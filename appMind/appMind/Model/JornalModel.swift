@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftData
 
 enum JournalType: String, CaseIterable {
     case socializacao = "Socialização"
@@ -13,11 +14,21 @@ enum JournalType: String, CaseIterable {
     case rotina = "Rotina"
 }
 
-struct JournalModel {
+@Model
+class JournalModel {
     var id: UUID = UUID()
     var type: JournalType
     var title: String
-    var description: String
+    var desc: String
     var date: Date
     var answers: [String]
+    
+    init(id: UUID, type: JournalType, title: String, desc: String, date: Date, answers: [String]) {
+        self.id = id
+        self.type = type
+        self.title = title
+        self.desc = desc
+        self.date = date
+        self.answers = answers
+    }
 }
