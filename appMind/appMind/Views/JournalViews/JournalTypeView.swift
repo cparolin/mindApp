@@ -11,21 +11,25 @@ struct JournalTypeView: View {
     @State var type: String
     
     var body: some View {
-        NavigationStack {
-            NavigationLink {
-                RoutineJournalView()
-            } label: {
-                ZStack {
-                    RoundedRectangle(cornerRadius: 16)
-                        .frame(width: 172, height: 277)
-                    Text("Rotina")
-                        .foregroundStyle(.black)
+        if #available(iOS 16.0, *) {
+            NavigationStack {
+                NavigationLink {
+                    RoutineJournalView()
+                } label: {
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 16)
+                            .frame(width: 172, height: 277)
+                        Text("Rotina")
+                            .foregroundStyle(.black)
+                    }
                 }
+                .padding(.top)
+                .navigationTitle("Meus Diários")
+                
+                Spacer()
             }
-            .padding(.top)
-            .navigationTitle("Meus Diários")
-            
-            Spacer()
+        } else {
+            // Fallback on earlier versions
         }
     }
 }
