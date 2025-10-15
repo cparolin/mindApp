@@ -10,12 +10,9 @@ import SwiftUI
 struct JournalListView: View {
     @Environment(\.modelContext) private var context
     @Query(sort: \JournalModel.type) var notes: [JournalModel]
-    
+    @State private var filteredNotes: [JournalModel] = []
     @State private var createNote = false
-    var navTitle: String
-    
-//    @Query(filter: #Predicate<JournalModel> { note in
-//        note.type.localizedStandardContains("Rotina")})
+    public var filterType: Category
     
     var body: some View {
         NavigationStack {
@@ -23,34 +20,33 @@ struct JournalListView: View {
                 if notes.count == 0 {
                     Text("Nenhum registro adicionado")
                 } else {
-                    List{
-                        ForEach(notes) { note in
-                            Text(note.title)
-                        }
+                    ForEach(filteredNotes) { note in
+                        Text(note.title)
                     }
                 }
             }
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
                     Button {
-                      createNote = true
+                        createNote = true
                     } label: {
-                      Image(systemName: "plus")
+                        Image(systemName: "plus")
                     }
                 }
                 
                 ToolbarItem(placement: .principal) {
-                    Text(navTitle)
+                    Text(filterType.rawValue)
                 }
             }
-            .listStyle(.plain)
-            .sheet(isPresented: $createNote) {
-                NewNoteView()
+            .onAppear {
+                filteredNotes = notes.filter({
+                    $0.type.localizedStandardContains(filterType.rawValue)
+                })
             }
         }
     }
 }
 
 #Preview {
-    JournalListView(navTitle: "Rotina")
+    JournalListView(filterType: .routine)
 }
