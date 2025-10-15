@@ -8,32 +8,60 @@
 import SwiftUI
 
 struct JournalTypeView: View {
-    @State var type: String
+    let columns = [
+        GridItem(.flexible()),
+        GridItem(.flexible())
+    ]
     
     var body: some View {
-        if #available(iOS 16.0, *) {
-            NavigationStack {
+        NavigationStack {
+            LazyVGrid(columns: columns) {
                 NavigationLink {
-                    RoutineJournalView()
+                    JournalListView(navTitle: "Rotina")
                 } label: {
                     ZStack {
                         RoundedRectangle(cornerRadius: 16)
                             .frame(width: 172, height: 277)
+                            .foregroundStyle(.gray)
                         Text("Rotina")
                             .foregroundStyle(.black)
+                            .font(.title)
                     }
                 }
-                .padding(.top)
-                .navigationTitle("Meus Diários")
                 
-                Spacer()
+                NavigationLink {
+                    JournalListView(navTitle: "Vícios")
+                } label: {
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 16)
+                            .frame(width: 172, height: 277)
+                            .foregroundStyle(.gray)
+                        Text("Vícios")
+                            .foregroundStyle(.black)
+                            .font(.title)
+                    }
+                }
+                
+                NavigationLink {
+                    JournalListView(navTitle: "Socialização")
+                } label: {
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 16)
+                            .frame(width: 172, height: 277)
+                            .foregroundStyle(.gray)
+                        Text("Socialização")
+                            .foregroundStyle(.black)
+                            .font(.title)
+                    }
+                }
             }
-        } else {
-            // Fallback on earlier versions
+            .padding(.top)
+            .navigationTitle("Meus Diários")
+            Spacer()
         }
     }
 }
 
 #Preview {
-    JournalTypeView(type: "Rotina")
+    JournalTypeView()
 }
