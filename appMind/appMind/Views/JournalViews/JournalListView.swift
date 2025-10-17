@@ -9,15 +9,19 @@ import SwiftUI
 
 struct JournalListView: View {
     @Environment(\.modelContext) private var context
+    
     @Query(sort: \JournalModel.type) var notes: [JournalModel]
+    
     @State private var filteredNotes: [JournalModel] = []
+    
     @State private var createNote = false
-    public var filterType: Category
+    
+    public var filterType: String
     
     var body: some View {
         NavigationStack {
             VStack {
-                if notes.count == 0 {
+                if filteredNotes.count == 0 {
                     Text("Nenhum registro adicionado")
                 } else {
                     ForEach(filteredNotes) { note in
@@ -35,12 +39,12 @@ struct JournalListView: View {
                 }
                 
                 ToolbarItem(placement: .principal) {
-                    Text(filterType.rawValue)
+                    Text(filterType)
                 }
             }
             .onAppear {
                 filteredNotes = notes.filter({
-                    $0.type.localizedStandardContains(filterType.rawValue)
+                    $0.type.localizedStandardContains(filterType)
                 })
             }
         }
@@ -48,5 +52,5 @@ struct JournalListView: View {
 }
 
 #Preview {
-    JournalListView(filterType: .routine)
+    JournalListView(filterType: "Rotina")
 }
