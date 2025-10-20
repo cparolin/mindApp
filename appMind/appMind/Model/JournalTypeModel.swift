@@ -8,17 +8,14 @@
 import Foundation
 import SwiftData
 
-
 @Model
 class JournalTypeModel {
     var id: UUID = UUID()
-    var title: String
+    var type: String
     var questions: [String]
     
-    init(title: String, questions: [String]) {
-        self.title = title
+    init(type: String, questions: [String]) {
+        self.type = type
         self.questions = questions
     }
-    
-    
 }

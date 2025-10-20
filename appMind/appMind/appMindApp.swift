@@ -16,8 +16,7 @@ struct appMindApp: App {
         WindowGroup {
             ContentView()
                 .environment(\.font, Font.custom(font, size: 17))
-                
         }
-        .modelContainer(for: JournalModel.self)
+        .modelContainer(for: JournalTypeModel.self)
     }
 }
