@@ -8,14 +8,14 @@ import SwiftData
 import SwiftUI
 
 struct JournalTypeView: View {
-    @Environment(\.modelContext) private var context
+    @Environment(\.modelContext) var context
     @Query private var journals: [JournalTypeModel]
     
     @State private var AddJournalSheet = false
     
     func initialJournalsCreation() {
         if journals.isEmpty {
-            let routine = JournalTypeModel(type: "Rotina", questions: [
+            let routine: JournalTypeModel = JournalTypeModel(type: "Rotina", questions: [
                 "O que fiz hoje na minha rotina?",
                 "Houve algo que me deixou confortável ou feliz?",
                 "Houve algo que me incomodou?",
@@ -61,13 +61,17 @@ struct JournalTypeView: View {
             ScrollView {
                 LazyVGrid(columns: columns) {
                     ForEach(journals) { journal in
-                        ZStack {
-                            RoundedRectangle(cornerRadius: 16)
-                                .frame(width: UIScreen.main.bounds.width * 0.43, height: 217)
-                                .foregroundStyle(.gray)
-                            Text(journal.type)
-                                .foregroundStyle(.black)
-                                .font(.title2)
+                        NavigationLink {
+                            JournalListView(journalType: journal)
+                        } label: {
+                            ZStack {
+                                RoundedRectangle(cornerRadius: 16)
+                                    .frame(width: UIScreen.main.bounds.width * 0.43, height: 217)
+                                    .foregroundStyle(.gray)
+                                Text(journal.type)
+                                    .foregroundStyle(.black)
+                                    .font(.title2)
+                            }
                         }
                     }
                 }

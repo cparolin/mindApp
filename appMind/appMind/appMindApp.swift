@@ -12,7 +12,7 @@ import SwiftData
 struct appMindApp: App {
     var body: some Scene {
         WindowGroup {
-            JournalTypeView()
+            ContentView()
         }
         .modelContainer(for: JournalTypeModel.self)
     }
