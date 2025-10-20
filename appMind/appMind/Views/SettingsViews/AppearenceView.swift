@@ -14,7 +14,9 @@ struct AppearenceView: View {
     @AppStorage("textLayout") private var textLayout: Int = 0
     @AppStorage("sound") private var sound = true
     @AppStorage("tactile") private var tactile = true
-    @AppStorage("font") private var font: Int = 0
+    @AppStorage("font") private var font = ""
+    
+    let availableFonts = ["System", "OpenDyslexicMono-Regular.otf"]
     
     var body: some View {
         NavigationStack {
@@ -51,18 +53,6 @@ struct AppearenceView: View {
                                     .fill(Color(color.rawValue))
                                     .frame(width: 38)
                                 }
-                                    
-//                                if textLayout == 1 {
-//                                    if let firstLetter = color.rawValue.first {
-//                                        Text(String(firstLetter))
-//                                            .bold()
-//                                            .foregroundStyle(.black)
-//                                            .textCase(.uppercase)
-//                                            
-//                                    } else {
-//                                        Text("?")
-//                                    }
-//                                }
                             }
                         }
                     }
@@ -119,8 +109,12 @@ struct AppearenceView: View {
                     
                     
                     Picker("", selection: $font) {
-                        Text("SF Pro").tag(0)
-                        Text("OpenDislexic").tag(1)
+                        Text("SF Pro")
+                            .tag("System")
+                        
+                        Text("OpenDislexic")
+                            .font(.custom("OpenDyslexicMono-Regular", size: 17))
+                            .tag("OpenDyslexicMono-Regular")
                     }
                 }
                 .padding()
