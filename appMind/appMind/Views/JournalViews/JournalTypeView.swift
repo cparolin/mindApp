@@ -9,13 +9,13 @@ import SwiftUI
 
 struct JournalTypeView: View {
     @Environment(\.modelContext) private var context
-    @Query var journals: [JournalTypeModel]
+    @Query private var journals: [JournalTypeModel]
     
     @State private var AddJournalSheet = false
     
     func initialJournalsCreation() {
         if journals.isEmpty {
-            let routine = JournalTypeModel(title: "Rotina", questions: [
+            let routine = JournalTypeModel(type: "Rotina", questions: [
                 "O que fiz hoje na minha rotina?",
                 "Houve algo que me deixou confortável ou feliz?",
                 "Houve algo que me incomodou?",
@@ -24,7 +24,7 @@ struct JournalTypeView: View {
                 "O que eu gostaria de ajustar para lidar com os incômodos da próxima vez?"
             ])
             
-            let addiction = JournalTypeModel(title: "Vícios", questions: [
+            let addiction = JournalTypeModel(type: "Vícios", questions: [
                 "Qual situação antecedeu a vontade de praticar o hábito disfuncional?",
                 "Quais pensamentos disfuncionais surgiram por conta da situação?",
                 "Quais emoções surgiram a partir da situação e dos pensamentos disfuncionais?",
@@ -33,7 +33,7 @@ struct JournalTypeView: View {
                 "O que eu posso fazer para me ajudar quando algo parecido acontecer de novo?"
             ])
             
-            let socialization = JournalTypeModel(title: "Socialização", questions: [
+            let socialization = JournalTypeModel(type: "Socialização", questions: [
                 "Onde eu estava e com quem?",
                 "O que aconteceu na prática? (Descrição da Situação)",
                 "Como eu participei dessa interação e como me senti? (Exemplos: falei bastante, mais escutei do que falei, me senti ansioso)",
@@ -65,7 +65,7 @@ struct JournalTypeView: View {
                             RoundedRectangle(cornerRadius: 16)
                                 .frame(width: UIScreen.main.bounds.width * 0.43, height: 217)
                                 .foregroundStyle(.gray)
-                            Text(journal.title)
+                            Text(journal.type)
                                 .foregroundStyle(.black)
                                 .font(.title2)
                         }
@@ -85,7 +85,7 @@ struct JournalTypeView: View {
                 }
             }
             .sheet(isPresented: $AddJournalSheet) {
-               NewJournalTypeView()
+                NewJournalTypeView()
             }
         }
         .onAppear {
