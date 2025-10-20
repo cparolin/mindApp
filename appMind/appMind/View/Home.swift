@@ -13,69 +13,80 @@ struct Home: View {
     @State private var currentDate: Date = Date()
     @State private var weekSlider: [[Date.WeekDay]] = []
     @State private var currentWeekIndex: Int = 0
-    @State private var tasks1: [Task] = []/*sampleTasks.sorted(by: { $1.todoDate < $0.todoDate})*/// Futuramente alterado pelo usuario e com SwiftData
     @State private var createNewTask: Bool = false
     @State private var newTask: Task = Task(taskTitle: "", todoDate: Date(), isCompleted: false, tint: "", notes: "")
     
-    
     var body: some View {
         VStack(alignment: .leading, spacing: 0, content: {
-            VStack(alignment: .center, spacing: 6) {
-                //            HStack(spacing: 5) {
-                //                Text(currentDate.format("MMMM"))
-                //                    .foregroundStyle(.blue)
-                //                Text(currentDate.format("YYYY"))
-                //                    .foregroundStyle(.gray)
-                //            }
-                //            .font(.title.bold())
-                
-                Text(Date().format("dd MMMM YYYY"))
-                    .font(.title)
-                    .fontWeight(.semibold)
-                    .textScale(.secondary)
+            ZStack {
+                RoundedRectangle(cornerRadius: 16)
+                    .frame(height: 195)
                     .foregroundStyle(.gray)
-                TabView(selection: $currentWeekIndex) {
-                    ForEach(weekSlider.indices, id: \.self){ index in
-                        let week = weekSlider[index]
-                        HStack(spacing: 0) {
-                            ForEach(week) { day in
-                                VStack {
-                                    Text(day.date.format("E"))
-                                        .font(.callout)
-                                        .fontWeight(.medium)
-                                        .textScale(.secondary)
-                                        .foregroundStyle(.gray)
-                                    
-                                    Text(day.date.format("d"))
-                                        .font(.callout)
-                                        .fontWeight(.bold)
-                                        .textScale(.secondary)
-                                        .foregroundStyle(isSameDate(day.date, currentDate) ? .white : .gray)
-                                        .frame(width: 35, height: 35)
-                                    // quando outra data é selecionada o fundo fica com outra cor, destacando o dia
-                                        .background(content: {
-                                            if isSameDate(day.date, currentDate) {
-                                                Circle()
-                                                    .fill(.blue)
-                                            }
-                                        })
-                                        .background(.white.shadow(.drop(radius: 1)), in: .circle) // deixa o numero dos dias com a borda circulae
-                                }
-                                .hSpacing(.center)
-                                .onTapGesture {
-                                    // Fazendo o update da data atual (animaçao pode ser colocada aqui)
-                                    currentDate = day.date
+                    .vSpacing(.top)
+                    .ignoresSafeArea()
+                
+                VStack(alignment: .center) {
+                    Text(Date().format("dd, MMMM YYYY"))
+                        .font(.headline)
+                        .fontWeight(.semibold)
+                        .textScale(.secondary)
+                        .foregroundStyle(.white)
+                    //                        .border(.red)
+                        .padding(.top, 24)
+                    TabView(selection: $currentWeekIndex) {
+                        ForEach(weekSlider.indices, id: \.self){ index in
+                            let week = weekSlider[index]
+                            HStack(spacing: 0) {
+                                ForEach(week) { day in
+                                    VStack {
+                                        Text(day.date.format("d"))
+                                            .font(.title)
+                                            .fontWeight(.bold)
+                                            .textScale(.secondary)
+                                            .foregroundStyle(isSameDate(day.date, currentDate) ? .white : .gray)
+                                            .frame(width: 44, height: 64)
+                                        // quando outra data é selecionada o fundo fica com outra cor, destacando o dia
+                                            .background(content: {
+                                                if isSameDate(day.date, currentDate) {
+                                                    Capsule()
+                                                        .fill(.blue)
+                                                }
+                                                else {
+                                                    Capsule()
+                                                        .fill(.white)
+                                                }
+                                            })
+                                            .background(.white.shadow(.drop(radius: 1)), in: .circle) // deixa o numero dos dias com a borda circular
+                                        Text(day.date.format("E"))
+                                            .font(.callout)
+                                            .fontWeight(.medium)
+                                            .textScale(.secondary)
+                                            .foregroundStyle(.white)
+                                            .padding(.bottom, -20)
+                                            .padding(.top, -8)
+                                    }
+                                    .hSpacing(.center)
+                                    .onTapGesture {
+                                        // Fazendo o update da data atual (animaçao pode ser colocada aqui)
+                                        currentDate = day.date
+                                    }
                                 }
                             }
                         }
+                        .padding(.bottom, 16)
                     }
+                    .tabViewStyle(.page(indexDisplayMode: .never))
+                    .frame(height: 90)
+                    //                    .border(.green)
+                    .vSpacing(.top)
                 }
-                .tabViewStyle(.page(indexDisplayMode: .never))
-                .frame(height: 90)
+                .padding(.horizontal, 16)
+                .hSpacing(.leading)
+                Spacer()
+                //                .vSpacing(.bottom)
             }
-            .padding(16)
-            .hSpacing(.leading)
-            
+            //            .border(.cyan)
+            .frame(height: 150)
             Text("Rotina do dia")
                 .fontWeight(.semibold)
                 .font(.title3)
@@ -88,8 +99,8 @@ struct Home: View {
             //Visualização das tarefas
             ScrollView(.vertical) {
                 VStack {
-                    VStack(alignment: .leading, spacing: 35) {
-                        
+                    VStack(alignment: .leading, spacing: 14) {
+                        //Cards
                         ForEach(tasks) { task in
                             if isSameDate(task.todoDate, currentDate) {
                                 HStack(alignment: .top, spacing: 15) {
@@ -102,22 +113,28 @@ struct Home: View {
                                             .fontWeight(.semibold)
                                             .foregroundStyle(.black)
                                             .hSpacing(.leading)
-                                        Circle()
-                                        //                                        .fill(.cyan)
-                                            .frame(width: 10, height: 10)
-                                            .padding(4)
-                                            .background(.white.shadow(.drop(color: .black.opacity(0.1), radius: 3)), in : .circle)
-                                            .overlay {
-                                                Circle()
-                                                    .frame(width: 50, height: 50)
-                                                    .blendMode(.destinationOver)
-                                                    .onTapGesture {
-                                                        withAnimation(.snappy) {
-                                                            task.isCompleted.toggle()
-                                                        }
+                                        if !task.isCompleted {
+                                            Circle()
+                                                .stroke(.black, lineWidth: 1)
+                                                .frame(width: 19, height: 19)
+                                                .padding(4)
+                                                .onTapGesture {
+                                                    withAnimation(.snappy) {
+                                                        task.isCompleted.toggle()
                                                     }
-                                            }
-                                        
+                                                }
+                                        }
+                                        else {
+                                            Circle()
+                                                .fill(.black)
+                                                .frame(width: 19, height: 19)
+                                                .padding(4)
+                                                .onTapGesture {
+                                                    withAnimation(.snappy) {
+                                                        task.isCompleted.toggle()
+                                                    }
+                                                }
+                                        }
                                     })
                                     .padding(16)
                                     .hSpacing(.leading)
@@ -125,7 +142,6 @@ struct Home: View {
                                     .strikethrough(task.isCompleted, pattern: .solid, color: .black)
                                     .offset(y: -8)
                                 }
-                                
                             }
                         }
                     }
@@ -137,18 +153,15 @@ struct Home: View {
             }
             .scrollIndicators(.hidden)
         })
-        .vSpacing(.top)
-        .overlay(alignment: .bottomTrailing, content: {
+        .overlay(alignment: .topTrailing, content: {
             Button(action: {
                 createNewTask.toggle()
             }, label: {
                 Image(systemName: "plus")
                     .fontWeight(.semibold)
-                    .foregroundStyle(.white)
-                    .frame(width: 55, height: 55)
-                    .background(.blue, in: .circle)
+                    .foregroundStyle(.black)
             })
-            .padding(16)
+            .padding(.horizontal, 16)
         })
         .onAppear {
             if weekSlider.isEmpty {
@@ -159,7 +172,7 @@ struct Home: View {
         .sheet(isPresented: $createNewTask) {
             NewTaskView(newTask: $newTask)
                 .presentationDetents([.height(585)])
-//                .interactiveDismissDisabled()
+            //                .interactiveDismissDisabled()
                 .presentationCornerRadius(30)
             //                .background(.white)
         }
