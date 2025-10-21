@@ -21,7 +21,7 @@ struct JournalListView: View {
                     Text("Nenhum registro adicionado")
                 } else {
                     ForEach(filteredNotes) { note in
-                        JournalItem(journal: note)
+                        JournalItem(journal: note, journalType: journalType)
                     }
                 }
             }

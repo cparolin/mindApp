@@ -31,8 +31,17 @@ struct NewJournalTypeView: View {
 
     var body: some View {
         NavigationStack {
-            Form {
-                TextField("Título do Diário", text: $title)
+            VStack {
+                ZStack {
+                    RoundedRectangle(cornerRadius: 16)
+                        .foregroundColor(.yellow)
+                        .frame(width: UIScreen.main.bounds.width * 0.43, height: 217)
+
+                    TextField("Nome", text: $title)
+                        .bold()
+                        .padding(EdgeInsets(top: 130, leading: 130, bottom: 0, trailing: 130))
+                }
+    
                 TextField("Pergunta 1", text: $question1)
                 TextField("Pergunta 2", text: $question2)
                 TextField("Pergunta 3", text: $question3)
@@ -40,20 +49,22 @@ struct NewJournalTypeView: View {
                 TextField("Pergunta 5", text: $question5)
                 TextField("Pergunta 6", text: $question6)
                 
-                .navigationTitle("Novo Diário")
-                .navigationBarTitleDisplayMode(.inline)
-                .toolbar {
-                    ToolbarItem(placement: .topBarLeading){
-                        Button("Cancelar"){
-                            dismiss()
-                        }
+                Spacer()
+            }
+            .padding()
+            .navigationTitle("Diário")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .topBarLeading){
+                    Button("Cancelar"){
+                        dismiss()
                     }
-                    
-                    ToolbarItem(placement: .confirmationAction){
-                        Button("Criar"){
-                            createAndSave()
-                            dismiss()
-                        }
+                }
+                
+                ToolbarItem(placement: .confirmationAction){
+                    Button("Criar"){
+                        createAndSave()
+                        dismiss()
                     }
                 }
             }

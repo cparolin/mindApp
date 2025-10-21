@@ -4,7 +4,7 @@
 //
 //  Created by Dayô Araújo on 16/10/25.
 //
-
+import TipKit
 import Foundation
 import SwiftData
 
@@ -18,4 +18,8 @@ class JournalTypeModel {
         self.type = type
         self.questions = questions
     }
+}
+
+struct InlineTip: Tip {
+    var title: Text
 }

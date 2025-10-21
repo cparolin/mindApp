@@ -27,13 +27,24 @@ struct JournalConclusionView: View {
     }
     
     var body: some View {
-        Form {
-            Section(header: Text("Detalhes do Registro")) {
-                TextField("Título do Registro", text: $title)
-                TextField("Descrição Curta", text: $desc)
-                DatePicker("Data", selection: $date)
-            }
+        VStack (spacing: 8){
+            TextField("Título do Registro", text: $title)
+                .font(.title2)
+                .bold()
+                .padding(.bottom, 10)
+            
+            TextField("Descrição Breve", text: $desc)
+                .fontWeight(.semibold)
+            
+            Divider()
+                .padding(.top, 4)
+            
+            DatePicker("Data do Registro", selection: $date, displayedComponents: .date)
+                .padding(.top, 15)
+            
+            Spacer()
         }
+        .padding(EdgeInsets(top: 30, leading: 30, bottom: 0, trailing: 30))
         .navigationTitle("Finalizar Registro")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {

@@ -9,6 +9,7 @@ import SwiftUI
 
 struct JournalItem: View {
     var journal: JournalModel
+    var journalType: JournalTypeModel
     
     let month = Date.FormatStyle()
         .month(.abbreviated)
@@ -18,7 +19,7 @@ struct JournalItem: View {
     
     var body: some View {
         NavigationLink {
-            
+            NoteCarrouselView(journal: journalType)
         } label: {
             ZStack {
                 Rectangle()
@@ -54,13 +55,13 @@ struct JournalItem: View {
     }
 }
 
-#Preview {
-    JournalItem(journal: JournalModel(title: "Título do Registro", desc: "Lorem Ipsum é simplesmente uma simulação de texto da ", date: Date.now, answers: ["", ""], journalType: JournalTypeModel(type: "Vícios", questions: [
-        "Qual situação antecedeu a vontade de praticar o hábito disfuncional?",
-        "Quais pensamentos disfuncionais surgiram por conta da situação?",
-        "Quais emoções surgiram a partir da situação e dos pensamentos disfuncionais?",
-        "Qual foi minha reação ou comportamento?",
-        "Como eu gostaria de ter reagido?",
-        "O que eu posso fazer para me ajudar quando algo parecido acontecer de novo?"
-    ])))
-}
+//#Preview {
+//    JournalItem(journal: JournalModel(title: "Título do Registro", desc: "Lorem Ipsum é simplesmente uma simulação de texto da ", date: Date.now, answers: ["", ""], journalType: JournalTypeModel(type: "Vícios", questions: [
+//        "Qual situação antecedeu a vontade de praticar o hábito disfuncional?",
+//        "Quais pensamentos disfuncionais surgiram por conta da situação?",
+//        "Quais emoções surgiram a partir da situação e dos pensamentos disfuncionais?",
+//        "Qual foi minha reação ou comportamento?",
+//        "Como eu gostaria de ter reagido?",
+//        "O que eu posso fazer para me ajudar quando algo parecido acontecer de novo?"
+//    ])))
+//}
