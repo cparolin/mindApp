@@ -8,30 +8,51 @@
 import SwiftUI
 import SwiftData
 
+import SwiftUI
+import SwiftData
+
 struct NoteCarrouselView: View {
     @Environment(\.modelContext) var context
-    
     var journal: JournalTypeModel
+    @State private var currentIndex: Int = 0
+    @State private var answers: [String] = []
+    @State private var showFinalView: Bool = false
 
-    @State var title: String = ""
-    @State var desc: String = ""
-    @State var answer1: String = ""
-    @State var answer2: String = ""
-    @State var answer3: String = ""
-    @State var answer4: String = ""
-    @State var answer5: String = ""
-    @State var answer6: String = ""
-    
-    func createNote() {
-        let answers = [answer1, answer2, answer3, answer4, answer5, answer6]
-        
-        let newNote = JournalModel(title: title, desc: desc, date: Date.now, answers: answers, journalType: journal)
-        
-        context.insert(newNote)
+    func nextView() {
+        if currentIndex < journal.questions.count - 1 {
+                currentIndex += 1
+        } else {
+            showFinalView = true
+        }
     }
     
     var body: some View {
-        NoteView(answer: $answer1, question: journal.questions[0])
+        NavigationStack {
+            Group {
+                if showFinalView {
+                    JournalConclusionView(journalType: journal, answers: answers)
+                    
+                } else if !answers.isEmpty {
+                    NoteView(
+                        answer: $answers[currentIndex],
+                        question: journal.questions[currentIndex],
+                        currentIndex: currentIndex,
+                        totalQuestions: journal.questions.count,
+                        onNext: nextView
+                    )
+                    .id(currentIndex)
+                } else {
+                    ProgressView()
+                }
+            }
+            .navigationTitle(journal.type)
+            .navigationBarTitleDisplayMode(.inline)
+        }
+        .onAppear {
+            if answers.isEmpty {
+                answers = Array(repeating: "", count: journal.questions.count)
+            }
+        }
     }
 }
 

@@ -28,7 +28,7 @@ struct JournalListView: View {
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
                     NavigationLink {
-                        
+                        NoteCarrouselView(journal: journalType)
                     } label: {
                         Image(systemName: "plus")
                     }
