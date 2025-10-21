@@ -61,7 +61,7 @@ struct AppearenceView: View {
                 ///Text Layout
                 HStack {
                     Text("Tipo de Layout")
-                        .font(.title)
+//                        .font()
                         .bold()
                     
                     Spacer()
