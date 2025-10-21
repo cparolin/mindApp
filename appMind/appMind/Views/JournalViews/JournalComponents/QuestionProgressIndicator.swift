@@ -7,8 +7,6 @@
 
 import SwiftUI
 
-import SwiftUI
-
 struct QuestionProgressIndicator: View {
     var currentIndex: Int
     var totalSteps: Int

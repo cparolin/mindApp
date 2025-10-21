@@ -4,10 +4,6 @@
 //
 //  Created by Dayô Araújo on 20/10/25.
 //
-
-import SwiftUI
-import SwiftData
-
 import SwiftUI
 import SwiftData
 
