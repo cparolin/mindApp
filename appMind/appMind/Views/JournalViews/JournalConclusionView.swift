@@ -12,6 +12,7 @@ struct JournalConclusionView: View {
     @Environment(\.modelContext) var context
     @Environment(\.dismiss) var dismiss
     
+    var existingJournal: JournalModel?
     var journalType: JournalTypeModel
     var answers: [String]
     
@@ -19,10 +20,27 @@ struct JournalConclusionView: View {
     @State private var desc: String = ""
     @State private var date: Date = Date.now
     
-    func createNote() {
-        let newNote = JournalModel(title: title, desc: desc, date: date, answers: answers, journalType: journalType)
+    init(existingJournal: JournalModel? = nil, journalType: JournalTypeModel, answers: [String]) {
+        self.existingJournal = existingJournal
+        self.journalType = journalType
+        self.answers = answers
         
-        context.insert(newNote)
+        _title = State(initialValue: existingJournal?.title ?? "")
+        _desc = State(initialValue: existingJournal?.desc ?? "")
+        _date = State(initialValue: existingJournal?.date ?? Date.now)
+    }
+    
+    func createNote() {
+        if let existing = existingJournal {
+            existing.title = title
+            existing.desc = desc
+            existing.date = date
+            existing.answers = answers
+        } else {
+            let newNote = JournalModel(title: title, desc: desc, date: date, answers: answers, journalType: journalType)
+            context.insert(newNote)
+        }
+        
         dismiss()
     }
     
@@ -45,14 +63,13 @@ struct JournalConclusionView: View {
             Spacer()
         }
         .padding(EdgeInsets(top: 30, leading: 30, bottom: 0, trailing: 30))
-        .navigationTitle("Finalizar Registro")
+        .navigationTitle(existingJournal == nil ? "Finalizar Registro" : "Editar Registro")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .confirmationAction) {
-                Button("Salvar") {
+                Button(existingJournal == nil ? "Salvar" : "Atualizar") {
                     createNote()
                 }
-                
                 .disabled(title.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
             }
         }

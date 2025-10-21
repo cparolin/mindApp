@@ -10,13 +10,14 @@ import SwiftData
 struct NoteCarrouselView: View {
     @Environment(\.modelContext) var context
     var journal: JournalTypeModel
+    var existingJournal: JournalModel?
     @State private var currentIndex: Int = 0
     @State private var answers: [String] = []
     @State private var showFinalView: Bool = false
-
+    
     func nextView() {
         if currentIndex < journal.questions.count - 1 {
-                currentIndex += 1
+            currentIndex += 1
         } else {
             showFinalView = true
         }
@@ -26,7 +27,7 @@ struct NoteCarrouselView: View {
         NavigationStack {
             Group {
                 if showFinalView {
-                    JournalConclusionView(journalType: journal, answers: answers)
+                    JournalConclusionView(existingJournal: existingJournal, journalType: journal, answers: answers)
                     
                 } else if !answers.isEmpty {
                     NoteView(
@@ -45,7 +46,10 @@ struct NoteCarrouselView: View {
             .navigationBarTitleDisplayMode(.inline)
         }
         .onAppear {
-            if answers.isEmpty {
+            if let existing = existingJournal {
+                answers = existing.answers
+            }
+            else if answers.isEmpty {
                 answers = Array(repeating: "", count: journal.questions.count)
             }
         }

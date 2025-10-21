@@ -13,6 +13,8 @@ struct NoteView: View {
     var totalQuestions: Int
     var onNext: () -> Void
     
+    @FocusState private var focused: Bool
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 30) {
             QuestionProgressIndicator(currentIndex: currentIndex, totalSteps: totalQuestions)
@@ -30,7 +32,8 @@ struct NoteView: View {
                 }
             }
             
-            TextField("", text: $answer)
+            TextField("", text: $answer, axis: .vertical)
+                            .focused($focused)
             
             Spacer()
             
@@ -50,6 +53,8 @@ struct NoteView: View {
         }
         .padding(.horizontal, 40)
         .padding(.top, 20)
+        .onAppear {
+            focused = true
+        }
     }
 }
-
