@@ -26,7 +26,7 @@ struct AppearenceView: View {
                 
                 HStack {
                     Text("Cor Principal")
-                        .font(.title)
+                        .font(.openDyslexic(fontStyle: .title, fontWeight: .bold))
                         .bold()
                     
                     Spacer()
@@ -61,7 +61,7 @@ struct AppearenceView: View {
                 ///Text Layout
                 HStack {
                     Text("Tipo de Layout")
-                        .font(.title)
+//                        .font()
                         .bold()
                     
                     Spacer()
@@ -113,7 +113,7 @@ struct AppearenceView: View {
                             .tag("System")
                         
                         Text("OpenDislexic")
-                            .font(.custom("OpenDyslexicMono-Regular", size: 17))
+                            .font(.openDyslexic())
                             .tag("OpenDyslexicMono-Regular")
                     }
                 }
