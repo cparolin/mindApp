@@ -8,14 +8,15 @@
 import SwiftUI
 
 struct ContentView: View {
+    let columns = [
+        GridItem(.flexible()),
+        GridItem(.flexible())
+    ]
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        NavigationStack {
+            
         }
-        .padding()
     }
 }
 
