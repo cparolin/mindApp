@@ -17,8 +17,7 @@ class JournalModel {
     var answers: [String]
     var journalType: JournalTypeModel
      
-    init(id: UUID, title: String, desc: String, date: Date, answers: [String], journalType: JournalTypeModel) {
-        self.id = id
+    init(title: String, desc: String, date: Date, answers: [String], journalType: JournalTypeModel) {
         self.title = title
         self.desc = desc
         self.date = date

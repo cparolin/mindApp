@@ -12,7 +12,6 @@ struct JournalListView: View {
     @Query(sort: \JournalModel.journalType.type) var notes: [JournalModel]
     
     @State private var filteredNotes: [JournalModel] = []
-    @State private var createNote = false
     @State var journalType: JournalTypeModel
     
     var body: some View {
@@ -22,14 +21,14 @@ struct JournalListView: View {
                     Text("Nenhum registro adicionado")
                 } else {
                     ForEach(filteredNotes) { note in
-                        Text(note.title)
+                        JournalItem(journal: note)
                     }
                 }
             }
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
-                    Button {
-                        createNote = true
+                    NavigationLink {
+                        NoteCarrouselView(journal: journalType)
                     } label: {
                         Image(systemName: "plus")
                     }
