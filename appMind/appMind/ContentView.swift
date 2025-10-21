@@ -8,14 +8,20 @@
 import SwiftUI
 
 struct ContentView: View {
-    let columns = [
-        GridItem(.flexible()),
-        GridItem(.flexible())
-    ]
-    
     var body: some View {
-        NavigationStack {
-            
+        TabView {
+            Home()
+                .tabItem {
+                    Label("Calendário", systemImage: "calendar.day.timeline.left")
+                }
+            JournalTypeView()
+                .tabItem {
+                    Label("Diários", systemImage: "book.pages")
+                }
+            AppearenceView()
+                .tabItem {
+                    Label("Configurações", systemImage: "gear")
+                }
         }
     }
 }
