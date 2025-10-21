@@ -9,104 +9,118 @@ import SwiftUI
 
 struct NewTaskView: View {
     @Environment(\.dismiss) private var dismiss
-    @Environment(\.modelContext) var modelContext
-    @State var enunToString: EnunsCreateEditTaskVIew = EnunsCreateEditTaskVIew()
-    @Query var tasks: [Task]
-    @State var taskTitle: String = ""
-    @State var taskNote: String = ""
-    @State var taskDate: Date = Date()
-    @State var taskColor: String = ""
-    @State var selectedColor: Color = .yellow
-    let isEditing: Bool = false
+    @State private var taskTitle: String = ""
+    @State private var taskNote: String = ""
+    @State private var taskDate: Date = Date()
+    @State private var taskColor: String = ""
+    @State private var selectedColor: Color = .yellow
+    @State private var selection: String = "t"
+    
     @Binding var newTask: Task
     
+    @Query var tasks: [Task]
+    @Environment(\.modelContext) var modelContext
     
     var body: some View {
         NavigationStack {
-            VStack(alignment: .leading, spacing: 15, content: {
-                VStack(alignment: .leading, spacing: 8, content: {
+//            if selection == "t" {
+                VStack(alignment: .leading, spacing: 15, content: {
                     
-                    TextField("Nome do evento", text: $taskTitle)
-                        .padding(.vertical, 12)
-                        .padding(.horizontal, 16)
-                        .font(.title)
+                    Picker("", selection: $selection){
+                        Text("Tarefa").tag("t")
+                        Text("Lembrete").tag("l")
+                    }
+                    .pickerStyle(.segmented)
                     
-                    TextField("Notas", text: $taskNote)
-                        .padding(.horizontal, 16)
-                })
-                Divider()
-                .padding(.top, 4)
-                
-                VStack(spacing: 16) {
                     VStack(alignment: .leading, spacing: 8, content: {
-                        Text("Data da tarefa")
-                            .font(.caption)
-                            .foregroundStyle(.gray)
-                        
-                        DatePicker("", selection: $taskDate)
-                            .datePickerStyle(.compact)
-                            .scaleEffect(0.9, anchor: .leading)
+                        TextField("Nome do evento", text: $taskTitle)
+                            .padding(.vertical, 12)
+                            .padding(.horizontal, 16)
+                            .font(.title)
+                        TextField("Notas", text: $taskNote)
+                            .padding(.horizontal, 16)
                     })
-                    .padding(.top, 4)
-                    // Maior espaco para clicar nas cores
-                    .padding(.trailing, -15)
-                    
-                    VStack(alignment: .leading, spacing: 8, content: {
-                        Text("Cor da tarefa")
-                            .font(.caption)
-                            .foregroundStyle(.gray)
+                    Divider()
+                        .padding(.top, 4)
+            
+                    VStack(spacing: 16) {
+                        VStack(alignment: .leading, spacing: 8, content: {
+                            Text("Data da tarefa")
+                                .font(.caption)
+                                .foregroundStyle(.gray)
+                            
+                            DatePicker("", selection: $taskDate)
+                                .datePickerStyle(.compact)
+                                .scaleEffect(0.9, anchor: .leading)
+                        })
+                        .padding(.top, 4)
+                        // Maior espaco para clicar nas cores
+                        .padding(.trailing, -15)
                         
-                        let colors: [Color] = [.blue, .red, .yellow, .orange, .purple, .green]
-                        
-                        HStack(spacing: 0) {
-                            ForEach(colors, id: \.self) { color in
-                                Circle()
-                                    .fill(color)
-                                    .frame(width: 54)
-                                    .background(content: {
-                                        Circle()
-                                            .stroke(.blue, lineWidth: 8)
-                                            .stroke(.white, lineWidth: 4)
-                                            .opacity(selectedColor == color ? 1 : 0)
-                                    })
-                                    .hSpacing(.center)
-                                    .contentShape(.rect)
-                                    .onTapGesture {
-                                        withAnimation(.snappy) {
-                                            selectedColor = color
-                                            taskColor = corPasta(selectedColor)
+                        VStack(alignment: .leading, spacing: 8, content: {
+                            Text("Cor da tarefa")
+                                .font(.caption)
+                                .foregroundStyle(.gray)
+                            
+                            let colors: [Color] = [.blue, .red, .yellow, .orange, .purple, .green]
+                            
+                            HStack(spacing: 0) {
+                                ForEach(colors, id: \.self) { color in
+                                    Circle()
+                                        .fill(color)
+                                        .frame(width: 54)
+                                        .background(content: {
+                                            Circle()
+                                                .stroke(.blue, lineWidth: 8)
+                                                .stroke(.white, lineWidth: 4)
+                                                .opacity(selectedColor == color ? 1 : 0)
+                                        })
+                                        .hSpacing(.center)
+                                        .contentShape(.rect)
+                                        .onTapGesture {
+                                            withAnimation(.snappy) {
+                                                selectedColor = color
+                                                taskColor = corPasta(selectedColor)
+                                            }
                                         }
-                                    }
+                                }
                             }
-                        }
-                    })
-                    .padding(.top, 4)
-                }
-            })
-            .padding(16)
-            .toolbar {
-                ToolbarItem(placement: .topBarLeading) {
-                    Button(action: {
-                        dismiss()
-                    }, label: {
-                        Image(systemName: "xmark")
-                    })
-                }
-                ToolbarItem(placement: .principal) {
-                    Text("Adicionar")
-                }
-                ToolbarItem(placement: .confirmationAction){
-                    Button(action: {
-                        newTask = Task(taskTitle: "\(taskTitle)", todoDate: taskDate, isCompleted: false, tint: "\(taskColor)", notes: "\(taskNote)")
-                        modelContext.insert(newTask)
-                        dismiss()
-                    }, label: {
-                        Text("OK")
-                    })
-                    .disabled(taskTitle == "" || taskNote == "")
+                        })
+                        .padding(.top, 4)
+                    }
+                })
+                .padding(.top, 120)
+                .padding(.horizontal, 16)
+                .vSpacing(.top)
+                .ignoresSafeArea()
+                .toolbar {
+                    ToolbarItem(placement: .topBarLeading) {
+                        Button(action: {
+                            dismiss()
+                        }, label: {
+                            Image(systemName: "xmark")
+                        })
+                    }
+                    ToolbarItem(placement: .principal) {
+                        Text("Adicionar")
+                    }
+                    ToolbarItem(placement: .confirmationAction){
+                        Button(action: {
+                            newTask = Task(taskTitle: "\(taskTitle)", todoDate: taskDate, isCompleted: false, tint: "\(taskColor)", notes: "\(taskNote)")
+                            modelContext.insert(newTask)
+                            dismiss()
+                        }, label: {
+                            Text("OK")
+                        })
+                        .disabled(taskTitle == "" || taskNote == "")
+                    }
                 }
             }
-        }
+//            else {
+//                NewLembreteView(selection: $selection, newTask: $newTask)
+//            }
+//        }
+        
     }
 }
 #Preview {
