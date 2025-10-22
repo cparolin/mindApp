@@ -14,6 +14,7 @@ struct JournalListView: View {
     @State private var filteredNotes: [JournalModel] = []
     @State var journalType: JournalTypeModel
     @State private var searchText = ""
+    var favorites: [JournalModel] = []
     
     var searchResults: [JournalModel] {
         if searchText.isEmpty {
@@ -30,7 +31,7 @@ struct JournalListView: View {
     var body: some View {
         NavigationStack {
             ScrollView (.vertical){
-                VStack {
+                VStack (spacing: 12){
                     if filteredNotes.count == 0 {
                         Text("Nenhum registro adicionado")
                             .frame(width: 370)
