@@ -32,15 +32,7 @@ struct NewJournalTypeView: View {
     var body: some View {
         NavigationStack {
             VStack {
-                ZStack {
-                    RoundedRectangle(cornerRadius: 16)
-                        .foregroundColor(.yellow)
-                        .frame(width: UIScreen.main.bounds.width * 0.43, height: 217)
-
-                    TextField("Nome", text: $title)
-                        .bold()
-                        .padding(EdgeInsets(top: 130, leading: 130, bottom: 0, trailing: 130))
-                }
+                NewJournalCover(title: $title)
     
                 TextField("Pergunta 1", text: $question1)
                 TextField("Pergunta 2", text: $question2)

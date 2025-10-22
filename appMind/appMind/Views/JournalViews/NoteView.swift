@@ -30,7 +30,6 @@ struct NoteView: View {
             
             HStack {
                 Spacer()
-                
                 Button(action: onNext) {
                     Image(systemName: "arrow.right")
                         .font(.title2)

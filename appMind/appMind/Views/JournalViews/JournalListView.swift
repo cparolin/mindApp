@@ -33,6 +33,8 @@ struct JournalListView: View {
                 VStack {
                     if filteredNotes.count == 0 {
                         Text("Nenhum registro adicionado")
+                            .frame(width: 370)
+                            .padding(.top, UIScreen.main.bounds.height * 0.33)
                         
                     } else if !searchText.isEmpty {
                         ForEach(searchResults) { note in
@@ -52,11 +54,6 @@ struct JournalListView: View {
                             Image(systemName: "plus")
                         }
                     }
-                    
-                    ToolbarItem(placement: .principal) {
-                        Text(journalType
-                            .type)
-                    }
                 }
                 .onAppear {
                     filteredNotes = notes.filter({
@@ -64,8 +61,9 @@ struct JournalListView: View {
                     })
                 }
             }
+            .searchable(text: $searchText)
+            .navigationTitle(journalType.type)
         }
-        .searchable(text: $searchText, prompt: "Buscar um registro")
     }
 }
 

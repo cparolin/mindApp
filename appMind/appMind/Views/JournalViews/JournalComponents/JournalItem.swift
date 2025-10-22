@@ -10,6 +10,8 @@ import SwiftUI
 struct JournalItem: View {
     var journal: JournalModel
     var journalType: JournalTypeModel
+//    var favorites: [JournalModel]
+//    var isFavorite: Bool = false
     
     let month = Date.FormatStyle()
         .month(.abbreviated)
@@ -22,8 +24,8 @@ struct JournalItem: View {
             NoteCarrouselView(journal: journalType, existingJournal: journal)
             
         } label: {
-            HStack (spacing: 20){
-                VStack (spacing: 15){
+            HStack (spacing: 15){
+                VStack (spacing: 12){
                     Text(journal.date.formatted(month))
                         .font(.title2)
                     
@@ -37,10 +39,9 @@ struct JournalItem: View {
                         .font(.title2)
                         .fontWeight(.semibold)
                     Text(journal.desc)
-                        .font(.body)
                         .multilineTextAlignment(.leading)
                 }
-                .frame(width: UIScreen.main.bounds.width * 0.7)
+                .frame(width: UIScreen.main.bounds.width * 0.65)
             }
             .padding(20)
             .background(
