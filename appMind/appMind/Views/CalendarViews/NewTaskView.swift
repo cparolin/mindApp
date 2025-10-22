@@ -13,7 +13,7 @@ struct NewTaskView: View {
     @State private var taskNote: String = ""
     @State private var taskDate: Date = Date()
     @State private var taskColor: String = ""
-    @State private var selectedColor: Color = .yellow
+    @State private var selectedColor: Color = .white
     @State private var selection: String = "t"
     
     @Binding var newTask: Task
@@ -23,22 +23,14 @@ struct NewTaskView: View {
     
     var body: some View {
         NavigationStack {
-//            if selection == "t" {
                 VStack(alignment: .leading, spacing: 15, content: {
-                    
-                    Picker("", selection: $selection){
-                        Text("Tarefa").tag("t")
-                        Text("Lembrete").tag("l")
-                    }
-                    .pickerStyle(.segmented)
-                    
                     VStack(alignment: .leading, spacing: 8, content: {
                         TextField("Nome do evento", text: $taskTitle)
                             .padding(.vertical, 12)
-                            .padding(.horizontal, 16)
                             .font(.title)
+                            .fontWeight(.semibold)
                         TextField("Notas", text: $taskNote)
-                            .padding(.horizontal, 16)
+
                     })
                     Divider()
                         .padding(.top, 4)
@@ -62,29 +54,7 @@ struct NewTaskView: View {
                                 .font(.caption)
                                 .foregroundStyle(.gray)
                             
-                            let colors: [Color] = [.blue, .red, .yellow, .orange, .purple, .green]
-                            
-                            HStack(spacing: 0) {
-                                ForEach(colors, id: \.self) { color in
-                                    Circle()
-                                        .fill(color)
-                                        .frame(width: 54)
-                                        .background(content: {
-                                            Circle()
-                                                .stroke(.blue, lineWidth: 8)
-                                                .stroke(.white, lineWidth: 4)
-                                                .opacity(selectedColor == color ? 1 : 0)
-                                        })
-                                        .hSpacing(.center)
-                                        .contentShape(.rect)
-                                        .onTapGesture {
-                                            withAnimation(.snappy) {
-                                                selectedColor = color
-                                                taskColor = corPasta(selectedColor)
-                                            }
-                                        }
-                                }
-                            }
+                            ColorPickerComponent(selectedColor: $selectedColor, taskColor: $taskColor)
                         })
                         .padding(.top, 4)
                     }
@@ -103,9 +73,11 @@ struct NewTaskView: View {
                     }
                     ToolbarItem(placement: .principal) {
                         Text("Adicionar")
+                            .fontWeight(.semibold)
                     }
                     ToolbarItem(placement: .confirmationAction){
                         Button(action: {
+                            taskColor = corPasta(selectedColor)
                             newTask = Task(taskTitle: "\(taskTitle)", todoDate: taskDate, isCompleted: false, tint: "\(taskColor)", notes: "\(taskNote)")
                             modelContext.insert(newTask)
                             dismiss()
@@ -116,13 +88,18 @@ struct NewTaskView: View {
                     }
                 }
             }
-//            else {
-//                NewLembreteView(selection: $selection, newTask: $newTask)
-//            }
-//        }
-        
+        .overlay(
+            Picker("", selection: $selection){
+                Text("Tarefa").tag("t")
+                Text("Lembrete").tag("l")
+            }
+                .pickerStyle(.segmented)
+                .padding(.bottom, 410)
+                .padding(.horizontal, 16)
+        )
+        .frame(height: 585)
     }
 }
 #Preview {
-    ContentView()
+    NewTaskView(newTask: .constant(Task(taskTitle: "", todoDate: Date(), isCompleted: false, tint: "", notes: "")))
 }
