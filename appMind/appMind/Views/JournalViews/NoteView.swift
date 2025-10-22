@@ -16,24 +16,15 @@ struct NoteView: View {
     @FocusState private var focused: Bool
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 30) {
+        VStack(alignment: .leading, spacing: 20) {
             QuestionProgressIndicator(currentIndex: currentIndex, totalSteps: totalQuestions)
             
-            HStack {
-                Text(question)
-                    .font(.title3)
-                    .fontWeight(.semibold)
-                
-                Spacer()
-                
-                VStack {
-                    Image(systemName: "info.circle")
-                        .foregroundStyle(.blue)
-                }
-            }
+            Text(question)
+                .font(.title3)
+                .fontWeight(.semibold)
             
             TextField("", text: $answer, axis: .vertical)
-                            .focused($focused)
+                .focused($focused)
             
             Spacer()
             

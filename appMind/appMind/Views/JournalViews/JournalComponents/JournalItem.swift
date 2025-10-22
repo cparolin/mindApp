@@ -22,36 +22,32 @@ struct JournalItem: View {
             NoteCarrouselView(journal: journalType, existingJournal: journal)
             
         } label: {
-            ZStack {
-                Rectangle()
-                .foregroundColor(.clear)
-                .frame(width: UIScreen.main.bounds.width * 0.9, height: 113)
-                .background(Color(red: 0.85, green: 0.85, blue: 0.85))
-                .cornerRadius(16)
-                
-                HStack {
-                    VStack (spacing: 10){
-                        Text(journal.date.formatted(month))
-                            .font(.title2)
-                        
-                        Text(journal.date.formatted(day))
-                            .font(.title)
-                    }
-                    .padding(.leading)
-                    .fontWeight(.semibold)
+            HStack (spacing: 20){
+                VStack (spacing: 15){
+                    Text(journal.date.formatted(month))
+                        .font(.title2)
                     
-                    VStack (alignment: .leading, spacing: 10){
-                        Text(journal.title)
-                            .font(.title2)
-                            .fontWeight(.semibold)
-                        Text(journal.desc)
-                            .font(.body)
-                            .multilineTextAlignment(.leading)
-                    }
-                    .frame(width: UIScreen.main.bounds.width * 0.7)
+                    Text(journal.date.formatted(day))
+                        .font(.title)
                 }
-                .foregroundStyle(.black)
+                .fontWeight(.semibold)
+                
+                VStack (alignment: .leading, spacing: 10){
+                    Text(journal.title)
+                        .font(.title2)
+                        .fontWeight(.semibold)
+                    Text(journal.desc)
+                        .font(.body)
+                        .multilineTextAlignment(.leading)
+                }
+                .frame(width: UIScreen.main.bounds.width * 0.7)
             }
+            .padding(20)
+            .background(
+                RoundedRectangle(cornerRadius: 16)
+                    .foregroundStyle(.gray)
+            )
+            .foregroundStyle(.black)
         }
     }
 }

@@ -51,8 +51,9 @@ struct JournalConclusionView: View {
                 .bold()
                 .padding(.bottom, 10)
             
-            TextField("Descrição Breve", text: $desc)
+            TextField("Descrição Breve", text: $desc, axis: .vertical)
                 .fontWeight(.semibold)
+                .limitInputLength(value: $desc, length: 60)
             
             Divider()
                 .padding(.top, 4)

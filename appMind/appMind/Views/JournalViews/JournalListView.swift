@@ -13,38 +13,59 @@ struct JournalListView: View {
     
     @State private var filteredNotes: [JournalModel] = []
     @State var journalType: JournalTypeModel
+    @State private var searchText = ""
+    
+    var searchResults: [JournalModel] {
+        if searchText.isEmpty {
+            return []
+        } else {
+            let results = filteredNotes.filter { note in
+                note.title.localizedStandardContains(searchText)
+            }
+            
+            return results
+        }
+    }
     
     var body: some View {
         NavigationStack {
-            VStack {
-                if filteredNotes.count == 0 {
-                    Text("Nenhum registro adicionado")
-                } else {
-                    ForEach(filteredNotes) { note in
-                        JournalItem(journal: note, journalType: journalType)
+            ScrollView (.vertical){
+                VStack {
+                    if filteredNotes.count == 0 {
+                        Text("Nenhum registro adicionado")
+                        
+                    } else if !searchText.isEmpty {
+                        ForEach(searchResults) { note in
+                            JournalItem(journal: note, journalType: journalType)
+                        }
+                    } else {
+                        ForEach(filteredNotes) { note in
+                            JournalItem(journal: note, journalType: journalType)
+                        }
                     }
                 }
-            }
-            .toolbar {
-                ToolbarItem(placement: .confirmationAction) {
-                    NavigationLink {
-                        NoteCarrouselView(journal: journalType)
-                    } label: {
-                        Image(systemName: "plus")
+                .toolbar {
+                    ToolbarItem(placement: .confirmationAction) {
+                        NavigationLink {
+                            NoteCarrouselView(journal: journalType)
+                        } label: {
+                            Image(systemName: "plus")
+                        }
+                    }
+                    
+                    ToolbarItem(placement: .principal) {
+                        Text(journalType
+                            .type)
                     }
                 }
-                
-                ToolbarItem(placement: .principal) {
-                    Text(journalType
-                        .type)
+                .onAppear {
+                    filteredNotes = notes.filter({
+                        $0.journalType.type.localizedStandardContains(journalType.type)
+                    })
                 }
-            }
-            .onAppear {
-                filteredNotes = notes.filter({
-                    $0.journalType.type.localizedStandardContains(journalType.type)
-                })
             }
         }
+        .searchable(text: $searchText, prompt: "Buscar um registro")
     }
 }
 
