@@ -13,7 +13,7 @@ struct NoteBackground: View {
     var body: some View {
         HStack (spacing: 0){
             Rectangle()
-                .foregroundStyle(baseColor.opacity(0.40))
+                .foregroundStyle(baseColor.opacity(0.15))
                 .frame(width: UIScreen.main.bounds.width * 0.77, height: 113)
                 .clipShape(
                     .rect(
