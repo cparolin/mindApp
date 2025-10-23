@@ -21,7 +21,7 @@ struct FavoriteJournalItem: View {
             ZStack {
                 RoundedRectangle(cornerRadius: 16)
                     .frame(width: UIScreen.main.bounds.width * 0.55, height: UIScreen.main.bounds.height * 0.13)
-                    .foregroundStyle(.yellow)
+                    .foregroundStyle(ColorName.from(name: journal.journalType.color))
                 
                 VStack (alignment: .trailing, spacing: 1){
                     Text(journal.journalType.type)

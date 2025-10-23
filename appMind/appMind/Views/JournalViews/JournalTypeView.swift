@@ -44,7 +44,8 @@ struct JournalTypeView: View {
                     JournalGrid(journals: journals)
                     
                     Spacer()
-                }.padding()
+                }
+                .padding()
             }
             .toolbar {
                 ToolbarItem (placement: .confirmationAction){

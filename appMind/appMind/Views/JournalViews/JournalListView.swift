@@ -69,7 +69,7 @@ struct JournalListView: View {
 }
 
 #Preview {
-    JournalListView(journalType: JournalTypeModel(type: "Rotina", questions: [
+    JournalListView(journalType: JournalTypeModel(type: "Rotina", color: "amarelo", questions: [
         "O que fiz hoje na minha rotina?",
         "Houve algo que me deixou confortável ou feliz?",
         "Houve algo que me incomodou?",
