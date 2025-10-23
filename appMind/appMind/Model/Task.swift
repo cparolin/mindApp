@@ -11,14 +11,16 @@ import Foundation
 @Model
 class Task {
     var taskTitle: String
-    var todoDate: Date
+    var todoDateStart: Date
+    var todoDateEnd: Date
     var isCompleted: Bool
     var tint: String
     var notes: String
     
-    init(taskTitle: String, todoDate: Date, isCompleted: Bool, tint: String, notes: String) {
+    init(taskTitle: String, todoDateStart: Date, todoDateEnd: Date, isCompleted: Bool, tint: String, notes: String) {
         self.taskTitle = taskTitle
-        self.todoDate = todoDate
+        self.todoDateStart = todoDateStart
+        self.todoDateEnd = todoDateEnd
         self.isCompleted = isCompleted
         self.tint = tint
         self.notes = notes

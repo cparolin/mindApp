@@ -11,12 +11,15 @@ struct NewTaskView: View {
     @Environment(\.dismiss) private var dismiss
     @State private var taskTitle: String = ""
     @State private var taskNote: String = ""
-    @State private var taskDate: Date = Date()
+    @State private var taskDateStart: Date = Date()
+    @State private var taskDateEnd: Date = Date()
     @State private var taskColor: String = ""
     @State private var selectedColor: Color = .white
     @State private var selection: String = "t"
+    @State private var isEnabled = false
     
     @Binding var newTask: Task
+    @Binding var newTaskDay: TaskDay
     
     @Query var tasks: [Task]
     @Environment(\.modelContext) var modelContext
@@ -36,18 +39,41 @@ struct NewTaskView: View {
                         .padding(.top, 4)
             
                     VStack(spacing: 16) {
-                        VStack(alignment: .leading, spacing: 8, content: {
-                            Text("Data da tarefa")
-                                .font(.caption)
-                                .foregroundStyle(.gray)
+                        HStack {
+                            Text("Dia inteiro")
+                                .font(.body)
+                                .foregroundStyle(.black)
                             
-                            DatePicker("", selection: $taskDate)
+                            Toggle("", isOn: $isEnabled)
+                                .padding(.trailing, 16)
+                        }
+                        HStack(content: {
+                            
+                            Text("Começa")
+                                .font(.body)
+                                .foregroundStyle(.black)
+                            
+                            DatePicker("", selection: $taskDateStart)
                                 .datePickerStyle(.compact)
                                 .scaleEffect(0.9, anchor: .leading)
+                                .disabled(isEnabled)
                         })
+                        .opacity(isEnabled ? 0.5 : 1)
                         .padding(.top, 4)
-                        // Maior espaco para clicar nas cores
-                        .padding(.trailing, -15)
+                        .padding(.trailing, -16)
+                        
+                        HStack(content: {
+                            Text("Termina")
+                                .font(.body)
+                                .foregroundStyle(.black)
+                            
+                            DatePicker("", selection: $taskDateEnd)
+                                .datePickerStyle(.compact)
+                                .scaleEffect(0.9, anchor: .leading)
+                                .disabled(isEnabled)
+                        })
+                        .padding(.trailing, -16)
+                        .opacity(isEnabled ? 0.5 : 1)
                         
                         VStack(alignment: .leading, spacing: 8, content: {
                             Text("Cor da tarefa")
@@ -78,8 +104,15 @@ struct NewTaskView: View {
                     ToolbarItem(placement: .confirmationAction){
                         Button(action: {
                             taskColor = corPasta(selectedColor)
-                            newTask = Task(taskTitle: "\(taskTitle)", todoDate: taskDate, isCompleted: false, tint: "\(taskColor)", notes: "\(taskNote)")
-                            modelContext.insert(newTask)
+                            if isEnabled {
+                                newTaskDay = TaskDay(taskTitleDay: "\(taskTitle)", todoDateDay: taskDateStart, tintDay: "\(taskColor)", notesDay: "\(taskNote)")
+                                modelContext.insert(newTaskDay)
+                            }
+                            else {
+                                newTask = Task(taskTitle: "\(taskTitle)", todoDateStart: taskDateStart, todoDateEnd: taskDateEnd, isCompleted: false, tint: "\(taskColor)", notes: "\(taskNote)")
+                                modelContext.insert(newTask)
+                            }
+                            
                             dismiss()
                         }, label: {
                             Text("OK")
@@ -99,7 +132,4 @@ struct NewTaskView: View {
         )
         .frame(height: 585)
     }
-}
-#Preview {
-    NewTaskView(newTask: .constant(Task(taskTitle: "", todoDate: Date(), isCompleted: false, tint: "", notes: "")))
 }

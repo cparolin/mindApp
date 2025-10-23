@@ -9,12 +9,15 @@ import SwiftUI
 
 struct Home: View {
     
-    @Query(sort: \Task.todoDate) var tasks: [Task]
+    @Query(sort: \Task.todoDateStart) var tasks: [Task]
+    @Query(sort: \TaskDay.todoDateDay) var tasksDay: [TaskDay]
+    
     @State private var currentDate: Date = Date()
     @State private var weekSlider: [[Date.WeekDay]] = []
     @State private var currentWeekIndex: Int = 0
     @State private var createNewTask: Bool = false
-    @State private var newTask: Task = Task(taskTitle: "", todoDate: Date(), isCompleted: false, tint: "", notes: "")
+    @State private var newTask: Task = Task(taskTitle: "", todoDateStart: Date(), todoDateEnd: Date(), isCompleted: false, tint: "", notes: "")
+    @State private var newTaskDay: TaskDay = TaskDay(taskTitleDay: "", todoDateDay: Date(), tintDay: "", notesDay: "")
     
     var body: some View {
         VStack(alignment: .leading, spacing: 0, content: {
@@ -31,7 +34,6 @@ struct Home: View {
                         .fontWeight(.semibold)
                         .textScale(.secondary)
                         .foregroundStyle(.white)
-                    //                        .border(.red)
                         .padding(.top, 24)
                     TabView(selection: $currentWeekIndex) {
                         ForEach(weekSlider.indices, id: \.self){ index in
@@ -77,81 +79,20 @@ struct Home: View {
                     }
                     .tabViewStyle(.page(indexDisplayMode: .never))
                     .frame(height: 90)
-                    //                    .border(.green)
                     .vSpacing(.top)
                 }
                 .padding(.horizontal, 16)
                 .hSpacing(.leading)
                 Spacer()
-                //                .vSpacing(.bottom)
             }
-            //            .border(.cyan)
             .frame(height: 150)
             Text("Rotina do dia")
                 .fontWeight(.semibold)
                 .font(.title3)
                 .padding(.leading, 16)
             
-            Label("", systemImage: "sun.max")
-                .font(.title3)
-                .padding(.leading, 32)
-                .padding(.top, 8)
             //Visualização das tarefas
-            ScrollView(.vertical) {
-                VStack {
-                    VStack(alignment: .leading, spacing: 14) {
-                        //Cards
-                        ForEach(tasks) { task in
-                            if isSameDate(task.todoDate, currentDate) {
-                                HStack(alignment: .top, spacing: 15) {
-                                    HStack(spacing: 8, content: {
-                                        Text("\(task.todoDate.format("HH:mm"))")
-                                            .font(.caption)
-                                            .foregroundStyle(.black)
-                                            .padding(.trailing, 50)
-                                        Text(task.taskTitle)
-                                            .fontWeight(.semibold)
-                                            .foregroundStyle(.black)
-                                            .hSpacing(.leading)
-                                        if !task.isCompleted {
-                                            Circle()
-                                                .stroke(.black, lineWidth: 1)
-                                                .frame(width: 19, height: 19)
-                                                .padding(4)
-                                                .onTapGesture {
-                                                    withAnimation(.snappy) {
-                                                        task.isCompleted.toggle()
-                                                    }
-                                                }
-                                        }
-                                        else {
-                                            Circle()
-                                                .fill(.black)
-                                                .frame(width: 19, height: 19)
-                                                .padding(4)
-                                                .onTapGesture {
-                                                    withAnimation(.snappy) {
-                                                        task.isCompleted.toggle()
-                                                    }
-                                                }
-                                        }
-                                    })
-                                    .padding(16)
-                                    .hSpacing(.leading)
-                                    .background(CorTarefa(rawValue: task.tint)?.color ?? .blue, in: .rect(topLeadingRadius: 16, bottomLeadingRadius: 16, bottomTrailingRadius: 16, topTrailingRadius: 16))
-                                    .strikethrough(task.isCompleted, pattern: .solid, color: .black)
-                                    .offset(y: -8)
-                                }
-                            }
-                        }
-                    }
-                    .padding(.horizontal, 16)
-                    .padding(.top, 15)
-                }
-                .hSpacing(.center)
-                .vSpacing(.center)
-            }
-            .scrollIndicators(.hidden)
+            TasksView()
         })
         .overlay(alignment: .topTrailing, content: {
             Button(action: {
@@ -170,7 +111,7 @@ struct Home: View {
             }
         }
         .sheet(isPresented: $createNewTask) {
-            NewTaskView(newTask: $newTask)
+            NewTaskView(newTask: $newTask, newTaskDay: $newTaskDay)
                 .presentationDetents([.height(585)])
                 .presentationCornerRadius(30)
                 .background(.white)

@@ -36,9 +36,10 @@ struct ColorPickerComponent: View {
                             }
                         }
                 }
-                ColorPicker("", selection: $selectedColor)
-                    .scaleEffect(2)
-                    .padding(.trailing, 22)
+                // Fora do MVP
+//                ColorPicker("", selection: $selectedColor)
+//                    .scaleEffect(2)
+//                    .padding(.trailing, 22)
             }
         }
     }
