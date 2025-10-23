@@ -1,12 +1,6 @@
-//
-//  AppearenceView.swift
-//  appMind
-//
-//  Created by Camila Parolin on 16/10/25.
-//
-
 import SwiftUI
 import AudioToolbox
+import UIKit
 
 struct AppearenceView: View {
     
@@ -14,20 +8,21 @@ struct AppearenceView: View {
     @AppStorage("textLayout") private var textLayout: Int = 0
     @AppStorage("sound") private var sound = true
     @AppStorage("tactile") private var tactile = true
-    @AppStorage("font") private var font = ""
+    @AppStorage("font") private var font = "SF Pro"
+    
+    @State private var name: String = "Tim"
+    @State private var birthDate = Date.now
     
     let availableFonts = ["System", "OpenDyslexicMono-Regular.otf"]
     
     var body: some View {
         NavigationStack {
             ScrollView {
-                
                 LayoutRectangle()
-                
                 HStack {
                     Text("Cor Principal")
-                        .font(.openDyslexic(fontStyle: .title, fontWeight: .bold))
-                        .bold()
+                        .font(.changeFont(fontType: font, fontStyle: .title, fontWeight: .bold))
+//                        .bold()
                     
                     Spacer()
                 }
@@ -61,7 +56,7 @@ struct AppearenceView: View {
                 ///Text Layout
                 HStack {
                     Text("Tipo de Layout")
-//                        .font()
+                       .font(.changeFont(fontType: font, fontStyle: .title, fontWeight: .bold))
                         .bold()
                     
                     Spacer()
@@ -78,31 +73,46 @@ struct AppearenceView: View {
                 
                 HStack {
                     Text("Efeitos")
-                        .font(.title)
+                        .font(.changeFont(fontType: font, fontStyle: .title, fontWeight: .bold))
                         .bold()
                     
                     Spacer()
                 }
                 .padding()
                 
+                
 //                List {
                 
+                HStack {
+                    Image(systemName: "speaker.wave.3.fill")
+//                        .padding(.horizontal)
+                    
                     Toggle("Som", isOn: $sound)
-                    .onChange(of: sound) {
-                        AudioServicesPlaySystemSound(1522)
-                    }
+                        .onChange(of: sound) {
+                            AudioServicesPlaySystemSound(1522)
+                        }
+//                        .padding(.horizontal)
+                }
+                .padding(.horizontal)
+                
+                Divider()
                     .padding()
                 
-                Toggle("Tátil", isOn: $tactile)
-                .onChange(of: tactile) {
-                    AudioServicesPlaySystemSound(1522)
+                HStack {
+                    Image(systemName: "water.waves")
+                    
+                    Toggle("Tátil", isOn: $tactile)
+                        .onChange(of: tactile) {
+                            AudioServicesPlaySystemSound(1522)
+                        }
+//                        .padding(.horizontal)
                 }
-                .padding()
+                .padding(.horizontal)
 //                }
                 
                 HStack {
                     Text("Fonte")
-                        .font(.title)
+                        .font(.changeFont(fontType: font, fontStyle: .title, fontWeight: .bold))
                         .bold()
                     
                     Spacer()
@@ -112,16 +122,47 @@ struct AppearenceView: View {
                         Text("SF Pro")
                             .tag("System")
                         
-                        Text("OpenDislexic")
-                            .font(.openDyslexic())
-                            .tag("OpenDyslexicMono-Regular")
+                        Text("OpenDyslexic")
+                            .tag("OpenDyslexic")
                     }
+                    
+                    
                 }
                 .padding()
                 
+//                TextField("Enter your name", text: $name)
+//                    .font(.changeFont(fontType: font, fontStyle: .callout, fontWeight: .regular))
+//
+//                DatePicker(selection: $birthDate, in: ...Date.now, displayedComponents: .date) {
+//                    Text("Select a date")
+//                        .font(.changeFont(fontType: font, fontWeight: .regular))
+//                }
+//
+//                Button {
+//                    print("oioioi")
+//                } label: {
+//                    ZStack {
+//                        Rectangle()
+//                            .frame(width: 100, height: 100)
+//
+//                        Text("Testeeeee")
+//                            .font(.changeFont(fontType: font, fontWeight: .regular))
+//
+//                    }
+//                }
+                
+                
+                
             }
             .navigationTitle("Aparência")
+            
+            
         }
+//        .id(font)
+        .onChange(of: font) { oldValue, newValue in
+            currentFont(to: font)
+        }
+        
     }
 }
 

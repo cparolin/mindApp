@@ -10,7 +10,12 @@ import SwiftData
 
 @main
 struct appMindApp: App {
-    @AppStorage("font") private var font = ""
+
+    @AppStorage("font") private var font = "OpenDyslexic"
+    
+    init() {
+        
+    }
     
     var body: some Scene {
         WindowGroup {

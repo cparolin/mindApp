@@ -1,16 +1,10 @@
-//
-//  LayoutRectangle.swift
-//  appMind
-//
-//  Created by Camila Parolin on 17/10/25.
-//
-
 import SwiftUI
 
 struct LayoutRectangle: View {
     
     @AppStorage("colorLayout") private var colorLayout: ColorCases = .amarelo
     @AppStorage("textLayout") private var textLayout: Int = 0
+    @AppStorage("font") private var font = "SF Pro"
     
     var body: some View {
         
@@ -46,6 +40,7 @@ struct LayoutRectangle: View {
                         
                         if textLayout != 2 {
                             Text("15:00")
+                                .font(.changeFont(fontType: font, fontWeight: .regular))
                         }
                         
                         Rectangle()
@@ -75,6 +70,7 @@ struct LayoutRectangle: View {
                     HStack {
                         if textLayout != 2 {
                             Text("17:30")
+                                .font(.changeFont(fontType: font, fontWeight: .regular))
                         }
                         
                         Rectangle()
@@ -103,6 +99,7 @@ struct LayoutRectangle: View {
                     HStack {
                         if textLayout != 2 {
                             Text("17:30")
+                                .font(.changeFont(fontType: font, fontWeight: .regular))
                         }
                         
                         VStack (alignment: .leading){

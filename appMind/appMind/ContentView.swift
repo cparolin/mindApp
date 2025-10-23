@@ -8,6 +8,12 @@
 import SwiftUI
 
 struct ContentView: View {
+    @AppStorage("font") private var font = "OpenDyslexic"
+        
+    init() {
+        currentFont(to: font)
+    }
+    
     var body: some View {
         TabView {
             Home()
