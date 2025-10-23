@@ -37,7 +37,7 @@ struct EditingTaskView: View {
                             .font(.caption)
                             .foregroundStyle(.gray)
                         
-                        DatePicker("", selection: $taskBeengEditing.todoDate)
+                        DatePicker("", selection: $taskBeengEditing.todoDateStart)
                             .datePickerStyle(.compact)
                             .scaleEffect(0.9, anchor: .leading)
                     })

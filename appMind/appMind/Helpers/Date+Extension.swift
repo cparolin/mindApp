@@ -14,6 +14,7 @@ extension Date {
     func format(_ format: String) -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = format
+        formatter.locale = Locale(identifier: "pt_BR")
         
         return formatter.string(from: self)
     }
