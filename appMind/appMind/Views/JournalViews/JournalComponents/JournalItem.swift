@@ -8,59 +8,61 @@
 import SwiftUI
 
 struct JournalItem: View {
+    @Environment(\.modelContext) private var context
+    
     var journal: JournalModel
     
-    let month = Date.FormatStyle()
-        .month(.abbreviated)
-    
-    let day = Date.FormatStyle()
-        .day(.twoDigits)
+    let month = Date.FormatStyle().month(.abbreviated)
+    let day = Date.FormatStyle().day(.twoDigits)
     
     var body: some View {
         NavigationLink {
+            NoteCarrouselView(journal: journal.journalType, existingJournal: journal)
             
         } label: {
             ZStack {
-                Rectangle()
-                .foregroundColor(.clear)
-                .frame(width: UIScreen.main.bounds.width * 0.9, height: 113)
-                .background(Color(red: 0.85, green: 0.85, blue: 0.85))
-                .cornerRadius(16)
+                NoteBackground(baseColor: ColorName.from(name: journal.journalType.color))
                 
-                HStack {
-                    VStack (spacing: 10){
-                        Text(journal.date.formatted(month))
-                            .font(.title2)
+                HStack (spacing: -6){
+                    HStack {
+                        VStack (spacing: 9){
+                            Text(journal.date.formatted(month))
+                                .font(.title3)
+                                .fontWeight(.semibold)
+                            
+                            Text(journal.date.formatted(day))
+                                .font(.title)
+                        }
                         
-                        Text(journal.date.formatted(day))
-                            .font(.title)
-                    }
-                    .padding(.leading)
-                    .fontWeight(.semibold)
+                        VStack (alignment: .leading, spacing: 9){
+                            Text(journal.title)
+                                .font(.title3)
+                                .fontWeight(.semibold)
+                            
+                            Text(journal.desc)
+                                .font(.callout)
+                                .multilineTextAlignment(.leading)
+                                .frame(width: UIScreen.main.bounds.width * 0.63, alignment: .topLeading)
+                        }
+                        .frame(width: UIScreen.main.bounds.width * 0.69)
+                    }.padding(.leading, 3)
                     
-                    VStack (alignment: .leading, spacing: 10){
-                        Text(journal.title)
-                            .font(.title2)
-                            .fontWeight(.semibold)
-                        Text(journal.desc)
-                            .font(.body)
-                            .multilineTextAlignment(.leading)
+                    Button {
+                        journal.isFavorite.toggle()
+                    } label: {
+                        if journal.isFavorite {
+                            Image(systemName: "heart.fill")
+                        }
+                        else {
+                            Image(systemName: "heart")
+                        }
                     }
-                    .frame(width: UIScreen.main.bounds.width * 0.7)
+                    .offset(x: UIScreen.main.bounds.width * -0.015, y: UIScreen.main.bounds.height * -0.04)
                 }
                 .foregroundStyle(.black)
+                .padding(.horizontal, 20)
+                .padding(.vertical, 20)
             }
         }
     }
-}
-
-#Preview {
-    JournalItem(journal: JournalModel(title: "Título do Registro", desc: "Lorem Ipsum é simplesmente uma simulação de texto da ", date: Date.now, answers: ["", ""], journalType: JournalTypeModel(type: "Vícios", questions: [
-        "Qual situação antecedeu a vontade de praticar o hábito disfuncional?",
-        "Quais pensamentos disfuncionais surgiram por conta da situação?",
-        "Quais emoções surgiram a partir da situação e dos pensamentos disfuncionais?",
-        "Qual foi minha reação ou comportamento?",
-        "Como eu gostaria de ter reagido?",
-        "O que eu posso fazer para me ajudar quando algo parecido acontecer de novo?"
-    ])))
 }

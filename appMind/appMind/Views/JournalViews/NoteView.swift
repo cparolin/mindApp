@@ -13,53 +13,39 @@ struct NoteView: View {
     var totalQuestions: Int
     var onNext: () -> Void
     
-    private var isAnswered: Bool {
-        !answer.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
-    }
+    // Variable to make the text field autofocused
+    @FocusState private var focused: Bool
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 30) {
+        VStack(alignment: .leading, spacing: 20) {
             QuestionProgressIndicator(currentIndex: currentIndex, totalSteps: totalQuestions)
             
             Text(question)
                 .font(.title3)
                 .fontWeight(.semibold)
             
-            TextEditor(text: $answer)
-                .frame(minHeight: 150, maxHeight: .infinity)
-                .overlay(
-                    Group {
-                        if answer.isEmpty {
-                            Text("Aqui você escreve sobre o seu registro...")
-                                .foregroundColor(Color(.placeholderText))
-                                .padding(.top, 8)
-                                .padding(.leading, 5)
-                                .allowsHitTesting(false)
-                        }
-                    },
-                    alignment: .topLeading
-                )
-                .background(Color.gray.opacity(0.1))
-                .cornerRadius(8)
+            TextField("", text: $answer, axis: .vertical)
+                .focused($focused)
             
             Spacer()
             
             HStack {
                 Spacer()
-                
                 Button(action: onNext) {
                     Image(systemName: "arrow.right")
                         .font(.title2)
                         .foregroundColor(.white)
                         .padding()
-                        .background(isAnswered ? Color.blue : Color.gray)
+                        .background(Color.blue)
                         .clipShape(Circle())
                 }
-                .disabled(!isAnswered)
+                .padding(.bottom, 30)
             }
         }
-        .padding(.horizontal, 20)
+        .padding(.horizontal, 40)
         .padding(.top, 20)
+        .onAppear {
+            focused = true
+        }
     }
 }
-

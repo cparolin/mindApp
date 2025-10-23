@@ -14,7 +14,7 @@ struct NewJournalTypeView: View {
     func createAndSave() {
         let questions = [question1, question2, question3, question4, question5, question6]
         
-        let newJournal = JournalTypeModel(type: title, questions: questions)
+        let newJournal = JournalTypeModel(type: title, color: "", symbol: "", questions: questions)
         
         context.insert(newJournal)
     }
@@ -31,8 +31,9 @@ struct NewJournalTypeView: View {
 
     var body: some View {
         NavigationStack {
-            Form {
-                TextField("Título do Diário", text: $title)
+            VStack {
+                NewJournalCover(title: $title)
+    
                 TextField("Pergunta 1", text: $question1)
                 TextField("Pergunta 2", text: $question2)
                 TextField("Pergunta 3", text: $question3)
@@ -40,20 +41,22 @@ struct NewJournalTypeView: View {
                 TextField("Pergunta 5", text: $question5)
                 TextField("Pergunta 6", text: $question6)
                 
-                .navigationTitle("Novo Diário")
-                .navigationBarTitleDisplayMode(.inline)
-                .toolbar {
-                    ToolbarItem(placement: .topBarLeading){
-                        Button("Cancelar"){
-                            dismiss()
-                        }
+                Spacer()
+            }
+            .padding()
+            .navigationTitle("Diário")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .topBarLeading){
+                    Button("Cancelar"){
+                        dismiss()
                     }
-                    
-                    ToolbarItem(placement: .confirmationAction){
-                        Button("Criar"){
-                            createAndSave()
-                            dismiss()
-                        }
+                }
+                
+                ToolbarItem(placement: .confirmationAction){
+                    Button("Criar"){
+                        createAndSave()
+                        dismiss()
                     }
                 }
             }

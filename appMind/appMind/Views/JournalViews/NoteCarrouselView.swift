@@ -9,14 +9,21 @@ import SwiftData
 
 struct NoteCarrouselView: View {
     @Environment(\.modelContext) var context
+    
     var journal: JournalTypeModel
+    var existingJournal: JournalModel?
+    
+    // State variables
     @State private var currentIndex: Int = 0
     @State private var answers: [String] = []
     @State private var showFinalView: Bool = false
-
+    
+    /// Iterates the `currentIndex` variable until it reaches the array
+    /// length, when the condition is met the boolean `showFinalView`
+    /// is toggled
     func nextView() {
         if currentIndex < journal.questions.count - 1 {
-                currentIndex += 1
+            currentIndex += 1
         } else {
             showFinalView = true
         }
@@ -26,7 +33,7 @@ struct NoteCarrouselView: View {
         NavigationStack {
             Group {
                 if showFinalView {
-                    JournalConclusionView(journalType: journal, answers: answers)
+                    JournalConclusionView(existingJournal: existingJournal, journalType: journal, answers: answers)
                     
                 } else if !answers.isEmpty {
                     NoteView(
@@ -45,7 +52,10 @@ struct NoteCarrouselView: View {
             .navigationBarTitleDisplayMode(.inline)
         }
         .onAppear {
-            if answers.isEmpty {
+            if let existing = existingJournal {
+                answers = existing.answers
+            }
+            else if answers.isEmpty {
                 answers = Array(repeating: "", count: journal.questions.count)
             }
         }
@@ -53,7 +63,7 @@ struct NoteCarrouselView: View {
 }
 
 #Preview {
-    NoteCarrouselView(journal: JournalTypeModel(type: "Rotina", questions: [
+    NoteCarrouselView(journal: JournalTypeModel(type: "Rotina", color: "amarelo", symbol: "arrow.trianglehead.clockwise", questions: [
         "O que fiz hoje na minha rotina?",
         "Houve algo que me deixou confortável ou feliz?",
         "Houve algo que me incomodou?",
