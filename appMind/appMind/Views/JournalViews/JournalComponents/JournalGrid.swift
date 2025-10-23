@@ -25,9 +25,16 @@ struct JournalGrid: View {
                         RoundedRectangle(cornerRadius: 16)
                             .frame(width: UIScreen.main.bounds.width * 0.43, height: 217)
                             .foregroundStyle(ColorName.from(name: journal.color))
-                        Text(journal.type)
-                            .foregroundStyle(.black)
-                            .font(.title2)
+                        
+                        VStack (spacing: 10){
+                            Image(systemName: journal.symbol)
+                                .font(.largeTitle)
+                            
+                            Text(journal.type)
+                                .font(.title2)
+                                .bold()
+                        }
+                        .foregroundStyle(.black)
                     }
                 }
             }
