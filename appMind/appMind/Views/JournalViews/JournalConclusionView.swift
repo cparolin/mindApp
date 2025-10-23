@@ -37,7 +37,7 @@ struct JournalConclusionView: View {
             existing.date = date
             existing.answers = answers
         } else {
-            let newNote = JournalModel(title: title, desc: desc, date: date, answers: answers, journalType: journalType)
+            let newNote = JournalModel(title: title, desc: desc, date: date, answers: answers, journalType: journalType, isFavorite: false)
             context.insert(newNote)
         }
         

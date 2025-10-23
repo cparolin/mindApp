@@ -9,37 +9,42 @@ import SwiftUI
 
 struct JournalTypeView: View {
     @Environment(\.modelContext) var context
-    @Query private var journals: [JournalTypeModel]
-    @State private var AddJournalSheet = false
-    var favorites: [JournalModel] = []
     
-    let columns = [
-        GridItem(.flexible()),
-        GridItem(.flexible())
-    ]
+    @Query private var journals: [JournalTypeModel]
+    @Query private var allNotes: [JournalModel]
+    
+    @State private var AddJournalSheet = false
+    
+    var favoriteJournals: [JournalModel] {
+        return allNotes.filter { $0.isFavorite == true }
+    }
     
     var body: some View {
         NavigationStack {
             ScrollView {
-                LazyVGrid(columns: columns) {
-                    ForEach(journals) { journal in
-                        NavigationLink {
-                            JournalListView(journalType: journal)
-                        } label: {
-                            ZStack {
-                                RoundedRectangle(cornerRadius: 16)
-                                    .frame(width: UIScreen.main.bounds.width * 0.43, height: 217)
-                                    .foregroundStyle(.gray)
-                                Text(journal.type)
-                                    .foregroundStyle(.black)
-                                    .font(.title2)
+                VStack (alignment: .leading){
+                    if !favoriteJournals.isEmpty {
+                        Text("Favoritos")
+                            .font(.title2)
+                            .fontWeight(.bold)
+                            .padding(.top)
+                        
+                        ScrollView(.horizontal, showsIndicators: false) {
+                            HStack(spacing: 15) {
+                                ForEach(favoriteJournals) { journal in
+                                    FavoriteJournalItem(journal: journal)
+                                }
                             }
                         }
                     }
-                }
-                .padding()
-                .navigationTitle("Meus Diários")
-                Spacer()
+                    
+                    Text("Meus Diários")
+                        .font(.title2)
+                        .bold()
+                    JournalGrid(journals: journals)
+                    
+                    Spacer()
+                }.padding()
             }
             .toolbar {
                 ToolbarItem (placement: .confirmationAction){

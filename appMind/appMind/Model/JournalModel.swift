@@ -18,13 +18,15 @@ class JournalModel {
     var date: Date
     var answers: [String]
     var journalType: JournalTypeModel
+    var isFavorite: Bool
      
-    init(title: String, desc: String, date: Date, answers: [String], journalType: JournalTypeModel) {
+    init(title: String, desc: String, date: Date, answers: [String], journalType: JournalTypeModel, isFavorite: Bool = false) {
         self.title = title
         self.desc = desc
         self.date = date
         self.answers = answers
         self.journalType = journalType
+        self.isFavorite = isFavorite
     }
 }
 
