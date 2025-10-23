@@ -7,15 +7,17 @@
 import SwiftData
 import SwiftUI
 
+/// Exibits all the journals of the selected journal type
 struct JournalListView: View {
     @Environment(\.modelContext) private var context
     @Query(sort: \JournalModel.journalType.type) var notes: [JournalModel]
     
+    // State properties
     @State private var filteredNotes: [JournalModel] = []
     @State var journalType: JournalTypeModel
     @State private var searchText = ""
-    var favorites: [JournalModel] = []
     
+    /// Search based on the `searchText` that returns a [JournalModel] to the `searchResults` variable
     var searchResults: [JournalModel] {
         if searchText.isEmpty {
             return []
@@ -23,7 +25,6 @@ struct JournalListView: View {
             let results = filteredNotes.filter { note in
                 note.title.localizedStandardContains(searchText)
             }
-            
             return results
         }
     }
@@ -57,6 +58,9 @@ struct JournalListView: View {
                     }
                 }
                 .onAppear {
+                    ///  The `filteredNotes` list receives the `notes` array
+                    ///  filtered by journal type. The `journalType` used to
+                    ///  make the comparison is received when the view is accessed
                     filteredNotes = notes.filter({
                         $0.journalType.type.localizedStandardContains(journalType.type)
                     })

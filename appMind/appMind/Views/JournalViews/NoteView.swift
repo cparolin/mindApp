@@ -13,6 +13,7 @@ struct NoteView: View {
     var totalQuestions: Int
     var onNext: () -> Void
     
+    // Variable to make the text field autofocused
     @FocusState private var focused: Bool
     
     var body: some View {

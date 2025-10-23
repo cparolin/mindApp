@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+/// Exibits all the journals on the favorite list
 struct FavoriteJournalListView: View {
     @State var favoriteNotes: [JournalModel]
     @State var searchText = ""
@@ -18,7 +19,6 @@ struct FavoriteJournalListView: View {
             let results = favoriteNotes.filter { note in
                 note.title.localizedStandardContains(searchText)
             }
-            
             return results
         }
     }

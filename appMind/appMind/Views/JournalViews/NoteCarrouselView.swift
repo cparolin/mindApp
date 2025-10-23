@@ -9,12 +9,18 @@ import SwiftData
 
 struct NoteCarrouselView: View {
     @Environment(\.modelContext) var context
+    
     var journal: JournalTypeModel
     var existingJournal: JournalModel?
+    
+    // State variables
     @State private var currentIndex: Int = 0
     @State private var answers: [String] = []
     @State private var showFinalView: Bool = false
     
+    /// Iterates the `currentIndex` variable until it reaches the array
+    /// length, when the condition is met the boolean `showFinalView`
+    /// is toggled
     func nextView() {
         if currentIndex < journal.questions.count - 1 {
             currentIndex += 1

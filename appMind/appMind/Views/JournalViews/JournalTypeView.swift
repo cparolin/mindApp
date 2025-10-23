@@ -7,6 +7,7 @@
 import SwiftData
 import SwiftUI
 
+/// Exibits the journal categories and 5 favorite notes
 struct JournalTypeView: View {
     @Environment(\.modelContext) var context
     
@@ -15,6 +16,7 @@ struct JournalTypeView: View {
     
     @State private var AddJournalSheet = false
     
+    /// Receives the `allNotes` array filtered by favorites
     var favoriteJournals: [JournalModel] {
         return allNotes.filter { $0.isFavorite == true }
     }
@@ -25,34 +27,10 @@ struct JournalTypeView: View {
                 VStack (alignment: .leading, spacing: 25){
                     if !favoriteJournals.isEmpty {
                         VStack (alignment: .leading, spacing: 4){
-                            HStack {
-                                Text("Favoritos")
-                                    .font(.title2)
-                                    .fontWeight(.semibold)
-                                    .padding(.leading, 20)
-                                
-                                Spacer()
-                                
-                                NavigationLink {
-                                    FavoriteJournalListView(favoriteNotes: favoriteJournals)
-                                    
-                                } label: {
-                                    Text("Mostrar tudo")
-                                        .font(.caption)
-                                        .foregroundStyle(.gray)
-                                        .fontWeight(.semibold)
-                                }
-                                .padding(.trailing, 20)
-                            }
                             
-                            ScrollView(.horizontal, showsIndicators: false) {
-                                HStack(spacing: 15) {
-                                    ForEach(favoriteJournals.prefix(5)) { journal in
-                                        FavoriteJournalItem(journal: journal)
-                                    }
-                                }
-                                .padding(.horizontal, 20)
-                            }
+                            FavoriteShowAll(favoriteJournals: favoriteJournals)
+                            
+                            FavoriteHorizontalScroll(favoriteJournals: favoriteJournals)
                         }
                     }
                     
@@ -84,6 +62,8 @@ struct JournalTypeView: View {
                 NewJournalTypeView()
             }
         }
+        /// Pre set categories initialized when the app is launched for
+        /// the first time
         .onAppear {
             appMind.initialJournalsCreation(journals: journals, context: context)
         }

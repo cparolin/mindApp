@@ -12,10 +12,12 @@ struct JournalConclusionView: View {
     @Environment(\.modelContext) var context
     @Environment(\.dismiss) var dismiss
     
+    // View properties
     var existingJournal: JournalModel?
     var journalType: JournalTypeModel
     var answers: [String]
     
+    // State properties
     @State private var title: String = ""
     @State private var desc: String = ""
     @State private var date: Date = Date.now
@@ -25,18 +27,22 @@ struct JournalConclusionView: View {
         self.journalType = journalType
         self.answers = answers
         
+        /// initializes the state properties with a default value or the existing journal value
         _title = State(initialValue: existingJournal?.title ?? "")
         _desc = State(initialValue: existingJournal?.desc ?? "")
         _date = State(initialValue: existingJournal?.date ?? Date.now)
     }
     
+    /// creates a new note instance or updates an existing instance
     func createNote() {
+        //update
         if let existing = existingJournal {
             existing.title = title
             existing.desc = desc
             existing.date = date
             existing.answers = answers
         } else {
+            //create
             let newNote = JournalModel(title: title, desc: desc, date: date, answers: answers, journalType: journalType, isFavorite: false)
             context.insert(newNote)
         }
@@ -66,12 +72,12 @@ struct JournalConclusionView: View {
         }
         .padding(EdgeInsets(top: 30, leading: 30, bottom: 0, trailing: 30))
         .navigationTitle(existingJournal == nil ? "Finalizar Registro" : "Editar Registro")
-        .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .confirmationAction) {
                 Button(existingJournal == nil ? "Salvar" : "Atualizar") {
                     createNote()
                 }
+                /// confirmation button is disabled if the fields are empty
                 .disabled(title.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || desc.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
             }
         }
