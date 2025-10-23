@@ -10,7 +10,12 @@ import SwiftData
 
 @main
 struct appMindApp: App {
-    @AppStorage("font") private var font = ""
+    
+    @AppStorage("font") private var font = "OpenDyslexic"
+    
+    init() {
+        
+    }
     
     var body: some Scene {
         WindowGroup {
@@ -18,5 +23,9 @@ struct appMindApp: App {
                 .environment(\.font, Font.custom(font, size: 17))
         }
         .modelContainer(for: [JournalTypeModel.self, Task.self, JournalModel.self])
+        
     }
+//        .onChange(of: font) { oldValue, newValue in
+//            init()
+//        }
 }

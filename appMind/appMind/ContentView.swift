@@ -8,6 +8,14 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @AppStorage("font") private var font = "OpenDyslexic"
+    
+    init() {
+         currentFont(to: font)
+        }
+    
+    
     var body: some View {
         TabView {
             Home()
@@ -21,6 +29,7 @@ struct ContentView: View {
             AppearenceView()
                 .tabItem {
                     Label("Configurações", systemImage: "gear")
+                        .font(.changeFont(fontType: font, fontWeight: .regular))
                 }
         }
     }

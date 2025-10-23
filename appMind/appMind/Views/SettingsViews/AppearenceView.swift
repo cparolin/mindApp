@@ -7,6 +7,7 @@
 
 import SwiftUI
 import AudioToolbox
+import UIKit
 
 struct AppearenceView: View {
     
@@ -15,6 +16,9 @@ struct AppearenceView: View {
     @AppStorage("sound") private var sound = true
     @AppStorage("tactile") private var tactile = true
     @AppStorage("font") private var font = "SF Pro"
+    
+    @State private var name: String = "Tim"
+    @State private var birthDate = Date.now
     
     let availableFonts = ["System", "OpenDyslexicMono-Regular.otf"]
     
@@ -128,16 +132,46 @@ struct AppearenceView: View {
                             .tag("System")
                         
                         Text("OpenDyslexic")
-//                            .font(.changeFont(fontType: font, fontWeight: .regular))
                             .tag("OpenDyslexic")
                     }
+                    
+                    
                 }
                 .padding()
+                
+//                TextField("Enter your name", text: $name)
+//                    .font(.changeFont(fontType: font, fontStyle: .callout, fontWeight: .regular))
+//                
+//                DatePicker(selection: $birthDate, in: ...Date.now, displayedComponents: .date) {
+//                    Text("Select a date")
+//                        .font(.changeFont(fontType: font, fontWeight: .regular))
+//                }
+//                
+//                Button {
+//                    print("oioioi")
+//                } label: {
+//                    ZStack {
+//                        Rectangle()
+//                            .frame(width: 100, height: 100)
+//                        
+//                        Text("Testeeeee")
+//                            .font(.changeFont(fontType: font, fontWeight: .regular))
+//                        
+//                    }
+//                }
+                
+                
                 
             }
             .navigationTitle("Aparência")
             
+            
         }
+        .id(font)
+        .onChange(of: font) { oldValue, newValue in
+            currentFont(to: font)
+        }
+        
     }
 }
 
