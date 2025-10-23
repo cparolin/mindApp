@@ -39,11 +39,11 @@ struct JournalListView: View {
                         
                     } else if !searchText.isEmpty {
                         ForEach(searchResults) { note in
-                            JournalItem(journal: note, journalType: journalType)
+                            JournalItem(journal: note)
                         }
                     } else {
                         ForEach(filteredNotes) { note in
-                            JournalItem(journal: note, journalType: journalType)
+                            JournalItem(journal: note)
                         }
                     }
                 }

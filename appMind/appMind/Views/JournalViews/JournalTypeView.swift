@@ -22,31 +22,55 @@ struct JournalTypeView: View {
     var body: some View {
         NavigationStack {
             ScrollView {
-                VStack (alignment: .leading){
+                VStack (alignment: .leading, spacing: 25){
                     if !favoriteJournals.isEmpty {
-                        Text("Favoritos")
-                            .font(.title2)
-                            .fontWeight(.bold)
-                            .padding(.top)
-                        
-                        ScrollView(.horizontal, showsIndicators: false) {
-                            HStack(spacing: 15) {
-                                ForEach(favoriteJournals) { journal in
-                                    FavoriteJournalItem(journal: journal)
+                        VStack (alignment: .leading, spacing: 4){
+                            HStack {
+                                Text("Favoritos")
+                                    .font(.title2)
+                                    .fontWeight(.semibold)
+                                    .padding(.leading, 20)
+                                
+                                Spacer()
+                                
+                                NavigationLink {
+                                    FavoriteJournalListView(favoriteNotes: favoriteJournals)
+                                    
+                                } label: {
+                                    Text("Mostrar tudo")
+                                        .font(.caption)
+                                        .foregroundStyle(.gray)
+                                        .fontWeight(.semibold)
                                 }
+                                .padding(.trailing, 20)
+                            }
+                            
+                            ScrollView(.horizontal, showsIndicators: false) {
+                                HStack(spacing: 15) {
+                                    ForEach(favoriteJournals.prefix(5)) { journal in
+                                        FavoriteJournalItem(journal: journal)
+                                    }
+                                }
+                                .padding(.horizontal, 20)
                             }
                         }
                     }
                     
-                    Text("Meus Diários")
-                        .font(.title2)
-                        .bold()
-                    JournalGrid(journals: journals)
+                    VStack (alignment: .leading){
+                        Text("Todos os diários")
+                            .font(.title2)
+                            .fontWeight(.semibold)
+                            .padding(.leading, 20)
+                        
+                        JournalGrid(journals: journals)
+                            .padding(.horizontal)
+                    }
                     
                     Spacer()
                 }
-                .padding()
+                .padding(.top, 30)
             }
+            .navigationTitle("Meus Diários")
             .toolbar {
                 ToolbarItem (placement: .confirmationAction){
                     Button {

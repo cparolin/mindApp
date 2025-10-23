@@ -11,18 +11,17 @@ struct JournalItem: View {
     @Environment(\.modelContext) private var context
     
     var journal: JournalModel
-    var journalType: JournalTypeModel
     
     let month = Date.FormatStyle().month(.abbreviated)
     let day = Date.FormatStyle().day(.twoDigits)
     
     var body: some View {
         NavigationLink {
-            NoteCarrouselView(journal: journalType, existingJournal: journal)
+            NoteCarrouselView(journal: journal.journalType, existingJournal: journal)
             
         } label: {
             ZStack {
-                NoteBackground()
+                NoteBackground(baseColor: ColorName.from(name: journal.journalType.color))
                 
                 HStack (spacing: -6){
                     HStack {

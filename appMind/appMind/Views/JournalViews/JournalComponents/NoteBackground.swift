@@ -8,10 +8,12 @@
 import SwiftUI
 
 struct NoteBackground: View {
+    var baseColor: Color
+    
     var body: some View {
         HStack (spacing: 0){
             Rectangle()
-                .foregroundStyle(Color(red: 0.59, green: 0.88, blue: 0.82))
+                .foregroundStyle(baseColor.opacity(0.40))
                 .frame(width: UIScreen.main.bounds.width * 0.77, height: 113)
                 .clipShape(
                     .rect(
@@ -23,7 +25,7 @@ struct NoteBackground: View {
                 )
                 
             Rectangle()
-                .foregroundStyle(Color(red: 0.18, green: 0.64, blue: 0.55))
+                .foregroundStyle(baseColor)
                 .frame(width: UIScreen.main.bounds.width * 0.135, height: 113)
                 .clipShape(
                     .rect(
@@ -39,5 +41,5 @@ struct NoteBackground: View {
 }
 
 #Preview {
-    NoteBackground()
+    NoteBackground(baseColor: .blue)
 }

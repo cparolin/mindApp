@@ -19,7 +19,7 @@ struct FavoriteJournalItem: View {
             NoteCarrouselView(journal: journal.journalType, existingJournal: journal)
         } label: {
             ZStack {
-                RoundedRectangle(cornerRadius: 16)
+                RoundedRectangle(cornerRadius: 20)
                     .frame(width: UIScreen.main.bounds.width * 0.55, height: UIScreen.main.bounds.height * 0.13)
                     .foregroundStyle(ColorName.from(name: journal.journalType.color))
                 

@@ -50,6 +50,7 @@ struct JournalConclusionView: View {
                 .font(.title2)
                 .bold()
                 .padding(.bottom, 10)
+                .limitInputLength(value: $desc, length: 18)
             
             TextField("Descrição Breve", text: $desc, axis: .vertical)
                 .fontWeight(.semibold)
@@ -71,7 +72,7 @@ struct JournalConclusionView: View {
                 Button(existingJournal == nil ? "Salvar" : "Atualizar") {
                     createNote()
                 }
-                .disabled(title.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
+                .disabled(title.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || desc.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
             }
         }
     }

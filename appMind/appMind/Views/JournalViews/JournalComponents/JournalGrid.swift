@@ -27,8 +27,9 @@ struct JournalGrid: View {
                             .foregroundStyle(ColorName.from(name: journal.color))
                         
                         VStack (spacing: 10){
-                            Image(systemName: journal.symbol)
-                                .font(.largeTitle)
+                            Text("\(Image(systemName: journal.symbol))")
+                                .font(.system(size: 96, weight: .medium))
+                                .innerShadow(Color(journal.color))
                             
                             Text(journal.type)
                                 .font(.title2)
