@@ -6,12 +6,22 @@
 //
 
 import SwiftUI
+import SwiftData
 
 @main
 struct appMindApp: App {
+
+    @AppStorage("font") private var font = "OpenDyslexic"
+    
+    init() {
+        
+    }
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environment(\.font, Font.custom(font, size: 17))
         }
+        .modelContainer(for: [JournalTypeModel.self, Task.self, JournalModel.self])
     }
 }
