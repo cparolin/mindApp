@@ -34,10 +34,10 @@ struct FavoriteJournalItem: View {
                     Capsule()
                         .frame(width: 90, height: 1.5)
                 }
-                .offset(x: UIScreen.main.bounds.width * 0.15, y: UIScreen.main.bounds.height * -0.04)
+                .offset(x: UIScreen.main.bounds.width * 0.16, y: UIScreen.main.bounds.height * -0.04)
                 
                 // Date, title and description
-                VStack (alignment: .leading, spacing: 8){
+                VStack (alignment: .leading/*, spacing: 12*/){
                     // Month and day
                     HStack (spacing: 4){
                         Text(journal.date.formatted(day))
@@ -51,19 +51,14 @@ struct FavoriteJournalItem: View {
                         
                         Spacer()
                     }
-                    // Title and description
-                    VStack (alignment: .leading){
-                        Text(journal.title)
-                            .font(.subheadline)
-                            .bold()
-                        
-                        Text(journal.desc)
-                            .font(.caption)
-                            .frame(width: UIScreen.main.bounds.width * 0.5, alignment: .topLeading)
-                            .multilineTextAlignment(.leading)
-                    }
+                    
+                    Spacer()
+                    // Title
+                    Text(journal.title)
+                        .font(.title2)
+                        .bold()
                 }
-                .frame(width: UIScreen.main.bounds.width * 0.5, height: UIScreen.main.bounds.height * 0.15)
+                .frame(width: UIScreen.main.bounds.width * 0.5, height: UIScreen.main.bounds.height * 0.1)
             }
         }
         .foregroundStyle(.black)

@@ -14,7 +14,7 @@ extension Text {
             .overlay(background.mask(self))
             .overlay(
                 ZStack {
-                    self.foregroundColor(Color(white: 1 - opacity))
+                    self.foregroundColor(Color(white: 1.2 - opacity))
                     self.foregroundColor(.white).blur(radius: radius).offset(x: 5, y: 5)
                 }
                     .mask(self)

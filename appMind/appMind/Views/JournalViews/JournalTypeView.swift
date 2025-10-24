@@ -31,6 +31,7 @@ struct JournalTypeView: View {
                             FavoriteShowAll(favoriteJournals: favoriteJournals)
                             
                             FavoriteHorizontalScroll(favoriteJournals: favoriteJournals)
+                                .padding(.top, 10)
                         }
                     }
                     
@@ -49,18 +50,6 @@ struct JournalTypeView: View {
                 .padding(.top, 30)
             }
             .navigationTitle("Meus Diários")
-            .toolbar {
-                ToolbarItem (placement: .confirmationAction){
-                    Button {
-                        AddJournalSheet = true
-                    } label: {
-                        Image(systemName: "plus")
-                    }
-                }
-            }
-            .sheet(isPresented: $AddJournalSheet) {
-                NewJournalTypeView()
-            }
         }
         /// Pre set categories initialized when the app is launched for
         /// the first time
