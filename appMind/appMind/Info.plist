@@ -4,8 +4,8 @@
 <dict>
 	<key>UIAppFonts</key>
 	<array>
-		<string>OpenDyslexic-Bold.otf</string>
 		<string>OpenDyslexic-Regular.otf</string>
+		<string>OpenDyslexic-Bold.otf</string>
 	</array>
 </dict>
 </plist>
