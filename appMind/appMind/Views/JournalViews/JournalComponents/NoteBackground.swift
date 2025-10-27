@@ -11,21 +11,13 @@ struct NoteBackground: View {
     var baseColor: Color
     
     var body: some View {
-        HStack (spacing: 0){
-            Rectangle()
-                .foregroundStyle(baseColor.opacity(0.15))
-                .frame(width: UIScreen.main.bounds.width * 0.77, height: 113)
-                .clipShape(
-                    .rect(
-                        topLeadingRadius: 16,
-                        bottomLeadingRadius: 16,
-                        bottomTrailingRadius: 0,
-                        topTrailingRadius: 0
-                    )
-                )
+        ZStack {
+            RoundedRectangle(cornerRadius: 16)
+                .stroke(baseColor, lineWidth: 2)
+                .fill(baseColor.opacity(0.15))
                 
             Rectangle()
-                .foregroundStyle(baseColor)
+                .fill(baseColor)
                 .frame(width: UIScreen.main.bounds.width * 0.135, height: 113)
                 .clipShape(
                     .rect(
@@ -35,8 +27,9 @@ struct NoteBackground: View {
                         topTrailingRadius: 16
                     )
                 )
+                .padding(.leading, UIScreen.main.bounds.width * 0.76)
         }
-        .shadow(color: .black.opacity(0.09), radius: 4.1, x: 0, y: 1)
+        .frame(width: UIScreen.main.bounds.width * 0.9, height: 113)
     }
 }
 
