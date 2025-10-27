@@ -18,11 +18,11 @@ struct FirstView: View {
                 .font(.title)
                 .fontWeight(.bold)
                 .padding(.bottom , 3)
-                Text("Aqui você coloca todas as suas atividades que deverá realizar durante o dia")
-                    .font(.body)
-                    .fontWeight(.regular)
-                    .multilineTextAlignment(.center)
-                    .padding(.bottom , 64)
+            Text("Aqui você coloca todas as suas atividades que deverá realizar durante o dia")
+                .font(.body)
+                .fontWeight(.regular)
+                .multilineTextAlignment(.center)
+                .padding(.bottom , 64)
             
             RoundedRectangle(cornerRadius: 20)
                 .frame(width: 361 , height: 213 , alignment: .center)
@@ -41,17 +41,30 @@ struct FirstView: View {
                 .padding(.top , 72)
             }
             Button(){
-                dismiss()
+                appState.setFirstTimeOnApp(value: true)
             } label: {
-                    Text("Pular introdução")
+                Text("Pular introdução")
                     .font(.footnote)
                     .foregroundStyle(.gray)
-                        .fontWeight(.semibold)
+                    .fontWeight(.semibold)
             }
             .padding(.top , 5)
         }
         .vSpacing(.top)
         .padding(.top , 60)
+        .toolbar(){
+            ToolbarItem(placement: .topBarLeading){
+                Button(){
+                    appState.route = .homeScreen
+                } label:{
+                    HStack(spacing: 4){
+                        Image(systemName: "chevron.left")
+                        Text("Inicio")
+                    }
+                    .padding(.top , 16)
+                }
+            }
+        }
     }
 }
 

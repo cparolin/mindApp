@@ -8,24 +8,32 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State var appState = AppState()
+    
     var body: some View {
-        TabView {
-            Home()
-                .tabItem {
-                    Label("Calendário", systemImage: "calendar.day.timeline.left")
-                }
-            JournalTypeView()
-                .tabItem {
-                    Label("Diários", systemImage: "book.pages")
-                }
-            AppearenceView()
-                .tabItem {
-                    Label("Configurações", systemImage: "gear")
-                }
+        if !appState.firstTimeOnApp {
+            OnboardingView()
+                .environment(appState)
+        }
+        else {
+            TabView {
+                Home()
+                    .tabItem {
+                        Label("Calendário", systemImage: "calendar.day.timeline.left")
+                    }
+                JournalTypeView()
+                    .tabItem {
+                        Label("Diários", systemImage: "book.pages")
+                    }
+                AppearenceView()
+                    .tabItem {
+                        Label("Configurações", systemImage: "gear")
+                    }
+            }
         }
     }
 }
 
-#Preview {
-    ContentView()
-}
+    #Preview {
+        ContentView()
+    }

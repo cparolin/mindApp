@@ -55,10 +55,31 @@ struct SecondView: View {
                 .frame(maxWidth: .infinity)
                 .padding(.top , 70)
             }
+            Button(){
+                appState.setFirstTimeOnApp(value: true)
+            } label: {
+                    Text("Pular introdução")
+                    .font(.footnote)
+                    .foregroundStyle(.gray)
+                        .fontWeight(.semibold)
+            }
+            .padding(.top , 5)
         }
         .vSpacing(.top)
         .padding(.top , 60)
-        
+        .toolbar(){
+            ToolbarItem(placement: .topBarLeading){
+                Button(){
+                    appState.route = .homeScreen
+                } label:{
+                    HStack(spacing: 4){
+                        Image(systemName: "chevron.left")
+                        Text("Inicio")
+                    }
+                    .padding(.top , 16)
+                }
+            }
+        }
     }
 }
 

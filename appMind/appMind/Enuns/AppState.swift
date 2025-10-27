@@ -6,8 +6,10 @@
 //
 
 import Foundation
+import SwiftUI
 
 enum Route: Hashable{
+    case homeScreen
     case firstScreen
     case secondScreen
     case thirdScreen
@@ -15,5 +17,11 @@ enum Route: Hashable{
 
 @Observable
 class AppState {
-    var route: Route = .firstScreen
+    var route: Route = .homeScreen
+    var firstTimeOnApp: Bool = UserDefaults.standard.bool(forKey: "FirstTimeOnApp")
+    
+    public func setFirstTimeOnApp(value: Bool) {
+        UserDefaults.standard.set(value, forKey: "FirstTimeOnApp")
+        firstTimeOnApp = UserDefaults.standard.bool(forKey: "FirstTimeOnApp")
+    }
 }

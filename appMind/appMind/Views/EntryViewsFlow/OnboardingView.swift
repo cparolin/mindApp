@@ -13,6 +13,9 @@ struct OnboardingView: View {
     var body: some View {
         VStack {
             switch appState.route {
+            case .homeScreen:
+                HomeScreenView()
+                    .environment(appState)
             case .firstScreen:
                 FirstView()
                     .environment(appState)
@@ -27,6 +30,3 @@ struct OnboardingView: View {
     }
 }
 
-#Preview {
-    OnboardingView()
-}
