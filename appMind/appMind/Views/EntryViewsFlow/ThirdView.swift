@@ -29,9 +29,8 @@ struct ThirdView: View {
             PhotosPicker(selection: $imageSelection, matching: .images){
                 if imageSelection == nil{
                     Circle()
-                        .frame(width: 161)
                         .foregroundStyle(Color.gray)
-                        .padding(.bottom , 25)
+                        .frame(width: 161)
                 }
                 else {
                     userProfileImage
@@ -41,15 +40,17 @@ struct ThirdView: View {
                         .clipShape(Circle())
                 }
             }
+            .padding(.bottom  , 20)
             VStack(alignment: .center){
                 TextField("AAAAAAAAAAA", text: $userProfileNameTemp, prompt: Text("Nome e Sobrenome")
                     .font(.title3)
                     .fontWeight(.semibold)
                     .foregroundStyle(.gray))
+                .font(.title3)
+                .fontWeight(.semibold)
                 .multilineTextAlignment(.center)
                 .padding(.bottom , 80)
             }
-            
             Button(){
                 if  userProfileNameTemp == "" {
                     userName = " "
@@ -74,6 +75,7 @@ struct ThirdView: View {
                 Text("Iniciar sem criar perfil")
                     .font(.footnote)
                     .fontWeight(.semibold)
+                    .foregroundStyle(.gray)
             }
             .foregroundStyle(colorScheme == .light ? .black : .white)
             .padding(.top , 10)
