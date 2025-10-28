@@ -8,7 +8,7 @@
 import SwiftUI
 import SwiftData
 
-struct FavoriteJournalItem: View {
+struct ReducedJournalItem: View {
     var journal: JournalModel
     var baseColor: Color
     
@@ -22,7 +22,7 @@ struct FavoriteJournalItem: View {
         } label: {
             ZStack {
                 // Background
-                FavoriteItemBackground(baseColor: ColorName.from(name: journal.journalType.color))
+                ReducedItemBackground(baseColor: ColorName.from(name: journal.journalType.color))
                 
                 // Top right label
                 VStack (alignment: .trailing, spacing: 2){
@@ -67,5 +67,5 @@ struct FavoriteJournalItem: View {
 }
 
 #Preview {
-    FavoriteJournalItem(journal: JournalModel(title: "Título", desc: "Lorem Ipsum é simplesmente uma simulação de texto da", date: Date.now, answers: ["",""], journalType: JournalTypeModel(type: "Socialização", color: "azul", secondaryColor: "vermelho", symbol: "message", questions: [""]), isFavorite: false), baseColor: .yellow)
+    ReducedJournalItem(journal: JournalModel(title: "Título", desc: "Lorem Ipsum é simplesmente uma simulação de texto da", date: Date.now, answers: ["",""], journalType: JournalTypeModel(type: "Socialização", color: "azul", secondaryColor: "vermelho", symbol: "message", questions: [""]), isFavorite: false), baseColor: .yellow)
 }

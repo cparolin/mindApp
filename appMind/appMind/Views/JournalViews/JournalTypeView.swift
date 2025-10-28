@@ -12,7 +12,7 @@ struct JournalTypeView: View {
     @Environment(\.modelContext) var context
     
     @Query private var journals: [JournalTypeModel]
-    @Query private var allNotes: [JournalModel]
+    @Query(sort: [SortDescriptor(\JournalModel.date, order: .reverse)]) var allNotes: [JournalModel]
     
     @State private var AddJournalSheet = false
     
@@ -25,18 +25,20 @@ struct JournalTypeView: View {
         NavigationStack {
             ScrollView (showsIndicators: false) {
                 VStack (alignment: .leading, spacing: 27){
+                    if !allNotes.isEmpty {
+                        VStack (alignment: .leading, spacing: 4){
+                            RecentShowAll(recentJournals: allNotes)
+                            
+                            NotesHorizontalScroll(notes: allNotes)
+                                .padding(.top, 10)
+                        }
+                    }
+                    
                     if !favoriteJournals.isEmpty {
                         VStack (alignment: .leading, spacing: 4){
                             FavoriteShowAll(favoriteJournals: favoriteJournals)
                             
-                            FavoriteHorizontalScroll(favoriteJournals: favoriteJournals)
-                                .padding(.top, 10)
-                        }
-                        
-                        VStack (alignment: .leading, spacing: 4){
-                            FavoriteShowAll(favoriteJournals: favoriteJournals)
-                            
-                            FavoriteHorizontalScroll(favoriteJournals: favoriteJournals)
+                            NotesHorizontalScroll(notes: favoriteJournals)
                                 .padding(.top, 10)
                         }
                     }

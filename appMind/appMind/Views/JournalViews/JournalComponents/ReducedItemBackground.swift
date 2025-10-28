@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct FavoriteItemBackground: View {
+struct ReducedItemBackground: View {
     var baseColor: Color
     
     var body: some View {
@@ -34,5 +34,5 @@ struct FavoriteItemBackground: View {
 }
 
 #Preview {
-    FavoriteItemBackground(baseColor: .yellow)
+    ReducedItemBackground(baseColor: .yellow)
 }
