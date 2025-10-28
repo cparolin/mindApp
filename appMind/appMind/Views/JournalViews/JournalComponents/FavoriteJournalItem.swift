@@ -34,7 +34,7 @@ struct FavoriteJournalItem: View {
                         .frame(width: 90, height: 2.6)
                         .foregroundStyle(ColorName.from(name: journal.journalType.color))
                 }
-                .offset(x: UIScreen.main.bounds.width * 0.162, y: UIScreen.main.bounds.height * -0.035)
+                .offset(x: UIScreen.main.bounds.width * 0.136, y: UIScreen.main.bounds.height * -0.035)
                 
                 // Date, title and description
                 VStack (alignment: .leading){
@@ -42,15 +42,14 @@ struct FavoriteJournalItem: View {
                     HStack (spacing: 5){
                         Text(journal.date.formatted(day))
                             .bold()
-                            .font(.title3)
                             .italic()
                         
                         Text(journal.date.formatted(month))
-                            .font(.title3)
                             .italic()
                         
                         Spacer()
                     }
+                    .font(.body)
                     
                     Spacer()
                     // Title
@@ -59,8 +58,8 @@ struct FavoriteJournalItem: View {
                         .bold()
                         .padding(.bottom, 4)
                 }
-                .padding(.leading, 8.4)
-                .frame(width: UIScreen.main.bounds.width * 0.5, height: UIScreen.main.bounds.height * 0.1)
+                .padding(.leading, 6)
+                .frame(width: UIScreen.main.bounds.width * 0.46, height: UIScreen.main.bounds.height * 0.095)
             }
         }
         .foregroundStyle(.black)
@@ -68,12 +67,5 @@ struct FavoriteJournalItem: View {
 }
 
 #Preview {
-    FavoriteJournalItem(journal: JournalModel(title: "Título", desc: "Lorem Ipsum é simplesmente uma simulação de texto da", date: Date.now, answers: ["",""], journalType: JournalTypeModel(type: "Socialização", color: "azul", symbol: "message", questions: [
-        "Onde eu estava e com quem?",
-        "O que aconteceu na prática? (Descrição da Situação)",
-        "Como eu participei dessa interação e como me senti? (Exemplos: falei bastante, mais escutei do que falei, me senti ansioso)",
-        "Resultado real da interação (Exemplos: fiquei satisfeito, houve entendimento mútuo)",
-        "O que aprendi ou percebi nessa interação? (Exemplos: funcionou melhor quando fiz perguntas)",
-        "O que quero manter ou melhorar para a próxima vez?"
-    ]), isFavorite: false), baseColor: .yellow)
+    FavoriteJournalItem(journal: JournalModel(title: "Título", desc: "Lorem Ipsum é simplesmente uma simulação de texto da", date: Date.now, answers: ["",""], journalType: JournalTypeModel(type: "Socialização", color: "azul", secondaryColor: "vermelho", symbol: "message", questions: [""]), isFavorite: false), baseColor: .yellow)
 }

@@ -23,11 +23,17 @@ struct JournalTypeView: View {
     
     var body: some View {
         NavigationStack {
-            ScrollView {
-                VStack (alignment: .leading, spacing: 25){
+            ScrollView (showsIndicators: false) {
+                VStack (alignment: .leading, spacing: 27){
                     if !favoriteJournals.isEmpty {
                         VStack (alignment: .leading, spacing: 4){
+                            FavoriteShowAll(favoriteJournals: favoriteJournals)
                             
+                            FavoriteHorizontalScroll(favoriteJournals: favoriteJournals)
+                                .padding(.top, 10)
+                        }
+                        
+                        VStack (alignment: .leading, spacing: 4){
                             FavoriteShowAll(favoriteJournals: favoriteJournals)
                             
                             FavoriteHorizontalScroll(favoriteJournals: favoriteJournals)
@@ -35,19 +41,18 @@ struct JournalTypeView: View {
                         }
                     }
                     
-                    VStack (alignment: .leading){
+                    VStack (alignment: .leading, spacing: 15){
                         Text("Todos os diários")
-                            .font(.title2)
+                            .font(.title3)
                             .fontWeight(.semibold)
                             .padding(.leading, 20)
                         
-                        JournalGrid(journals: journals)
-                            .padding(.horizontal)
+                        JournalCoverScroll(journals: journals)
                     }
                     
                     Spacer()
                 }
-                .padding(.top, 30)
+                .padding(.top, 10)
             }
             .navigationTitle("Meus Diários")
         }

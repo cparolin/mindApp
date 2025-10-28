@@ -13,7 +13,7 @@ struct FavoriteShowAll: View {
     var body: some View {
         HStack {
             Text("Favoritos")
-                .font(.title2)
+                .font(.title3)
                 .fontWeight(.semibold)
                 .padding(.leading, 20)
             

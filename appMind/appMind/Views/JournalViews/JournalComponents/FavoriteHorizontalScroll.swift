@@ -14,7 +14,7 @@ struct FavoriteHorizontalScroll: View {
     
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
-            HStack(spacing: 15) {
+            HStack(spacing: 25) {
                 ForEach(favoriteJournals.prefix(5)) { journal in
                     FavoriteJournalItem(journal: journal, baseColor: ColorName.from(name: journal.journalType.color))
                 }

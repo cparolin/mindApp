@@ -92,18 +92,5 @@ struct JournalConclusionView: View {
 }
 
 #Preview {
-    JournalConclusionView(journalType: JournalTypeModel(type: "Rotina", color: "amarelo", symbol: "arrow.trianglehead.clockwise", questions: [
-        "O que fiz hoje na minha rotina?",
-        "Houve algo que me deixou confortável ou feliz?",
-        "Houve algo que me incomodou?",
-        "Como eu me senti e o que pensei sobre esse incômodo?",
-        "O que funcionou bem na minha rotina?",
-        "O que eu gostaria de ajustar para lidar com os incômodos da próxima vez?"]), answers: [
-            "",
-            "",
-            "",
-            "",
-            "",
-            ""
-        ])
+    JournalConclusionView(journalType: JournalTypeModel(type: "Rotina", color: "amarelo", secondaryColor: "laranja", symbol: "arrow.trianglehead.clockwise", questions: [""]), answers: [""])
 }
