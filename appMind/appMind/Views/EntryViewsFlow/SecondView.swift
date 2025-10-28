@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 
+/// Esta View é uma prevea visual e breve descrição de como funciona sistema de Diarios do app.
 struct SecondView: View {
     @Environment(AppState.self) private var appState: AppState
     @Environment(\.dismiss) private var dismiss

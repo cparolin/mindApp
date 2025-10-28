@@ -8,13 +8,13 @@
 import Foundation
 import SwiftUI
 
+///Tela inicial e base para o 
 struct HomeScreenView: View {
     @Environment(AppState.self) private var appState: AppState
     var body: some View {
         VStack {
             RoundedRectangle(cornerRadius: 20)
                 .frame(width: 200 , height: 200 , alignment: .top)
-            
             Text("Bem-vindo ao App!")
                 .font(.largeTitle)
                 .fontWeight(.bold)

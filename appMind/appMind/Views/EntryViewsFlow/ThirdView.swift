@@ -9,11 +9,14 @@ import Foundation
 import SwiftUI
 import PhotosUI
 
+/// Esta View é onde o usuario indica seu nome e foto de perfil, contendo a opção de iniciar sem criar um perfil(sem armazenar nome nem icone de perfil).
+
 struct ThirdView: View {
     @State var userProfileNameTemp: String = ""
     @State var imageSelection: PhotosPickerItem? = nil
-    @State var userProfileImage: Image = Image("Error")
-    @AppStorage ("Nome do usuario salvo localmente") var userName: String = " "
+    @State var userProfileImage: UIImage = UIImage()
+    @AppStorage("Imagem do usuario salvo localmente") var savedUserProfileImage: Data = Data()
+    @AppStorage("Nome do usuario salvo localmente") var userName: String = ""
     @Environment(AppState.self) private var appState: AppState
     @Environment(\.dismiss) private var dismiss
     @Environment(\.colorScheme) var colorScheme
@@ -33,7 +36,7 @@ struct ThirdView: View {
                         .frame(width: 161)
                 }
                 else {
-                    userProfileImage
+                    Image(uiImage: userProfileImage)
                         .resizable()
                         .scaledToFill()
                         .frame(width: 161 , height: 161)
@@ -52,7 +55,7 @@ struct ThirdView: View {
                 .padding(.bottom , 80)
             }
             Button(){
-                if  userProfileNameTemp == "" {
+                if  userProfileNameTemp == ""{
                     userName = " "
                 }
                 userName = userProfileNameTemp
@@ -70,6 +73,8 @@ struct ThirdView: View {
             }
             
             Button(){
+                imageSelection = nil
+                savedUserProfileImage = Data()
                 appState.setFirstTimeOnApp(value: true)
             } label: {
                 Text("Iniciar sem criar perfil")
@@ -82,8 +87,9 @@ struct ThirdView: View {
         }
         .task(id: imageSelection) {
             do{
-                if let loaded = try await imageSelection?.loadTransferable(type: Image.self) {
-                    userProfileImage = loaded
+                if let loaded = try await imageSelection?.loadTransferable(type: Data.self) {
+                    savedUserProfileImage = loaded
+                    userProfileImage = UIImage(data: savedUserProfileImage) ?? UIImage(named: "Se Voce esta vendo isso, significa que algo deu errado no momento de converter o Data para UIImage na 'ThirdView'")!
                 } else {
                     print("Failed")
                 }

@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 
+/// Esta View é uma prevea visual e breve descrição de como funciona o sistema de Calendario do app.
 struct FirstView: View {
     @Environment(AppState.self) private var appState: AppState
     @Environment(\.dismiss) private var dismiss
@@ -27,6 +28,7 @@ struct FirstView: View {
             RoundedRectangle(cornerRadius: 20)
                 .frame(width: 361 , height: 213 , alignment: .center)
                 .foregroundStyle(.gray)
+            ///Este botão esta encarregado de redirecionar a tela exibida para a secondScreen.
             Button(){
                 appState.route = .secondScreen
             } label: {

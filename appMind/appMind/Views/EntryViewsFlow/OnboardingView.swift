@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+///Esta View cuida da exibição das demais telas do fluxo inicial do app, mediando qual tela deve ser exibida a partir da rota armazenada no AppState.
 struct OnboardingView: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(AppState.self) private var appState: AppState
