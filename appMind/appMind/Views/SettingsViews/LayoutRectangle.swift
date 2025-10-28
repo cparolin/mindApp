@@ -2,7 +2,8 @@ import SwiftUI
 
 struct LayoutRectangle: View {
     
-    @AppStorage("colorLayout") private var colorLayout: ColorCases = .amarelo
+//    @AppStorage("colorLayout") private var colorLayout: ColorCases = .amarelo
+    @AppStorage("paletteLayout") private var paletteLayout: String = "Saturadas"
     @AppStorage("textLayout") private var textLayout: Int = 0
     @AppStorage("font") private var font = "SF Pro"
     
@@ -21,7 +22,7 @@ struct LayoutRectangle: View {
                         if number == 5 {
                             RoundedRectangle(cornerRadius: 12)
                                 .frame(width: UIScreen.main.bounds.width * 0.10, height: 55)
-                                .foregroundStyle(Color("\(colorLayout)"))
+                                .foregroundStyle(Color.accentColor)
                                 .padding(.trailing, 5)
                         }
                         RoundedRectangle(cornerRadius: 12)
@@ -34,7 +35,7 @@ struct LayoutRectangle: View {
                 ZStack {
                     RoundedRectangle(cornerRadius: 16)
                         .frame(width: UIScreen.main.bounds.width * 0.89, height: 32)
-                        .foregroundStyle(.secondary)
+                        .foregroundStyle(Color(getPaletteColor(palette: paletteLayout, color: "cor1")))
                     
                     HStack {
                         
@@ -45,6 +46,7 @@ struct LayoutRectangle: View {
                         
                         Rectangle()
                             .frame(width: 100, height: 5)
+                            .foregroundStyle(Color.black)
                         
                         if textLayout != 2 {
                             Spacer()
@@ -65,7 +67,7 @@ struct LayoutRectangle: View {
                 ZStack {
                     RoundedRectangle(cornerRadius: 16)
                         .frame(width: UIScreen.main.bounds.width * 0.89, height: 32)
-                        .foregroundStyle(.secondary)
+                        .foregroundStyle(Color(getPaletteColor(palette: paletteLayout, color: "cor2")))
                     
                     HStack {
                         if textLayout != 2 {
@@ -73,16 +75,16 @@ struct LayoutRectangle: View {
                                 .font(.changeFont(fontType: font, fontWeight: .regular))
                         }
                         
-                        Rectangle()
-                            .frame(width: 100, height: 5)
-                        
                         if textLayout != 2 {
-                            Spacer()
-                                .frame(width: 150)
+                            Rectangle()
+                                .frame(width: 100, height: 5)
                         } else {
-                            Spacer()
-                                .frame(width: 200)
+                            Rectangle()
+                                .frame(width: 150, height: 5)
                         }
+                        
+                        Spacer()
+                            .frame(width: 150)
                         
                         Circle()
                             .stroke(.black)
@@ -94,7 +96,7 @@ struct LayoutRectangle: View {
                 ZStack {
                     RoundedRectangle(cornerRadius: 16)
                         .frame(width: UIScreen.main.bounds.width * 0.89, height: 50)
-                        .foregroundStyle(.secondary)
+                        .foregroundStyle(Color(getPaletteColor(palette: paletteLayout, color: "cor3")))
                     
                     HStack {
                         if textLayout != 2 {

@@ -11,7 +11,7 @@ import SwiftData
 @main
 struct appMindApp: App {
 
-    @AppStorage("font") private var font = "OpenDyslexic"
+    @AppStorage("font") private var font = "SFPro"
     
     init() {
         

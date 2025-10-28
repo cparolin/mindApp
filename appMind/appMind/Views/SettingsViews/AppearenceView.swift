@@ -4,7 +4,8 @@ import UIKit
 
 struct AppearenceView: View {
     
-    @AppStorage("colorLayout") private var colorLayout: ColorCases = .amarelo
+//    @AppStorage("colorLayout") private var colorLayout: ColorCases = .amarelo
+    @AppStorage("paletteLayout") private var paletteLayout: String = "Saturadas"
     @AppStorage("textLayout") private var textLayout: Int = 0
     @AppStorage("sound") private var sound = true
     @AppStorage("tactile") private var tactile = true
@@ -12,6 +13,7 @@ struct AppearenceView: View {
     
     @State private var name: String = "Tim"
     @State private var birthDate = Date.now
+    @State private var showingSheet = false
     
     let availableFonts = ["System", "OpenDyslexicMono-Regular.otf"]
     
@@ -20,7 +22,7 @@ struct AppearenceView: View {
             ScrollView {
                 LayoutRectangle()
                 HStack {
-                    Text("Cor Principal")
+                    Text("Paleta de Cores")
                         .font(.changeFont(fontType: font, fontStyle: .title, fontWeight: .bold))
 //                        .bold()
                     
@@ -28,30 +30,42 @@ struct AppearenceView: View {
                 }
                 .padding()
                 
-                HStack{
-                    ForEach(ColorCases.allCases, id: \.self) { color in
-                        Button {
-                            colorLayout = color
-                        } label: {
-                            ZStack{
-                                if colorLayout == color {
-                                    Circle()
-                                    .fill(Color(color.rawValue))
-                                    .background(content: {
-                                        Circle()
-                                            .stroke(.blue, lineWidth: 8)
-                                            .stroke(.white, lineWidth: 4)
-                                    })
-                                    .frame(width: 38)
-                                } else {
-                                    Circle()
-                                    .fill(Color(color.rawValue))
-                                    .frame(width: 38)
-                                }
-                            }
-                        }
-                    }
+                Button {
+                    showingSheet.toggle()
+                } label: {
+                     Text("Paleta")
+                        .foregroundStyle(Color.black)
                 }
+                .sheet(isPresented: $showingSheet) {
+                    PaletteOptionsView()
+                        .presentationDetents([.height(437)])
+                        .background(.white)
+                }
+                
+//                HStack{
+//                    ForEach(ColorCases.allCases, id: \.self) { color in
+//                        Button {
+//                            colorLayout = color
+//                        } label: {
+//                            ZStack{
+//                                if colorLayout == color {
+//                                    Circle()
+//                                    .fill(Color(color.rawValue))
+//                                    .background(content: {
+//                                        Circle()
+//                                            .stroke(.blue, lineWidth: 8)
+//                                            .stroke(.white, lineWidth: 4)
+//                                    })
+//                                    .frame(width: 38)
+//                                } else {
+//                                    Circle()
+//                                    .fill(Color(color.rawValue))
+//                                    .frame(width: 38)
+//                                }
+//                            }
+//                        }
+//                    }
+//                }
                 
                 ///Text Layout
                 HStack {

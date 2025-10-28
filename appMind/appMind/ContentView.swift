@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    @AppStorage("font") private var font = "OpenDyslexic"
+    @AppStorage("font") private var font = "SFPro"
         
     init() {
         currentFont(to: font)
@@ -24,7 +24,7 @@ struct ContentView: View {
                 .tabItem {
                     Label("Diários", systemImage: "book.pages")
                 }
-            AppearenceView()
+            SettingsView()
                 .tabItem {
                     Label("Configurações", systemImage: "gear")
                 }
