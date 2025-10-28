@@ -13,15 +13,17 @@ struct NewTaskView: View {
     @State private var taskNote: String = ""
     @State private var taskDateStart: Date = Date()
     @State private var taskDateEnd: Date = Date()
+    @State private var taskDate: Date = Date()
     @State private var taskColor: String = ""
     @State private var selectedColor: Color = .white
     @State private var selection: String = "t"
     @State private var isEnabled = false
     
-    @Binding var newTask: Task
-    @Binding var newTaskDay: TaskDay
+//    @Binding var newTask: Task
+//    @Binding var newTaskDay: TaskDay
     
     @Query var tasks: [Task]
+    @Query var tasksDay: [TaskDay]
     @Environment(\.modelContext) var modelContext
     
     var body: some View {
@@ -85,10 +87,10 @@ struct NewTaskView: View {
                         .padding(.top, 4)
                     }
                 })
-                .padding(.top, 120)
+//                .padding(.top, 70)
                 .padding(.horizontal, 16)
                 .vSpacing(.top)
-                .ignoresSafeArea()
+//                .ignoresSafeArea()
                 .toolbar {
                     ToolbarItem(placement: .topBarLeading) {
                         Button(action: {
@@ -105,14 +107,13 @@ struct NewTaskView: View {
                         Button(action: {
                             taskColor = corPasta(selectedColor)
                             if isEnabled {
-                                newTaskDay = TaskDay(taskTitleDay: "\(taskTitle)", todoDateDay: taskDateStart, tintDay: "\(taskColor)", notesDay: "\(taskNote)")
+                                let newTaskDay = TaskDay(taskTitleDay: "\(taskTitle)", todoDateDay: taskDate, tintDay: "\(taskColor)", notesDay: "\(taskNote)")
                                 modelContext.insert(newTaskDay)
                             }
                             else {
-                                newTask = Task(taskTitle: "\(taskTitle)", todoDateStart: taskDateStart, todoDateEnd: taskDateEnd, isCompleted: false, tint: "\(taskColor)", notes: "\(taskNote)")
+                                let newTask = Task(taskTitle: "\(taskTitle)", todoDateStart: taskDateStart, todoDateEnd: taskDateEnd, isCompleted: false, tint: "\(taskColor)", notes: "\(taskNote)")
                                 modelContext.insert(newTask)
                             }
-                            
                             dismiss()
                         }, label: {
                             Text("OK")
@@ -121,15 +122,8 @@ struct NewTaskView: View {
                     }
                 }
             }
-        .overlay(
-            Picker("", selection: $selection){
-                Text("Tarefa").tag("t")
-                Text("Lembrete").tag("l")
-            }
-                .pickerStyle(.segmented)
-                .padding(.bottom, 410)
-                .padding(.horizontal, 16)
-        )
-        .frame(height: 585)
     }
+}
+#Preview {
+    NewTaskView()
 }

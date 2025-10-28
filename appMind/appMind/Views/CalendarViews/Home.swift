@@ -12,18 +12,18 @@ struct Home: View {
     @Query(sort: \Task.todoDateStart) var tasks: [Task]
     @Query(sort: \TaskDay.todoDateDay) var tasksDay: [TaskDay]
     
-    @State private var currentDate: Date = Date()
+    @State var currentDate: Date = Date()
     @State private var weekSlider: [[Date.WeekDay]] = []
     @State private var currentWeekIndex: Int = 0
     @State private var createNewTask: Bool = false
-    @State private var newTask: Task = Task(taskTitle: "", todoDateStart: Date(), todoDateEnd: Date(), isCompleted: false, tint: "", notes: "")
-    @State private var newTaskDay: TaskDay = TaskDay(taskTitleDay: "", todoDateDay: Date(), tintDay: "", notesDay: "")
+//    @State private var newTask: Task = Task(taskTitle: "", todoDateStart: Date(), todoDateEnd: Date(), isCompleted: false, tint: "", notes: "")
+//    @State private var newTaskDay: TaskDay = TaskDay(taskTitleDay: "", todoDateDay: Date(), tintDay: "", notesDay: "")
     
     var body: some View {
         VStack(alignment: .leading, spacing: 0, content: {
             ZStack {
                 RoundedRectangle(cornerRadius: 16)
-                    .frame(height: 195)
+                    .frame(height: 210)
                     .foregroundStyle(.gray)
                     .vSpacing(.top)
                     .ignoresSafeArea()
@@ -34,7 +34,7 @@ struct Home: View {
                         .fontWeight(.semibold)
                         .textScale(.secondary)
                         .foregroundStyle(.white)
-                        .padding(.top, 24)
+                        .padding(.top, 36)
                     TabView(selection: $currentWeekIndex) {
                         ForEach(weekSlider.indices, id: \.self){ index in
                             let week = weekSlider[index]
@@ -86,13 +86,9 @@ struct Home: View {
                 Spacer()
             }
             .frame(height: 150)
-            Text("Rotina do dia")
-                .fontWeight(.semibold)
-                .font(.title3)
-                .padding(.leading, 16)
             
             //Visualização das tarefas
-            TasksView()
+            TasksView(tasksDay: tasksDay, tasks: tasks, currentDate: $currentDate)
         })
         .overlay(alignment: .topTrailing, content: {
             Button(action: {
@@ -101,6 +97,7 @@ struct Home: View {
                 Image(systemName: "plus")
                     .fontWeight(.semibold)
                     .foregroundStyle(.black)
+                    .font(.title2)
             })
             .padding(.horizontal, 16)
         })
@@ -111,7 +108,7 @@ struct Home: View {
             }
         }
         .sheet(isPresented: $createNewTask) {
-            NewTaskView(newTask: $newTask, newTaskDay: $newTaskDay)
+            NewTaskView(/*newTask: $newTask, newTaskDay: $newTaskDay*/)
                 .presentationDetents([.height(585)])
                 .presentationCornerRadius(30)
                 .background(.white)
