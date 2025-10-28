@@ -1,18 +1,18 @@
 //
-//  FavoriteShowAll.swift
+//  RecentShowAll.swift
 //  appMind
 //
-//  Created by Dayô Araújo on 23/10/25.
+//  Created by Dayô Araújo on 28/10/25.
 //
 
 import SwiftUI
 
-struct FavoriteShowAll: View {
-    @State var favoriteJournals: [JournalModel]
+struct RecentShowAll: View {
+    @State var recentJournals: [JournalModel]
     
     var body: some View {
         HStack {
-            Text("Favoritos")
+            Text("Recentes")
                 .font(.title3)
                 .fontWeight(.semibold)
                 .padding(.leading, 20)
@@ -20,7 +20,7 @@ struct FavoriteShowAll: View {
             Spacer()
             
             NavigationLink {
-                ListView(notes: favoriteJournals, isFavorite: true)
+                ListView(notes: recentJournals, isFavorite: false)
                 
             } label: {
                 Text("Mostrar tudo")
@@ -32,3 +32,7 @@ struct FavoriteShowAll: View {
         }
     }
 }
+
+//#Preview {
+//    RecentShowAll()
+//}

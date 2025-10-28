@@ -8,15 +8,16 @@
 import SwiftUI
 
 /// Exibits all the journals on the favorite list
-struct FavoriteJournalListView: View {
-    @State var favoriteNotes: [JournalModel]
+struct ListView: View {
+    @State var notes: [JournalModel]
     @State var searchText = ""
+    var isFavorite: Bool
     
     var searchResults: [JournalModel] {
         if searchText.isEmpty {
             return []
         } else {
-            let results = favoriteNotes.filter { note in
+            let results = notes.filter { note in
                 note.title.localizedStandardContains(searchText)
             }
             return results
@@ -27,7 +28,7 @@ struct FavoriteJournalListView: View {
         NavigationStack {
             ScrollView (.vertical){
                 VStack (spacing: 12){
-                    if favoriteNotes.count == 0 {
+                    if notes.count == 0 {
                         Text("Nenhum registro adicionado")
                             .frame(width: 370)
                             .padding(.top, UIScreen.main.bounds.height * 0.33)
@@ -37,14 +38,14 @@ struct FavoriteJournalListView: View {
                             JournalItem(journal: note)
                         }
                     } else {
-                        ForEach(favoriteNotes) { note in
+                        ForEach(notes) { note in
                             JournalItem(journal: note)
                         }
                     }
                 }
             }
             .searchable(text: $searchText)
-            .navigationTitle("Diários Favoritos")
+            .navigationTitle(isFavorite ? "Diários Favoritos" : "Todos os Registros")
         }
     }
 }

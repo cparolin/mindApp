@@ -23,7 +23,7 @@ struct JournalItem: View {
             ZStack {
                 NoteBackground(baseColor: ColorName.from(name: journal.journalType.color))
                 
-                HStack (spacing: -6){
+                HStack (spacing: -3){
                     HStack {
                         VStack (spacing: 9){
                             Text(journal.date.formatted(month))
