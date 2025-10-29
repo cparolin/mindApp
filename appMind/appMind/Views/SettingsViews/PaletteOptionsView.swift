@@ -21,22 +21,31 @@ struct PaletteOptionsView: View {
     var body: some View {
         NavigationStack {
             VStack {
-                LazyVGrid(columns: columns, spacing: 20) {
+                LazyVGrid(columns: columns, spacing: 30) {
                     ForEach(Array(Palettes.keys.sorted()), id: \.self) { number in
                         Button {
                             paletteLayout = number
-                            print("\(paletteLayout)")
+                            print("jjknknjk")
                         } label: {
-                            ZStack {
-                                
-                                RoundedRectangle(cornerRadius: 16)
-                                    .frame(width: 151, height: 145)
-                                    .foregroundStyle(Color(getPaletteColor(palette: paletteLayout, color: "cor1")))
-                                
-                                Text(number)
-                                    .foregroundStyle(Color.black)
-                                
-                                
+                            VStack {
+                                    ZStack {
+                                        RoundedRectangle(cornerRadius: 16)
+                                            .foregroundStyle(Color.white)
+                                            .frame(width: 170, height: 145)
+                                            .overlay(
+                                                RoundedRectangle(cornerRadius: 16)
+                                                    .stroke(Color.accentColor, lineWidth: 4)
+                                                    .opacity(paletteLayout == number ? 1 : 0)
+                                            )
+                                        
+                                        VStack {
+                                            PaletteButton(palette: number)
+                                            
+                                            Text(number)
+                                                .foregroundStyle(Color.black)
+                                        }
+                                        
+                                    }
                             }
                         }
                     }

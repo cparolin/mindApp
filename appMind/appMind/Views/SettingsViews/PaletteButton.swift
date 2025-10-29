@@ -9,13 +9,33 @@ import SwiftUI
 
 struct PaletteButton: View {
     
+//    @AppStorage("paletteLayout") private var paletteLayout: String = "Saturadas"
+    let columns = [
+        GridItem(.fixed(35), spacing: 12),
+        GridItem(.fixed(35), spacing: 12),
+        GridItem(.fixed(35), spacing: 12),
+    ]
     
+    let palette: String
     
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+
+            VStack {
+                LazyVGrid(columns: columns, spacing: 5) {
+                    ForEach(Array(PalettesButton[palette]!.keys).sorted(), id: \.self) { color in
+                        
+                        Circle()
+                            .frame(width: 43)
+                            .foregroundStyle(Color(getPaletteColorButton(palette: palette, color: color)))
+                        
+                        
+                    }
+//                }
+            }
+        }
     }
 }
 
 #Preview {
-    PaletteButton()
+    PaletteButton(palette: "Suaves")
 }

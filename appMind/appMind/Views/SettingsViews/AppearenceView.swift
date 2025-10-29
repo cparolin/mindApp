@@ -38,34 +38,9 @@ struct AppearenceView: View {
                 }
                 .sheet(isPresented: $showingSheet) {
                     PaletteOptionsView()
-                        .presentationDetents([.height(437)])
+                        .presentationDetents([.height(450)])
                         .background(.white)
                 }
-                
-//                HStack{
-//                    ForEach(ColorCases.allCases, id: \.self) { color in
-//                        Button {
-//                            colorLayout = color
-//                        } label: {
-//                            ZStack{
-//                                if colorLayout == color {
-//                                    Circle()
-//                                    .fill(Color(color.rawValue))
-//                                    .background(content: {
-//                                        Circle()
-//                                            .stroke(.blue, lineWidth: 8)
-//                                            .stroke(.white, lineWidth: 4)
-//                                    })
-//                                    .frame(width: 38)
-//                                } else {
-//                                    Circle()
-//                                    .fill(Color(color.rawValue))
-//                                    .frame(width: 38)
-//                                }
-//                            }
-//                        }
-//                    }
-//                }
                 
                 ///Text Layout
                 HStack {
