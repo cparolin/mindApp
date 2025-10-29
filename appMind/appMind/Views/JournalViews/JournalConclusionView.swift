@@ -4,7 +4,7 @@
 //
 //  Created by Dayô Araújo on 21/10/25.
 //
-
+import Combine
 import SwiftUI
 import SwiftData
 
@@ -16,6 +16,8 @@ struct JournalConclusionView: View {
     var existingJournal: JournalModel?
     var journalType: JournalTypeModel
     var answers: [String]
+    var descLength: Int = 50
+    var titleLength: Int = 8
     
     // State properties
     @State private var title: String = ""
@@ -45,6 +47,7 @@ struct JournalConclusionView: View {
             //create
             let newNote = JournalModel(title: title, desc: desc, date: date, answers: answers, journalType: journalType, isFavorite: false)
             context.insert(newNote)
+            try? context.save()
         }
         
         dismiss()
@@ -56,11 +59,15 @@ struct JournalConclusionView: View {
                 .font(.title2)
                 .bold()
                 .padding(.bottom, 10)
-                .limitInputLength(value: $desc, length: 18)
+                .onReceive(Just(title)) {
+                    title = String($0.prefix(titleLength))
+                }
             
             TextField("Descrição Breve", text: $desc, axis: .vertical)
                 .fontWeight(.semibold)
-                .limitInputLength(value: $desc, length: 50)
+                .onReceive(Just(desc)) {
+                    desc = String($0.prefix(descLength))
+                }
             
             Divider()
                 .padding(.top, 4)
@@ -85,18 +92,5 @@ struct JournalConclusionView: View {
 }
 
 #Preview {
-    JournalConclusionView(journalType: JournalTypeModel(type: "Rotina", color: "amarelo", symbol: "arrow.trianglehead.clockwise", questions: [
-        "O que fiz hoje na minha rotina?",
-        "Houve algo que me deixou confortável ou feliz?",
-        "Houve algo que me incomodou?",
-        "Como eu me senti e o que pensei sobre esse incômodo?",
-        "O que funcionou bem na minha rotina?",
-        "O que eu gostaria de ajustar para lidar com os incômodos da próxima vez?"]), answers: [
-            "",
-            "",
-            "",
-            "",
-            "",
-            ""
-        ])
+    JournalConclusionView(journalType: JournalTypeModel(type: "Rotina", color: "amarelo", secondaryColor: "laranja", symbol: "arrow.trianglehead.clockwise", questions: [""]), answers: [""])
 }

@@ -16,20 +16,22 @@ class Task {
     var isCompleted: Bool
     var tint: String
     var notes: String
+    var symbol: String
     
-    init(taskTitle: String, todoDateStart: Date, todoDateEnd: Date, isCompleted: Bool, tint: String, notes: String) {
+    init(taskTitle: String, todoDateStart: Date, todoDateEnd: Date, isCompleted: Bool, tint: String, notes: String, symbol: String) {
         self.taskTitle = taskTitle
         self.todoDateStart = todoDateStart
         self.todoDateEnd = todoDateEnd
         self.isCompleted = isCompleted
         self.tint = tint
         self.notes = notes
+        self.symbol = symbol
     }
 }
 
-extension Date {
-    static func updateHour(_ value: Int) -> Date {
-        let calendar = Calendar.current
-        return calendar.date(byAdding: .hour, value: value, to: .init()) ?? .init()
-    }
-}
+//extension Date {
+//    static func updateHour(_ value: Int) -> Date {
+//        let calendar = Calendar.current
+//        return calendar.date(byAdding: .hour, value: value, to: .init()) ?? .init()
+//    }
+//}

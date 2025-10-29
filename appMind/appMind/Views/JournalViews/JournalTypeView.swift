@@ -12,7 +12,7 @@ struct JournalTypeView: View {
     @Environment(\.modelContext) var context
     
     @Query private var journals: [JournalTypeModel]
-    @Query private var allNotes: [JournalModel]
+    @Query(sort: [SortDescriptor(\JournalModel.date, order: .reverse)]) var allNotes: [JournalModel]
     
     @State private var AddJournalSheet = false
     
@@ -23,44 +23,40 @@ struct JournalTypeView: View {
     
     var body: some View {
         NavigationStack {
-            ScrollView {
-                VStack (alignment: .leading, spacing: 25){
-                    if !favoriteJournals.isEmpty {
+            ScrollView (showsIndicators: false) {
+                VStack (alignment: .leading, spacing: 27){
+                    if !allNotes.isEmpty {
                         VStack (alignment: .leading, spacing: 4){
+                            RecentShowAll(recentJournals: allNotes)
                             
-                            FavoriteShowAll(favoriteJournals: favoriteJournals)
-                            
-                            FavoriteHorizontalScroll(favoriteJournals: favoriteJournals)
+                            NotesHorizontalScroll(notes: allNotes)
+                                .padding(.top, 10)
                         }
                     }
                     
-                    VStack (alignment: .leading){
+                    if !favoriteJournals.isEmpty {
+                        VStack (alignment: .leading, spacing: 4){
+                            FavoriteShowAll(favoriteJournals: favoriteJournals)
+                            
+                            NotesHorizontalScroll(notes: favoriteJournals)
+                                .padding(.top, 10)
+                        }
+                    }
+                    
+                    VStack (alignment: .leading, spacing: 15){
                         Text("Todos os diários")
-                            .font(.title2)
+                            .font(.title3)
                             .fontWeight(.semibold)
                             .padding(.leading, 20)
                         
-                        JournalGrid(journals: journals)
-                            .padding(.horizontal)
+                        JournalCoverScroll(journals: journals)
                     }
                     
                     Spacer()
                 }
-                .padding(.top, 30)
+                .padding(.top, 10)
             }
             .navigationTitle("Meus Diários")
-            .toolbar {
-                ToolbarItem (placement: .confirmationAction){
-                    Button {
-                        AddJournalSheet = true
-                    } label: {
-                        Image(systemName: "plus")
-                    }
-                }
-            }
-            .sheet(isPresented: $AddJournalSheet) {
-                NewJournalTypeView()
-            }
         }
         /// Pre set categories initialized when the app is launched for
         /// the first time

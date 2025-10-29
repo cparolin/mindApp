@@ -13,25 +13,46 @@ struct NewTaskView: View {
     @State private var taskNote: String = ""
     @State private var taskDateStart: Date = Date()
     @State private var taskDateEnd: Date = Date()
+    @State private var taskDate: Date = Date()
     @State private var taskColor: String = ""
     @State private var selectedColor: Color = .white
     @State private var selection: String = "t"
     @State private var isEnabled = false
+    @State private var symbolsPicker = false
+    @State var tempSelectedIcon: String = ""
     
-    @Binding var newTask: Task
-    @Binding var newTaskDay: TaskDay
+//    @Binding var newTask: Task
+//    @Binding var newTaskDay: TaskDay
     
     @Query var tasks: [Task]
+    @Query var tasksDay: [TaskDay]
     @Environment(\.modelContext) var modelContext
     
     var body: some View {
         NavigationStack {
                 VStack(alignment: .leading, spacing: 15, content: {
                     VStack(alignment: .leading, spacing: 8, content: {
-                        TextField("Nome do evento", text: $taskTitle)
-                            .padding(.vertical, 12)
-                            .font(.title)
-                            .fontWeight(.semibold)
+                        HStack {
+                            Button {
+                                symbolsPicker.toggle()
+                            } label : {
+                                if tempSelectedIcon == "" {
+                                    Image(systemName: "figure.cross.training")
+                                        .resizable()
+                                        .frame(width: 30,height: 40)
+                                        .foregroundStyle(.gray)
+                                } else {
+                                    Image(systemName: "\(tempSelectedIcon)")
+                                        .resizable()
+                                        .frame(width: 30,height: 40)
+                                        .foregroundStyle(.gray)
+                                }
+                            }
+                            TextField("Nome do evento", text: $taskTitle)
+                                .padding(.vertical, 12)
+                                .font(.title)
+                                .fontWeight(.semibold)
+                        }
                         TextField("Notas", text: $taskNote)
 
                     })
@@ -85,10 +106,10 @@ struct NewTaskView: View {
                         .padding(.top, 4)
                     }
                 })
-                .padding(.top, 120)
+//                .padding(.top, 70)
                 .padding(.horizontal, 16)
                 .vSpacing(.top)
-                .ignoresSafeArea()
+//                .ignoresSafeArea()
                 .toolbar {
                     ToolbarItem(placement: .topBarLeading) {
                         Button(action: {
@@ -105,31 +126,28 @@ struct NewTaskView: View {
                         Button(action: {
                             taskColor = corPasta(selectedColor)
                             if isEnabled {
-                                newTaskDay = TaskDay(taskTitleDay: "\(taskTitle)", todoDateDay: taskDateStart, tintDay: "\(taskColor)", notesDay: "\(taskNote)")
+                                let newTaskDay = TaskDay(taskTitleDay: "\(taskTitle)", todoDateDay: taskDate, tintDay: "\(taskColor)", notesDay: "\(taskNote)", symbolDay: "\(tempSelectedIcon)")
                                 modelContext.insert(newTaskDay)
                             }
                             else {
-                                newTask = Task(taskTitle: "\(taskTitle)", todoDateStart: taskDateStart, todoDateEnd: taskDateEnd, isCompleted: false, tint: "\(taskColor)", notes: "\(taskNote)")
+                                let newTask = Task(taskTitle: "\(taskTitle)", todoDateStart: taskDateStart, todoDateEnd: taskDateEnd, isCompleted: false, tint: "\(taskColor)", notes: "\(taskNote)", symbol: "\(tempSelectedIcon)")
                                 modelContext.insert(newTask)
+                                print(newTask)
                             }
-                            
                             dismiss()
                         }, label: {
                             Text("OK")
                         })
-                        .disabled(taskTitle == "" || taskNote == "")
+                        .disabled(taskTitle == "" || taskNote == "" || tempSelectedIcon == "")
                     }
                 }
-            }
-        .overlay(
-            Picker("", selection: $selection){
-                Text("Tarefa").tag("t")
-                Text("Lembrete").tag("l")
-            }
-                .pickerStyle(.segmented)
-                .padding(.bottom, 410)
-                .padding(.horizontal, 16)
-        )
-        .frame(height: 585)
+        } .sheet(isPresented: $symbolsPicker) {
+            SymbolsPickerView(tempSelectedIcon: $tempSelectedIcon)
+                .presentationDetents([.height(345)])
+                .interactiveDismissDisabled()
+        }
     }
+}
+#Preview {
+    NewTaskView()
 }

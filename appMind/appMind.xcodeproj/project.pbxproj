@@ -15,22 +15,9 @@
 		F7E408002EABF513006D7BA0 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
-/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		F7E407FC2EABE9CB006D7BA0 /* Exceptions for "appMind" folder in "appMind" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Info_.plist,
-			);
-			target = F7E404F62E9ED74A006D7BA0 /* appMind */;
-		};
-/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
-
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		F7E404F92E9ED74A006D7BA0 /* appMind */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				F7E407FC2EABE9CB006D7BA0 /* Exceptions for "appMind" folder in "appMind" target */,
-			);
 			path = appMind;
 			sourceTree = "<group>";
 		};
@@ -273,7 +260,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = DTN67JCQ8K;
+				DEVELOPMENT_TEAM = 2B49H9LV4C;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = appMind/Info_.plist;
@@ -307,7 +294,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = DTN67JCQ8K;
+				DEVELOPMENT_TEAM = 2B49H9LV4C;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = appMind/Info_.plist;
