@@ -8,7 +8,6 @@ import SwiftData
 import SwiftUI
 
 struct Home: View {
-    
     @Query(sort: \Task.todoDateStart) var tasks: [Task]
     @Query(sort: \TaskDay.todoDateDay) var tasksDay: [TaskDay]
     
@@ -16,15 +15,13 @@ struct Home: View {
     @State private var weekSlider: [[Date.WeekDay]] = []
     @State private var currentWeekIndex: Int = 0
     @State private var createNewTask: Bool = false
-//    @State private var newTask: Task = Task(taskTitle: "", todoDateStart: Date(), todoDateEnd: Date(), isCompleted: false, tint: "", notes: "")
-//    @State private var newTaskDay: TaskDay = TaskDay(taskTitleDay: "", todoDateDay: Date(), tintDay: "", notesDay: "")
     
     var body: some View {
         VStack(alignment: .leading, spacing: 0, content: {
             ZStack {
-                RoundedRectangle(cornerRadius: 16)
-                    .frame(height: 210)
-                    .foregroundStyle(.gray)
+                RoundedRectangle(cornerRadius: 25)
+                    .frame(height: 200)
+                    .foregroundColor(.accentColor.opacity(0.3))
                     .vSpacing(.top)
                     .ignoresSafeArea()
                 
@@ -33,7 +30,7 @@ struct Home: View {
                         .font(.headline)
                         .fontWeight(.semibold)
                         .textScale(.secondary)
-                        .foregroundStyle(.white)
+                        .foregroundStyle(.black)
                         .padding(.top, 36)
                     TabView(selection: $currentWeekIndex) {
                         ForEach(weekSlider.indices, id: \.self){ index in
@@ -63,7 +60,7 @@ struct Home: View {
                                             .font(.callout)
                                             .fontWeight(.medium)
                                             .textScale(.secondary)
-                                            .foregroundStyle(.white)
+                                            .foregroundStyle(.black)
                                             .padding(.bottom, -20)
                                             .padding(.top, -8)
                                     }
@@ -88,7 +85,7 @@ struct Home: View {
             .frame(height: 150)
             
             //Visualização das tarefas
-            TasksView(tasksDay: tasksDay, tasks: tasks, currentDate: $currentDate)
+            TasksView(tasksDay: tasksDay, tasks: tasks, currentDate: currentDate)
         })
         .overlay(alignment: .topTrailing, content: {
             Button(action: {
@@ -96,7 +93,7 @@ struct Home: View {
             }, label: {
                 Image(systemName: "plus")
                     .fontWeight(.semibold)
-                    .foregroundStyle(.black)
+                    .foregroundColor(.accentColor)
                     .font(.title2)
             })
             .padding(.horizontal, 16)

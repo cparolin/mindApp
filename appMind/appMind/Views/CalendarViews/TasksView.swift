@@ -9,52 +9,49 @@ import SwiftData
 import SwiftUI
 
 struct TasksView: View {
-    
     var tasksDay: [TaskDay]
     var tasks: [Task]
     
-    @Binding var currentDate: Date 
-    
+    var currentDate: Date
     
     var body: some View {
-        
-            ScrollView(.vertical) {
-                VStack(alignment: .leading, spacing: 0) {
-                    ForEach(tasksDay) { task in
-                        if isSameDate(task.todoDateDay, currentDate) {
-                            TaskDayCard(task: task)
-                        }
-                        else {
-                            Text("Sem tarefas para hoje")
-                        }
+        ScrollView(.vertical) {
+            VStack(alignment: .leading, spacing: 15) {
+                ForEach(tasksDay) { task in
+                    if isSameDate(task.todoDateDay, currentDate) {
+                        TaskDayCardReduced(task: task, baseColor: ColorName.from(name: task.tintDay))
                     }
-                    .padding(.top, 16)
-                    
-                    Text("Rotina do dia")
-                        .fontWeight(.semibold)
-                        .font(.title3)
-                        .hSpacing(.leading)
-                    //                    .padding(.leading, 16)
-                    //                            .padding(.top, 16)
-                    
-                    //Cards
-                    ForEach(tasks) { task in
-                        if isSameDate(task.todoDateStart, currentDate) {
-                            TaskCard(task: task)
-                        }
-                        else {
-                            Text("Sem tarefas para hoje")
-                        }
-                    }
-                    .padding(.top, 16)
-                    
-                    
                 }
-                .padding(.horizontal, 16)
-                .padding(.top, 15)
-                .hSpacing(.center)
-                .vSpacing(.center)
+                
+                Text("Rotina do dia")
+                    .fontWeight(.semibold)
+                    .font(.title3)
+                    .padding(.bottom, 5)
+                    .padding(.leading)
+                
+                //Cards
+                ForEach(tasks) { task in
+                    if isSameDate(task.todoDateStart, currentDate) {
+                        TaskCardMedium(task: task, baseColor: ColorName.from(name: task.tint))
+                    }
+                }
             }
-            .scrollIndicators(.hidden)
+            .padding(.top, 25)
         }
+        .scrollIndicators(.hidden)
     }
+}
+
+#Preview {
+    TasksView(tasksDay: [
+        TaskDay(taskTitleDay: "aaaaa", todoDateDay: Date.now, tintDay: "azul", notesDay: "aaaa"),
+        TaskDay(taskTitleDay: "aaaa", todoDateDay: Date.now, tintDay: "azul", notesDay: "aaaa"),
+        TaskDay(taskTitleDay: "aaaa", todoDateDay: Date.now, tintDay: "azul", notesDay: "aaa"),
+        TaskDay(taskTitleDay: "aaa", todoDateDay: Date.now, tintDay: "azul", notesDay: "aaa"),
+        TaskDay(taskTitleDay: "aaa", todoDateDay: Date.now, tintDay: "azul", notesDay: "aaa")
+    ], tasks: [
+        Task(taskTitle: "Título", todoDateStart: Date.now, todoDateEnd: Date.now, isCompleted: false, tint: "azul", notes: ""),
+        Task(taskTitle: "Título", todoDateStart: Date.now, todoDateEnd: Date.now, isCompleted: false, tint: "azul", notes: ""),
+        Task(taskTitle: "Título", todoDateStart: Date.now, todoDateEnd: Date.now, isCompleted: false, tint: "azul", notes: "")
+    ], currentDate: Date.now)
+}

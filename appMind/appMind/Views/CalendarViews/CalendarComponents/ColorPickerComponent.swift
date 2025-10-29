@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct ColorPickerComponent: View {
-    
     @Binding var selectedColor: Color
     @Binding var taskColor: String
     
@@ -16,7 +15,7 @@ struct ColorPickerComponent: View {
     
     var body: some View {
         VStack {
-            HStack(spacing: 0) {
+            HStack(spacing: 8) {
                 ForEach(colors, id: \.self) { color in
                     Circle()
                         .fill(color)
@@ -27,7 +26,6 @@ struct ColorPickerComponent: View {
                                 .stroke(.white, lineWidth: 4)
                                 .opacity(selectedColor == color ? 1 : 0)
                         })
-                        .hSpacing(.center)
                         .contentShape(.rect)
                         .onTapGesture {
                             withAnimation(.snappy) {
@@ -36,10 +34,6 @@ struct ColorPickerComponent: View {
                             }
                         }
                 }
-                // Fora do MVP
-//                ColorPicker("", selection: $selectedColor)
-//                    .scaleEffect(2)
-//                    .padding(.trailing, 22)
             }
         }
     }
