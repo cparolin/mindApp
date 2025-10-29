@@ -7,99 +7,89 @@
 
 import Foundation
 
-enum ColorCases: String, CaseIterable {
-    case azul
-    case vermelho
-    case roxo
-    case verde
-    case amarelo
-    case rosa
-    case laranja
-}
-
 var Palettes = [
-    "Saturadas" : [ "cor1" : "azul",
-                    "cor1.1" : "azul",
-                    "cor1.2" : "azul",
-                    "cor2" : "vermelho",
-                    "cor2.1" : "vermelho",
-                    "cor2.2" : "vermelho",
-                    "cor3" : "roxo",
-                    "cor4" : "verde",
-                    "cor4.1" : "verde",
-                    "cor4.2" : "verde",
-                    "cor5" : "amarelo",
-                    "cor6" : "rosa"
+    "Saturadas" : [ "cor1" : "saturadas1",
+                    "cor1.1" : "saturadas1.1",
+                    "cor1.2" : "saturadas1.2",
+                    "cor2" : "saturadas2",
+                    "cor2.1" : "saturadas2.1",
+                    "cor2.2" : "saturadas2.2",
+                    "cor3" : "saturadas3",
+                    "cor4" : "saturadas4",
+                    "cor4.1" : "saturadas4.1",
+                    "cor4.2" : "saturadas4.2",
+                    "cor5" : "saturadas5",
+                    "cor6" : "saturadas6"
     ],
-    "Suaves" :    [ "cor1" : "amarelo",
-                    "cor1.1" : "amarelo",
-                    "cor1.2" : "amarelo",
-                    "cor2" : "rosa",
-                    "cor2.1" : "vermelho",
-                    "cor2.2" : "vermelho",
-                    "cor3" : "laranja",
-                    "cor4" : "azul",
-                    "cor4.1" : "verde",
-                    "cor4.2" : "verde",
-                    "cor5" : "roxo",
-                    "cor6" : "verde"
+    "Suaves" :    [ "cor1" : "suaves1",
+                    "cor1.1" : "suaves1.1",
+                    "cor1.2" : "suaves1.2",
+                    "cor2" : "suaves2",
+                    "cor2.1" : "suaves2.1",
+                    "cor2.2" : "suaves2.2",
+                    "cor3" : "suaves3",
+                    "cor4" : "suaves4",
+                    "cor4.1" : "suaves4.1",
+                    "cor4.2" : "suaves4.2",
+                    "cor5" : "suaves5",
+                    "cor6" : "suaves6"
     ],
-    "Tons Frios" : [ "cor1" : "verde",
-                     "cor1.1" : "amarelo",
-                     "cor1.2" : "amarelo",
-                     "cor2" : "roxo",
-                     "cor2.1" : "vermelho",
-                     "cor2.2" : "vermelho",
-                     "cor3" : "azul",
-                     "cor4" : "rosa",
-                     "cor4.1" : "verde",
-                     "cor4.2" : "verde",
-                     "cor5" : "vermelho",
-                     "cor6" : "amarelo"
+    "Tons Frios" : [ "cor1" : "frios1",
+                     "cor1.1" : "frios1.1",
+                     "cor1.2" : "frios1.2",
+                     "cor2" : "frios2",
+                     "cor2.1" : "frios2.1",
+                     "cor2.2" : "frios2.2",
+                     "cor3" : "frios3",
+                     "cor4" : "frios4",
+                     "cor4.1" : "frios4.1",
+                     "cor4.2" : "frios4.2",
+                     "cor5" : "frios5",
+                     "cor6" : "frios6"
     ],
-    "Tons de Cinza" : [ "cor1" : "laranja",
-                        "cor1.1" : "amarelo",
-                        "cor1.2" : "amarelo",
-                        "cor2" : "vermelho",
-                        "cor2.1" : "vermelho",
-                        "cor2.2" : "vermelho",
-                        "cor3" : "roxo",
-                        "cor4" : "amarelo",
-                        "cor4.1" : "verde",
-                        "cor4.2" : "verde",
-                        "cor5" : "rosa",
-                        "cor6" : "azul"
+    "Tons de Cinza" : [ "cor1" : "cinza1",
+                        "cor1.1" : "cinza1.1",
+                        "cor1.2" : "cinza1.2",
+                        "cor2" : "cinza2",
+                        "cor2.1" : "cinza2.1",
+                        "cor2.2" : "cinza2.2",
+                        "cor3" : "cinza3",
+                        "cor4" : "cinza4",
+                        "cor4.1" : "cinza4.1",
+                        "cor4.2" : "cinza4.2",
+                        "cor5" : "cinza5",
+                        "cor6" : "cinza6"
     ]
 ]
 
 var PalettesButton = [
-    "Saturadas" : [ "cor1" : "azul",
-                    "cor2" : "vermelho",
-                    "cor3" : "roxo",
-                    "cor4" : "verde",
-                    "cor5" : "amarelo",
-                    "cor6" : "rosa"
+    "Saturadas" : [ "cor1" : "saturadas1",
+                    "cor2" : "saturadas2",
+                    "cor3" : "saturadas3",
+                    "cor4" : "saturadas4",
+                    "cor5" : "saturadas5",
+                    "cor6" : "saturadas6"
     ],
-    "Suaves" :    [ "cor1" : "amarelo",
-                    "cor2" : "rosa",
-                    "cor3" : "laranja",
-                    "cor4" : "azul",
-                    "cor5" : "roxo",
-                    "cor6" : "verde"
+    "Suaves" :    [ "cor1" : "suaves1",
+                    "cor2" : "suaves2",
+                    "cor3" : "suaves3",
+                    "cor4" : "suaves4",
+                    "cor5" : "suaves5",
+                    "cor6" : "suaves6"
     ],
-    "Tons Frios" : [ "cor1" : "verde",
-                     "cor2" : "roxo",
-                     "cor3" : "azul",
-                     "cor4" : "rosa",
-                     "cor5" : "vermelho",
-                     "cor6" : "amarelo"
+    "Tons Frios" : [ "cor1" : "frios1",
+                     "cor2" : "frios2",
+                     "cor3" : "frios3",
+                     "cor4" : "frios4",
+                     "cor5" : "frios5",
+                     "cor6" : "frios6"
     ],
-    "Tons de Cinza" : [ "cor1" : "laranja",
-                        "cor2" : "vermelho",
-                        "cor3" : "roxo",
-                        "cor4" : "amarelo",
-                        "cor5" : "rosa",
-                        "cor6" : "azul"
+    "Tons de Cinza" : [ "cor1" : "cinza1",
+                        "cor2" : "cinza2",
+                        "cor3" : "cinza3",
+                        "cor4" : "cinza4",
+                        "cor5" : "cinza5",
+                        "cor6" : "cinza6"
     ]
 ]
 
