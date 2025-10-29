@@ -14,20 +14,28 @@ struct ContentView: View {
         currentFont(to: font)
     }
     
+    @State var appState = AppState()
+    
     var body: some View {
-        TabView {
-            Home()
-                .tabItem {
-                    Label("Calendário", systemImage: "calendar.day.timeline.left")
-                }
-            JournalTypeView()
-                .tabItem {
-                    Label("Diários", systemImage: "book.pages")
-                }
-            SettingsView()
-                .tabItem {
-                    Label("Configurações", systemImage: "gear")
-                }
+        if !appState.firstTimeOnApp {
+            OnboardingView()
+                .environment(appState)
+        }
+        else {
+            TabView {
+                Home()
+                    .tabItem {
+                        Label("Calendário", systemImage: "calendar.day.timeline.left")
+                    }
+                JournalTypeView()
+                    .tabItem {
+                        Label("Diários", systemImage: "book.pages")
+                    }
+                AppearenceView()
+                    .tabItem {
+                        Label("Configurações", systemImage: "gear")
+                    }
+            }
         }
     }
 }
