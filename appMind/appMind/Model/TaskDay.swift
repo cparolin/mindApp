@@ -14,11 +14,13 @@ class TaskDay {
     var todoDateDay: Date
     var tintDay: String
     var notesDay: String
+    var symbolDay: String
     
-    init(taskTitleDay: String, todoDateDay: Date, tintDay: String, notesDay: String) {
+    init(taskTitleDay: String, todoDateDay: Date, tintDay: String, notesDay: String, symbolDay: String) {
         self.taskTitleDay = taskTitleDay
         self.todoDateDay = todoDateDay
         self.tintDay = tintDay
         self.notesDay = notesDay
+        self.symbolDay = symbolDay
     }
 }

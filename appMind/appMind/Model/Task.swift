@@ -16,14 +16,16 @@ class Task {
     var isCompleted: Bool
     var tint: String
     var notes: String
+    var symbol: String
     
-    init(taskTitle: String, todoDateStart: Date, todoDateEnd: Date, isCompleted: Bool, tint: String, notes: String) {
+    init(taskTitle: String, todoDateStart: Date, todoDateEnd: Date, isCompleted: Bool, tint: String, notes: String, symbol: String) {
         self.taskTitle = taskTitle
         self.todoDateStart = todoDateStart
         self.todoDateEnd = todoDateEnd
         self.isCompleted = isCompleted
         self.tint = tint
         self.notes = notes
+        self.symbol = symbol
     }
 }
 
