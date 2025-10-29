@@ -11,7 +11,7 @@ struct ColorPickerComponent: View {
     @Binding var selectedColor: Color
     @Binding var taskColor: String
     
-    let colors: [Color] = [.blue, .red, .yellow, .orange, .purple, .green]
+    let colors: [Color] = [.blue, .red, .yellow, .orange, .purple]
     
     var body: some View {
         VStack {
@@ -37,21 +37,4 @@ struct ColorPickerComponent: View {
             }
         }
     }
-}
-
-#Preview {
-    // 1. Defina um estado para simular o Binding da cor selecionada.
-    // Usaremos .red como cor inicial.
-    @State var selected: Color = .red
-    
-    // 2. Defina um estado para simular o Binding da string da cor.
-    // Iniciaremos com uma string vazia.
-    @State var colorString: String = ""
-
-    return ColorPickerComponent(
-        // Passa o Binding simulado para a view
-        selectedColor: $selected,
-        taskColor: $colorString
-    )
-    .padding() // Adiciona padding para que os círculos não encostem nas bordas
 }

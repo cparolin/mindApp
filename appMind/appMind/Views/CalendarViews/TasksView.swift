@@ -21,9 +21,6 @@ struct TasksView: View {
                     if isSameDate(task.todoDateDay, currentDate) {
                         TaskDayCardReduced(task: task, baseColor: ColorName.from(name: task.tintDay))
                     }
-                    else {
-                        Text("Sem tarefas para hoje")
-                    }
                 }
                 
                 Text("Rotina do dia")
@@ -36,9 +33,6 @@ struct TasksView: View {
                 ForEach(tasks) { task in
                     if isSameDate(task.todoDateStart, currentDate) {
                         TaskCardMedium(task: task, baseColor: ColorName.from(name: task.tint))
-                    }
-                    else {
-                        Text("Sem tarefas para hoje")
                     }
                 }
             }
