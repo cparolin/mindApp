@@ -13,7 +13,7 @@ struct TaskDayCardReduced: View {
     
     var body: some View {
         HStack {
-            Image(systemName: "bus.fill")
+            Image(systemName: task.symbolDay)
                 .font(.title3)
                 .foregroundStyle(.black)
                 .frame(width: 60, height: 50)
