@@ -8,18 +8,35 @@
 import SwiftUI
 
 struct ReducedItemBackground: View {
-    var baseColor: Color
+    var journal: String
+    @AppStorage("paletteLayout") private var paletteLayout: String = "Saturadas"
+    
+    var color: String {
+        switch journal {
+        case "Rotina":
+            return "cor1"
+            
+        case "Socialização":
+            return "cor2"
+            
+        case "Vícios":
+            return "cor4"
+            
+        default:
+            return "cor não selecionada"
+        }
+    }
     
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 16)
-                .stroke(baseColor, lineWidth: 2)
-                .fill(baseColor.opacity(0.15))
+                .stroke(Color(getPaletteColor(palette: paletteLayout, color: color)), lineWidth: 2)
+                .fill(Color(getPaletteColor(palette: paletteLayout, color: color)).opacity(0.15))
                 .frame(width: UIScreen.main.bounds.width * 0.5, height: UIScreen.main.bounds.height * 0.107)
             
             Rectangle()
                 .frame(width: UIScreen.main.bounds.width * 0.23, height: UIScreen.main.bounds.height * 0.037)
-                .foregroundStyle(baseColor)
+                .foregroundStyle(Color(getPaletteColor(palette: paletteLayout, color: color)))
                 .clipShape(
                     .rect(
                         topLeadingRadius: 16,
@@ -34,5 +51,5 @@ struct ReducedItemBackground: View {
 }
 
 #Preview {
-    ReducedItemBackground(baseColor: .yellow)
+    ReducedItemBackground(journal: "Vícios")
 }

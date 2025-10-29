@@ -73,5 +73,5 @@ struct JournalListView: View {
 }
 
 #Preview {
-    JournalListView(journalType: JournalTypeModel(type: "Rotina", color: "amarelo", secondaryColor: "laranja", symbol: "arrow.trianglehead.clockwise", questions: [""]))
+    JournalListView(journalType: JournalTypeModel(type: "Rotina", symbol: "arrow.trianglehead.clockwise", questions: [""]))
 }

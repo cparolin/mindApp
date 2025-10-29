@@ -16,7 +16,7 @@ struct NotesHorizontalScroll: View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 25) {
                 ForEach(notes.prefix(5)) { note in
-                    ReducedJournalItem(journal: note, baseColor: ColorName.from(name: note.journalType.color))
+                    ReducedJournalItem(journal: note)
                 }
             }
             .padding(.horizontal, 20)

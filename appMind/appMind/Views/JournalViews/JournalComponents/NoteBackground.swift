@@ -8,16 +8,33 @@
 import SwiftUI
 
 struct NoteBackground: View {
-    var baseColor: Color
+    @AppStorage("paletteLayout") private var paletteLayout: String = "Saturadas"
+    var journal: String
+    
+    var color: String {
+        switch journal {
+        case "Rotina":
+            return "cor1"
+            
+        case "Socialização":
+            return "cor2"
+            
+        case "Vícios":
+            return "cor4"
+            
+        default:
+            return "cor não selecionada"
+        }
+    }
     
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 16)
-                .stroke(baseColor, lineWidth: 2)
-                .fill(baseColor.opacity(0.15))
+                .stroke(Color(getPaletteColor(palette: paletteLayout, color: color)), lineWidth: 2)
+                .fill(Color(getPaletteColor(palette: paletteLayout, color: color)).opacity(0.15))
                 
             Rectangle()
-                .fill(baseColor)
+                .fill(Color(getPaletteColor(palette: paletteLayout, color: color)))
                 .frame(width: UIScreen.main.bounds.width * 0.135, height: 113)
                 .clipShape(
                     .rect(
@@ -34,5 +51,5 @@ struct NoteBackground: View {
 }
 
 #Preview {
-    NoteBackground(baseColor: .blue)
+    NoteBackground(journal: "Vícios")
 }

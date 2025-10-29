@@ -9,19 +9,34 @@ import SwiftUI
 
 struct JournalCover: View {
     var journal: JournalTypeModel
-    var baseColor: Color
-    var secondaryColor: Color
+    @AppStorage("paletteLayout") private var paletteLayout: String = "Saturadas"
+    
+    var color: [String] {
+        switch journal.type {
+        case "Rotina":
+            return ["cor1", "cor1.1", "cor1.2"]
+            
+        case "Socialização":
+            return ["cor2", "cor2.1", "cor2.2"]
+            
+        case "Vícios":
+            return ["cor4", "cor4.1", "cor4.2"]
+            
+        default:
+            return []
+        }
+    }
     
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 16)
-                .foregroundColor(baseColor)
+                .foregroundColor(Color(getPaletteColor(palette: paletteLayout, color: color[0])))
                 .frame(width: UIScreen.main.bounds.width * 0.6, height: UIScreen.main.bounds.width * 0.6)
             
             Rectangle()
-                .foregroundColor(secondaryColor)
+                .foregroundColor(Color(getPaletteColor(palette: paletteLayout, color: color[2])))
                 .frame(width: UIScreen.main.bounds.width * 0.48, height: UIScreen.main.bounds.height * 0.02)
-                .padding(.bottom, UIScreen.main.bounds.height * 0.256)
+                .padding(.bottom, UIScreen.main.bounds.height * 0.257)
             
             Rectangle()
                 .foregroundColor(.white)
@@ -35,16 +50,16 @@ struct JournalCover: View {
                     )
                 )
                 .shadow(color: .black.opacity(0.15), radius: 7, x: 0, y: -1)
-                .padding(.bottom, UIScreen.main.bounds.height * 0.215)
+                .padding(.bottom, UIScreen.main.bounds.height * 0.218)
             
             VStack (spacing: 12){
                 Text("\(Image(systemName: journal.symbol))")
                     .font(.system(size: 90, weight: .medium))
-                    .innerShadow(Color(secondaryColor))
+                    .innerShadow(Color(getPaletteColor(palette: paletteLayout, color: color[1])))
                 
                 Text(journal.type)
-                    .foregroundStyle(.black)
-                    .font(.title2)
+                    .foregroundStyle(Color(getPaletteColor(palette: paletteLayout, color: color[1])))
+                    .font(.title)
                     .bold()
             }
             .padding(.top, 25)
@@ -53,5 +68,5 @@ struct JournalCover: View {
 }
 
 #Preview {
-    JournalCover(journal: JournalTypeModel(type: "Socialização", color: "amarelo", secondaryColor: "laranja", symbol: "arrow.trianglehead.clockwise", questions: [""]), baseColor: .orange, secondaryColor: .red)
+    JournalCover(journal: JournalTypeModel(type: "Socialização", symbol: "arrow.trianglehead.clockwise", questions: [""]))
 }

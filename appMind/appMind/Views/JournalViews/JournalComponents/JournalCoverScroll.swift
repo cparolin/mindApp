@@ -18,10 +18,7 @@ struct JournalCoverScroll: View {
                     NavigationLink {
                         JournalListView(journalType: journal)
                     } label: {
-                        JournalCover(
-                            journal: journal,
-                            baseColor: ColorName.from(name: journal.color),
-                            secondaryColor: ColorName.from(name: journal.secondaryColor))
+                        JournalCover(journal: journal)
                     }
                 }
             }

@@ -63,5 +63,5 @@ struct NoteCarrouselView: View {
 }
 
 #Preview {
-    NoteCarrouselView(journal: JournalTypeModel(type: "Rotina", color: "amarelo", secondaryColor: "laranja", symbol: "arrow.trianglehead.clockwise", questions: [""]))
+    NoteCarrouselView(journal: JournalTypeModel(type: "Rotina", symbol: "arrow.trianglehead.clockwise", questions: [""]))
 }

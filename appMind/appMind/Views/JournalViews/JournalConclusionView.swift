@@ -92,5 +92,5 @@ struct JournalConclusionView: View {
 }
 
 #Preview {
-    JournalConclusionView(journalType: JournalTypeModel(type: "Rotina", color: "amarelo", secondaryColor: "laranja", symbol: "arrow.trianglehead.clockwise", questions: [""]), answers: [""])
+    JournalConclusionView(journalType: JournalTypeModel(type: "Rotina", symbol: "arrow.trianglehead.clockwise", questions: [""]), answers: [""])
 }

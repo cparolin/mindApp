@@ -61,7 +61,7 @@ struct JournalTypeView: View {
         /// Pre set categories initialized when the app is launched for
         /// the first time
         .onAppear {
-            appMind.initialJournalsCreation(journals: journals, context: context)
+            JournalTypeModel.initialJournalsCreation(journals: journals, context: context)
         }
     }
 }

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct JournalItem: View {
     @Environment(\.modelContext) private var context
@@ -21,7 +22,7 @@ struct JournalItem: View {
             
         } label: {
             ZStack {
-                NoteBackground(baseColor: ColorName.from(name: journal.journalType.color))
+                NoteBackground(journal: journal.journalType.type)
                 
                 HStack (spacing: -3){
                     HStack {
@@ -49,6 +50,8 @@ struct JournalItem: View {
                     
                     Button {
                         journal.isFavorite.toggle()
+                        try? context.save()
+                        
                     } label: {
                         if journal.isFavorite {
                             Image(systemName: "heart.fill")

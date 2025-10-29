@@ -32,7 +32,3 @@ struct RecentShowAll: View {
         }
     }
 }
-
-//#Preview {
-//    RecentShowAll()
-//}
