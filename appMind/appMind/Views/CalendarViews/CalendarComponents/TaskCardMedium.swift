@@ -48,7 +48,7 @@ struct TaskCardMedium: View {
             }
             
             HStack (spacing: 0){
-                Image(systemName: "bus.fill")
+                Image(systemName: task.symbol)
                     .font(.title3)
                     .foregroundStyle(.black)
                     .padding(.leading, 12)
@@ -105,5 +105,5 @@ struct completionButton: View {
 }
 
 #Preview {
-    TaskCardMedium(task: Task(taskTitle: "Título", todoDateStart: Date.now, todoDateEnd: Date.now, isCompleted: false, tint: "azul", notes: "descrição"), baseColor: .yellow)
+    TaskCardMedium(task: Task(taskTitle: "Título", todoDateStart: Date.now, todoDateEnd: Date.now, isCompleted: false, tint: "azul", notes: "descrição", symbol: "bus.fill"), baseColor: .yellow)
 }

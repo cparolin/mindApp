@@ -44,14 +44,12 @@ struct TasksView: View {
 
 #Preview {
     TasksView(tasksDay: [
-        TaskDay(taskTitleDay: "aaaaa", todoDateDay: Date.now, tintDay: "azul", notesDay: "aaaa"),
-        TaskDay(taskTitleDay: "aaaa", todoDateDay: Date.now, tintDay: "azul", notesDay: "aaaa"),
-        TaskDay(taskTitleDay: "aaaa", todoDateDay: Date.now, tintDay: "azul", notesDay: "aaa"),
-        TaskDay(taskTitleDay: "aaa", todoDateDay: Date.now, tintDay: "azul", notesDay: "aaa"),
-        TaskDay(taskTitleDay: "aaa", todoDateDay: Date.now, tintDay: "azul", notesDay: "aaa")
+        TaskDay(taskTitleDay: "aaaaa", todoDateDay: Date.now, tintDay: "azul", notesDay: "aaaa", symbolDay: "bus.fill"),
+        TaskDay(taskTitleDay: "aaaaa", todoDateDay: Date.now, tintDay: "azul", notesDay: "aaaa", symbolDay: "bus.fill"),
+        TaskDay(taskTitleDay: "aaaaa", todoDateDay: Date.now, tintDay: "azul", notesDay: "aaaa", symbolDay: "bus.fill")
     ], tasks: [
-        Task(taskTitle: "Título", todoDateStart: Date.now, todoDateEnd: Date.now, isCompleted: false, tint: "azul", notes: ""),
-        Task(taskTitle: "Título", todoDateStart: Date.now, todoDateEnd: Date.now, isCompleted: false, tint: "azul", notes: ""),
-        Task(taskTitle: "Título", todoDateStart: Date.now, todoDateEnd: Date.now, isCompleted: false, tint: "azul", notes: "")
+        Task(taskTitle: "Título", todoDateStart: Date.now, todoDateEnd: Date.now, isCompleted: false, tint: "azul", notes: "", symbol: "bus.fill"),
+        Task(taskTitle: "Título", todoDateStart: Date.now, todoDateEnd: Date.now, isCompleted: false, tint: "azul", notes: "", symbol: "bus.fill"),
+        Task(taskTitle: "Título", todoDateStart: Date.now, todoDateEnd: Date.now, isCompleted: false, tint: "azul", notes: "", symbol: "bus.fill")
     ], currentDate: Date.now)
 }

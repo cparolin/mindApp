@@ -48,7 +48,7 @@ struct TaskCardExpanded: View {
             }
             
             HStack (spacing: 0){
-                Image(systemName: "bus.fill")
+                Image(systemName: task.symbol)
                     .font(.title3)
                     .foregroundStyle(.black)
                     .padding(.leading, 12)
@@ -82,5 +82,5 @@ struct TaskCardExpanded: View {
 }
 
 #Preview {
-    TaskCardExpanded(task: Task(taskTitle: "Título", todoDateStart: Date.now, todoDateEnd: Date.now, isCompleted: false, tint: "azul", notes: "descrição"), baseColor: .yellow)
+    TaskCardExpanded(task: Task(taskTitle: "Título", todoDateStart: Date.now, todoDateEnd: Date.now, isCompleted: false, tint: "azul", notes: "descrição", symbol: "bus.fill"), baseColor: .yellow)
 }

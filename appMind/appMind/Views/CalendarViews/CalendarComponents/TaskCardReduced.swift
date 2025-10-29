@@ -13,7 +13,7 @@ struct TaskCardReduced: View {
 
     var body: some View {
         HStack {
-            Image(systemName: "bus.fill")
+            Image(systemName: task.symbol)
                 .font(.title3)
                 .foregroundStyle(.black)
                 .frame(width: 60, height: 50)
@@ -45,5 +45,5 @@ struct TaskCardReduced: View {
 }
 
 #Preview {
-    TaskCardReduced(task: Task(taskTitle: "Título", todoDateStart: Date.now, todoDateEnd: Date.now, isCompleted: false, tint: "azul", notes: "descrição"), baseColor: .yellow)
+    TaskCardReduced(task: Task(taskTitle: "Título", todoDateStart: Date.now, todoDateEnd: Date.now, isCompleted: false, tint: "azul", notes: "descrição", symbol: "bus.fill"), baseColor: .yellow)
 }
