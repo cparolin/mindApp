@@ -47,6 +47,7 @@ struct ReducedItemBackground: View {
                 )
                 .padding(EdgeInsets(top: 0, leading: 0, bottom: 61, trailing: 107))
         }
+        .padding(.vertical, 5)
     }
 }
 

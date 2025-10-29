@@ -15,7 +15,6 @@ struct FavoriteShowAll: View {
             Text("Favoritos")
                 .font(.title3)
                 .fontWeight(.semibold)
-                .padding(.leading, 20)
             
             Spacer()
             
@@ -28,7 +27,7 @@ struct FavoriteShowAll: View {
                     .foregroundStyle(.gray)
                     .fontWeight(.semibold)
             }
-            .padding(.trailing, 20)
         }
+        .padding(.horizontal, 20)
     }
 }
