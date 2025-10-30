@@ -17,7 +17,7 @@ struct JournalConclusionView: View {
     var journalType: JournalTypeModel
     var answers: [String]
     let descLength: Int = 50
-    let titleLength: Int = 12
+    let titleLength: Int = 16
     
     // State properties
     @State private var title: String

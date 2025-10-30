@@ -74,7 +74,7 @@ struct ReducedJournalItem: View {
                     Spacer()
                     // Title
                     Text(journal.title)
-                        .font(.title2)
+                        .font(.title3)
                         .bold()
                         .padding(.bottom, 4)
                 }

@@ -18,7 +18,7 @@ struct JournalItem: View {
     
     var body: some View {
         NavigationLink {
-            NoteCarrouselView(journal: journal.journalType, existingJournal: journal)
+            NoteAnswersView(journal: journal)
             
         } label: {
             ZStack {
@@ -42,10 +42,10 @@ struct JournalItem: View {
                         Text(journal.desc)
                             .font(.callout)
                             .multilineTextAlignment(.leading)
-                            .frame(width: UIScreen.main.bounds.width * 0.63, alignment: .topLeading)
+                            .frame(width: UIScreen.main.bounds.width * 0.60, alignment: .topLeading)
                     }
                     .frame(width: UIScreen.main.bounds.width * 0.69)
-                    .padding(.leading, 7)
+                    .padding(.leading, 6)
                     
                     Button {
                         journal.isFavorite.toggle()
@@ -67,6 +67,17 @@ struct JournalItem: View {
             }
         }
     }
+}
+
+#Preview {
+    JournalItem(journal: JournalModel(title: "Título", desc: "Lorem Ipsum é simplesmente uma simulação de texto da", date: Date.now, answers: ["Não fiz Nada","aaa","aa","aaa","aaa","aaa",], journalType: JournalTypeModel(type: "Rotina", symbol: "arrow.trianglehead.clockwise", questions: [
+        "O que fiz hoje na minha rotina?",
+        "Houve algo que me deixou confortável ou feliz?",
+        "Houve algo que me incomodou?",
+        "Como eu me senti e o que pensei sobre esse incômodo?",
+        "O que funcionou bem na minha rotina?",
+        "O que eu gostaria de ajustar para lidar com os incômodos da próxima vez?"
+    ]), isFavorite: false))
 }
 
 struct NoteBackground: View {
