@@ -44,39 +44,40 @@ struct ReducedJournalItem: View {
                 // Background
                 ReducedItemBackground(journal: journal.journalType.type)
                 
-                // Top right label
-                VStack (alignment: .trailing, spacing: 2){
-                    Text(journal.journalType.type)
-                        .font(.caption)
-                        .bold()
-                        .padding(.trailing, 10)
-                    Capsule()
-                        .frame(width: 90, height: 2.6)
-                        .foregroundStyle(getColor())
-                }
-                .offset(x: UIScreen.main.bounds.width * 0.136, y: UIScreen.main.bounds.height * -0.035)
-                
                 // Date, title and description
                 VStack (alignment: .leading){
                     // Month and day
-                    HStack (spacing: 5){
-                        Text(journal.date.formatted(day))
-                            .bold()
-                            .italic()
-                        
-                        Text(journal.date.formatted(month))
-                            .italic()
+                    HStack {
+                        HStack (spacing: 5){
+                            Text(journal.date.formatted(day))
+                                .bold()
+                                .italic()
+                            
+                            Text(journal.date.formatted(month))
+                                .italic()
+                        }
+                        .padding(.leading, 7)
                         
                         Spacer()
+                        
+                        VStack (alignment: .trailing, spacing: 2){
+                            Text(journal.journalType.type)
+                                .font(.caption)
+                                .bold()
+                                .padding(.trailing, 10)
+                            Capsule()
+                                .frame(width: 88, height: 2.6)
+                                .foregroundStyle(getColor())
+                        }
                     }
-                    .font(.body)
+                    .frame(width: UIScreen.main.bounds.width * 0.48)
                     
                     Spacer()
                     // Title
                     Text(journal.title)
                         .font(.title3)
                         .bold()
-                        .padding(.bottom, 4)
+                        .padding(EdgeInsets(top: 0, leading: 6, bottom: 6, trailing: 0))
                 }
                 .padding(.leading, 6)
                 .frame(width: UIScreen.main.bounds.width * 0.46, height: UIScreen.main.bounds.height * 0.095)
@@ -131,7 +132,7 @@ struct ReducedItemBackground: View {
                         topTrailingRadius: 0
                     )
                 )
-                .offset(x: -55, y: -30)
+                .offset(x: width * -0.27, y: height * -0.33)
         }
         .padding(.vertical, 5)
     }
