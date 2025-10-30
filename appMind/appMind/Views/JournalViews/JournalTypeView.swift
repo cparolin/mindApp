@@ -12,9 +12,8 @@ struct JournalTypeView: View {
     @Environment(\.modelContext) var context
     
     @Query private var journals: [JournalTypeModel]
-    @Query(sort: [SortDescriptor(\JournalModel.date, order: .reverse)]) var allNotes: [JournalModel]
     
-    @State private var AddJournalSheet = false
+    @Query(sort: [SortDescriptor(\JournalModel.date, order: .reverse)]) var allNotes: [JournalModel]
     
     /// Receives the `allNotes` array filtered by favorites
     var favoriteJournals: [JournalModel] {

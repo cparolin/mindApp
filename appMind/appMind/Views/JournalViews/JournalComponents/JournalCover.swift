@@ -11,6 +11,9 @@ struct JournalCover: View {
     var journal: JournalTypeModel
     @AppStorage("paletteLayout") private var paletteLayout: String = "Saturadas"
     
+    let coverSize: CGFloat = UIScreen.main.bounds.width * 0.6
+    let tabSize: CGFloat = UIScreen.main.bounds.height * 0.02
+    
     var color: [String] {
         switch journal.type {
         case "Rotina":
@@ -31,16 +34,16 @@ struct JournalCover: View {
         ZStack {
             RoundedRectangle(cornerRadius: 16)
                 .foregroundColor(Color(getPaletteColor(palette: paletteLayout, color: color[0])))
-                .frame(width: UIScreen.main.bounds.width * 0.6, height: UIScreen.main.bounds.width * 0.6)
+                .frame(width: coverSize, height: coverSize)
             
             Rectangle()
                 .foregroundColor(Color(getPaletteColor(palette: paletteLayout, color: color[2])))
-                .frame(width: UIScreen.main.bounds.width * 0.48, height: UIScreen.main.bounds.height * 0.02)
+                .frame(width: coverSize * 0.8, height: tabSize)
                 .padding(.bottom, UIScreen.main.bounds.height * 0.257)
             
             Rectangle()
                 .foregroundColor(.white)
-                .frame(width: UIScreen.main.bounds.width * 0.48, height: UIScreen.main.bounds.height * 0.02)
+                .frame(width: coverSize * 0.8, height: tabSize)
                 .clipShape(
                     .rect(
                         topLeadingRadius: 0,

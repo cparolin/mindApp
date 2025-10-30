@@ -16,13 +16,13 @@ struct JournalConclusionView: View {
     var existingJournal: JournalModel?
     var journalType: JournalTypeModel
     var answers: [String]
-    var descLength: Int = 50
-    var titleLength: Int = 8
+    let descLength: Int = 50
+    let titleLength: Int = 12
     
     // State properties
-    @State private var title: String = ""
-    @State private var desc: String = ""
-    @State private var date: Date = Date.now
+    @State private var title: String
+    @State private var desc: String
+    @State private var date: Date
     
     init(existingJournal: JournalModel? = nil, journalType: JournalTypeModel, answers: [String]) {
         self.existingJournal = existingJournal
@@ -77,7 +77,7 @@ struct JournalConclusionView: View {
             
             Spacer()
         }
-        .padding(EdgeInsets(top: 30, leading: 30, bottom: 0, trailing: 30))
+        .padding(30)
         .navigationTitle(existingJournal == nil ? "Finalizar Registro" : "Editar Registro")
         .toolbar {
             ToolbarItem(placement: .confirmationAction) {

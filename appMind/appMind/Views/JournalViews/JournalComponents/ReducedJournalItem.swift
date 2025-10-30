@@ -32,6 +32,10 @@ struct ReducedJournalItem: View {
         }
     }
     
+    private func getColor() -> Color {
+        return Color(getPaletteColor(palette: paletteLayout, color: color))
+    }
+    
     var body: some View {
         NavigationLink {
             NoteCarrouselView(journal: journal.journalType, existingJournal: journal)
@@ -48,7 +52,7 @@ struct ReducedJournalItem: View {
                         .padding(.trailing, 10)
                     Capsule()
                         .frame(width: 90, height: 2.6)
-                        .foregroundStyle(Color(getPaletteColor(palette: paletteLayout, color: color)))
+                        .foregroundStyle(getColor())
                 }
                 .offset(x: UIScreen.main.bounds.width * 0.136, y: UIScreen.main.bounds.height * -0.035)
                 
@@ -102,16 +106,23 @@ struct ReducedItemBackground: View {
         }
     }
     
+    private func getColor() -> Color {
+        return Color(getPaletteColor(palette: paletteLayout, color: color))
+    }
+    
+    let width = UIScreen.main.bounds.width * 0.5
+    let height = UIScreen.main.bounds.height * 0.107
+    
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 16)
-                .stroke(Color(getPaletteColor(palette: paletteLayout, color: color)), lineWidth: 2)
-                .fill(Color(getPaletteColor(palette: paletteLayout, color: color)).opacity(0.15))
-                .frame(width: UIScreen.main.bounds.width * 0.5, height: UIScreen.main.bounds.height * 0.107)
+                .stroke(getColor(), lineWidth: 2)
+                .fill(getColor().opacity(0.15))
+                .frame(width: width, height: height)
             
             Rectangle()
-                .frame(width: UIScreen.main.bounds.width * 0.23, height: UIScreen.main.bounds.height * 0.037)
-                .foregroundStyle(Color(getPaletteColor(palette: paletteLayout, color: color)))
+                .frame(width: width * 0.46, height: height * 0.35)
+                .foregroundStyle(getColor())
                 .clipShape(
                     .rect(
                         topLeadingRadius: 16,
@@ -120,7 +131,7 @@ struct ReducedItemBackground: View {
                         topTrailingRadius: 0
                     )
                 )
-                .padding(EdgeInsets(top: 0, leading: 0, bottom: 61, trailing: 107))
+                .offset(x: -55, y: -30)
         }
         .padding(.vertical, 5)
     }

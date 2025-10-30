@@ -1,5 +1,5 @@
 //
-//  RoutineJournalView.swift
+//  JournalListView.swift
 //  appMind
 //
 //  Created by Dayô Araújo on 14/10/25.
@@ -10,7 +10,7 @@ import SwiftUI
 /// Exibits all the journals of the selected journal type
 struct JournalListView: View {
     @Environment(\.modelContext) private var context
-    @Query(sort: \JournalModel.journalType.type) var notes: [JournalModel]
+    @Query(sort: \JournalModel.date, order: .reverse) var allNotes: [JournalModel]
     
     // State properties
     @State private var filteredNotes: [JournalModel] = []
@@ -61,7 +61,7 @@ struct JournalListView: View {
                     ///  The `filteredNotes` list receives the `notes` array
                     ///  filtered by journal type. The `journalType` used to
                     ///  make the comparison is received when the view is accessed
-                    filteredNotes = notes.filter({
+                    filteredNotes = allNotes.filter({
                         $0.journalType.type.localizedStandardContains(journalType.type)
                     })
                 }

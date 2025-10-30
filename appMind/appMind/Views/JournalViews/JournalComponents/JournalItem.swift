@@ -25,28 +25,27 @@ struct JournalItem: View {
                 NoteBackground(journal: journal.journalType.type)
                 
                 HStack (spacing: -3){
-                    HStack {
-                        VStack (spacing: 9){
-                            Text(journal.date.formatted(month))
-                                .font(.title3)
-                                .fontWeight(.semibold)
-                            
-                            Text(journal.date.formatted(day))
-                                .font(.title)
-                        }
+                    VStack (spacing: 9){
+                        Text(journal.date.formatted(month))
+                            .font(.title3)
+                            .fontWeight(.semibold)
                         
-                        VStack (alignment: .leading, spacing: 9){
-                            Text(journal.title)
-                                .font(.title3)
-                                .fontWeight(.semibold)
-                            
-                            Text(journal.desc)
-                                .font(.callout)
-                                .multilineTextAlignment(.leading)
-                                .frame(width: UIScreen.main.bounds.width * 0.63, alignment: .topLeading)
-                        }
-                        .frame(width: UIScreen.main.bounds.width * 0.69)
-                    }.padding(.leading, 3)
+                        Text(journal.date.formatted(day))
+                            .font(.title)
+                    }
+                    
+                    VStack (alignment: .leading, spacing: 9){
+                        Text(journal.title)
+                            .font(.title3)
+                            .fontWeight(.semibold)
+                        
+                        Text(journal.desc)
+                            .font(.callout)
+                            .multilineTextAlignment(.leading)
+                            .frame(width: UIScreen.main.bounds.width * 0.63, alignment: .topLeading)
+                    }
+                    .frame(width: UIScreen.main.bounds.width * 0.69)
+                    .padding(.leading, 7)
                     
                     Button {
                         journal.isFavorite.toggle()
@@ -60,7 +59,7 @@ struct JournalItem: View {
                             Image(systemName: "heart")
                         }
                     }
-                    .offset(x: UIScreen.main.bounds.width * -0.015, y: UIScreen.main.bounds.height * -0.04)
+                    .offset(x: UIScreen.main.bounds.width * -0.01, y: UIScreen.main.bounds.height * -0.04)
                 }
                 .foregroundStyle(.black)
                 .padding(.horizontal, 20)
@@ -73,6 +72,9 @@ struct JournalItem: View {
 struct NoteBackground: View {
     @AppStorage("paletteLayout") private var paletteLayout: String = "Saturadas"
     var journal: String
+    
+    let width = UIScreen.main.bounds.width * 0.9
+    let height: CGFloat = 113
     
     var color: String {
         switch journal {
@@ -90,15 +92,19 @@ struct NoteBackground: View {
         }
     }
     
+    private func getColor() -> Color {
+        return Color(getPaletteColor(palette: paletteLayout, color: color))
+    }
+    
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 16)
-                .stroke(Color(getPaletteColor(palette: paletteLayout, color: color)), lineWidth: 2)
-                .fill(Color(getPaletteColor(palette: paletteLayout, color: color)).opacity(0.15))
-                
+                .stroke(getColor(), lineWidth: 2)
+                .fill(getColor().opacity(0.15))
+            
             Rectangle()
-                .fill(Color(getPaletteColor(palette: paletteLayout, color: color)))
-                .frame(width: UIScreen.main.bounds.width * 0.135, height: 113)
+                .fill(getColor())
+                .frame(width: width * 0.15, height: height)
                 .clipShape(
                     .rect(
                         topLeadingRadius: 0,
@@ -107,8 +113,8 @@ struct NoteBackground: View {
                         topTrailingRadius: 16
                     )
                 )
-                .padding(.leading, UIScreen.main.bounds.width * 0.76)
+                .padding(.leading, width * 0.85)
         }
-        .frame(width: UIScreen.main.bounds.width * 0.9, height: 113)
+        .frame(width: width, height: height)
     }
 }

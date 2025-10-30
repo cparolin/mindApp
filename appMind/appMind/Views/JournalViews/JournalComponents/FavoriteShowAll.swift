@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct FavoriteShowAll: View {
-    @State var favoriteJournals: [JournalModel]
+    var favoriteJournals: [JournalModel]
     
     var body: some View {
         HStack {
@@ -19,6 +19,7 @@ struct FavoriteShowAll: View {
             Spacer()
             
             NavigationLink {
+                // Passes the notes array and indicates that it is the favorites list
                 ListView(notes: favoriteJournals, isFavorite: true)
                 
             } label: {
