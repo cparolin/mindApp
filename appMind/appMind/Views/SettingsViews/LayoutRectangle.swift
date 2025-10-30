@@ -46,20 +46,24 @@ struct LayoutRectangle: View {
                         
                         if textLayout != 2 {
                             Text("15:00")
+                                .frame(width: UIScreen.main.bounds.width * 0.082, height: 10)
                                 .font(.changeFont(fontType: font, fontStyle: .caption2, fontWeight: .regular))
+//                                .border(.red)
+                                
                                 
                         }
                         
                         Rectangle()
-                            .frame(width: 80, height: 4)
+                            .frame(width: UIScreen.main.bounds.width * 0.20, height: 4)
+//                            .border(.red)
                             .foregroundStyle(Color.black)
                         
                         if textLayout != 2 {
                             Spacer()
-                                .frame(width: 200)
+                                .frame(width: UIScreen.main.bounds.width * 0.48)
                         } else {
                             Spacer()
-                                .frame(width: 240)
+                                .frame(width: UIScreen.main.bounds.width * 0.583)
                         }
                         
                         Circle()
@@ -77,23 +81,24 @@ struct LayoutRectangle: View {
                     HStack {
                         if textLayout != 2 {
                             Text("17:30")
+                                .frame(width: UIScreen.main.bounds.width * 0.082, height: 10)
                                 .font(.changeFont(fontType: font, fontStyle: .caption2, fontWeight: .regular))
                         }
                         
                         if textLayout != 2 {
                             Rectangle()
-                                .frame(width: 80, height: 4)
+                                .frame(width: UIScreen.main.bounds.width * 0.20, height: 4)
                         } else {
                             Rectangle()
-                                .frame(width: 126.5, height: 4)
+                                .frame(width: UIScreen.main.bounds.width * 0.36, height: 4)
                         }
                         
                         if textLayout != 2 {
                             Spacer()
-                                .frame(width: 200)
+                                .frame(width: UIScreen.main.bounds.width * 0.48)
                         } else {
                             Spacer()
-                                .frame(width: 195)
+                                .frame(width: UIScreen.main.bounds.width * 0.423)
                         }
                         
                         Circle()
@@ -110,28 +115,29 @@ struct LayoutRectangle: View {
                     HStack {
                         if textLayout != 2 {
                             Text("17:30")
+                                .frame(width: UIScreen.main.bounds.width * 0.082, height: 10)
                                 .font(.changeFont(fontType: font, fontStyle: .caption2, fontWeight: .regular))
                         }
                         
                         VStack (alignment: .leading){
                             Rectangle()
-                                .frame(width: 80, height: 4)
+                                .frame(width: UIScreen.main.bounds.width * 0.20, height: 4)
                             
                             if textLayout == 0 {
                                 Rectangle()
-                                    .frame(width: 151, height: 4)
+                                    .frame(width: UIScreen.main.bounds.width * 0.36, height: 4)
                             }
                         }
                         
                         if textLayout == 0 {
                             Spacer()
-                                .frame(width: 130)
+                                .frame(width:  UIScreen.main.bounds.width * 0.32)
                         } else if textLayout == 1 {
                             Spacer()
-                                .frame(width: 200)
+                                .frame(width: UIScreen.main.bounds.width * 0.48)
                         } else {
                             Spacer()
-                                .frame(width: 240)
+                                .frame(width: UIScreen.main.bounds.width * 0.583)
                         }
                         
                         Circle()
