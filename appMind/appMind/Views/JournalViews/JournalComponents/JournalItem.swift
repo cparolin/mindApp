@@ -24,7 +24,7 @@ struct JournalItem: View {
             ZStack {
                 NoteBackground(journal: journal.journalType.type)
                 
-                HStack (spacing: -3){
+                HStack (spacing: 22){
                     VStack (spacing: 9){
                         Text(journal.date.formatted(month))
                             .font(.title3)
@@ -42,10 +42,8 @@ struct JournalItem: View {
                         Text(journal.desc)
                             .font(.callout)
                             .multilineTextAlignment(.leading)
-                            .frame(width: UIScreen.main.bounds.width * 0.60, alignment: .topLeading)
+                            .frame(width: UIScreen.main.bounds.width * 0.53, alignment: .topLeading)
                     }
-                    .frame(width: UIScreen.main.bounds.width * 0.69)
-                    .padding(.leading, 6)
                     
                     Button {
                         journal.isFavorite.toggle()
@@ -59,12 +57,11 @@ struct JournalItem: View {
                             Image(systemName: "heart")
                         }
                     }
-                    .offset(x: UIScreen.main.bounds.width * -0.01, y: UIScreen.main.bounds.height * -0.04)
+                    .offset(x: UIScreen.main.bounds.width * 0.02, y: UIScreen.main.bounds.height * -0.04)   
                 }
                 .foregroundStyle(.black)
-                .padding(.horizontal, 20)
-                .padding(.vertical, 20)
             }
+            .padding(.horizontal)
         }
     }
 }
@@ -84,7 +81,7 @@ struct NoteBackground: View {
     @AppStorage("paletteLayout") private var paletteLayout: String = "Saturadas"
     var journal: String
     
-    let width = UIScreen.main.bounds.width * 0.9
+    let width = UIScreen.main.bounds.width * 0.88
     let height: CGFloat = 113
     
     var color: String {
@@ -115,7 +112,7 @@ struct NoteBackground: View {
             
             Rectangle()
                 .fill(getColor())
-                .frame(width: width * 0.15, height: height)
+                .frame(width: width * 0.14, height: height)
                 .clipShape(
                     .rect(
                         topLeadingRadius: 0,
@@ -124,7 +121,7 @@ struct NoteBackground: View {
                         topTrailingRadius: 16
                     )
                 )
-                .padding(.leading, width * 0.85)
+                .padding(.leading, width * 0.855)
         }
         .frame(width: width, height: height)
     }
