@@ -22,40 +22,42 @@ struct JournalTypeView: View {
     
     var body: some View {
         NavigationStack {
-            ScrollView (showsIndicators: false) {
-                VStack (alignment: .leading, spacing: 27){
-                    if !allNotes.isEmpty {
-                        VStack (alignment: .leading, spacing: 4){
-                            RecentShowAll(recentJournals: allNotes)
-                            
-                            NotesHorizontalScroll(notes: allNotes)
-                                .padding(.top, 10)
+            NavigationView {
+                ScrollView (showsIndicators: false) {
+                    VStack (alignment: .leading, spacing: 27){
+                        if !allNotes.isEmpty {
+                            VStack (alignment: .leading, spacing: 4){
+                                RecentShowAll(recentJournals: allNotes)
+                                
+                                NotesHorizontalScroll(notes: allNotes)
+                                    .padding(.top, 10)
+                            }
                         }
-                    }
-                    
-                    if !favoriteJournals.isEmpty {
-                        VStack (alignment: .leading, spacing: 4){
-                            FavoriteShowAll(favoriteJournals: favoriteJournals)
-                            
-                            NotesHorizontalScroll(notes: favoriteJournals)
-                                .padding(.top, 10)
-                        }
-                    }
-                    
-                    VStack (alignment: .leading, spacing: 15){
-                        Text("Todos os diários")
-                            .font(.title3)
-                            .fontWeight(.semibold)
-                            .padding(.leading, 20)
                         
-                        JournalCoverScroll(journals: journals)
+                        if !favoriteJournals.isEmpty {
+                            VStack (alignment: .leading, spacing: 4){
+                                FavoriteShowAll(favoriteJournals: favoriteJournals)
+                                
+                                NotesHorizontalScroll(notes: favoriteJournals)
+                                    .padding(.top, 10)
+                            }
+                        }
+                        
+                        VStack (alignment: .leading, spacing: 15){
+                            Text("Todos os diários")
+                                .font(.title3)
+                                .fontWeight(.semibold)
+                                .padding(.leading, 20)
+                            
+                            JournalCoverScroll(journals: journals)
+                        }
+                        
+                        Spacer()
                     }
-                    
-                    Spacer()
+                    .padding(.top, 10)
                 }
-                .padding(.top, 10)
+                .navigationTitle("Meus Diários")
             }
-            .navigationTitle("Meus Diários")
         }
         /// Pre set categories initialized when the app is launched for
         /// the first time

@@ -11,26 +11,30 @@ struct SettingsView: View {
     
     var body: some View {
         NavigationStack {
-            VStack {
-                Form {
-                    List {
-                        NavigationLink(destination: NotificationsView()) {
-                            Image(systemName: "bell.badge")
-                            Text("Notificações")
-                        }
-                        NavigationLink(destination: AppearenceView()) {
-                            HStack {
-                                Image(systemName: "paintpalette")
-                                Text("Aparência")
+            NavigationView {
+                VStack {
+                    Form {
+                        List {
+                            NavigationLink(destination: NotificationsView()) {
+                                Image(systemName: "bell.badge")
+                                Text("Notificações")
                             }
+                            NavigationLink(destination: AppearenceView()) {
+                                HStack {
+                                    Image(systemName: "paintpalette")
+                                    Text("Aparência")
+                                }
+                            }
+                            
+                            
                         }
-                                       
-                        
                     }
                 }
+                .navigationTitle("Ajustes")
             }
-            .navigationTitle("Ajustes")
+            
         }
+        
     }
 }
 
