@@ -9,7 +9,7 @@ import SwiftUI
 
 struct TaskCardMedium: View {
     var task: Task
-    var baseColor: Color
+    var baseColor: String
     
     var dateEquals: Bool {
         if task.todoDateStart == task.todoDateEnd {
@@ -30,7 +30,7 @@ struct TaskCardMedium: View {
                 .foregroundStyle(.black)
                 .background(
                     RoundedRectangle(cornerRadius: 16)
-                        .foregroundStyle(baseColor)
+                        .foregroundStyle(Color(baseColor))
                 )
             } else {
                 VStack(spacing: 20) {
@@ -43,7 +43,7 @@ struct TaskCardMedium: View {
                 .foregroundStyle(.black)
                 .background(
                     RoundedRectangle(cornerRadius: 16)
-                        .foregroundStyle(baseColor)
+                        .foregroundStyle(Color(baseColor))
                 )
             }
             
@@ -54,6 +54,8 @@ struct TaskCardMedium: View {
                     .padding(.leading, 12)
                 
                 Text(task.taskTitle)
+                    .lineLimit(1)
+                    .truncationMode(.tail)
                     .fontWeight(.semibold)
                     .foregroundStyle(.black)
                     .padding(.leading, 10)
@@ -65,8 +67,8 @@ struct TaskCardMedium: View {
             .padding(.vertical, dateEquals ? 12 : 25)
             .background(
                 RoundedRectangle(cornerRadius: 16)
-                    .stroke(baseColor, lineWidth: 2)
-                    .fill(baseColor.opacity(0.15))
+                    .stroke(Color(baseColor), lineWidth: 2)
+                    .fill(Color(baseColor).opacity(0.15))
             )
         }
         .padding(.horizontal, 15)
@@ -76,12 +78,12 @@ struct TaskCardMedium: View {
 
 struct completionButton: View {
     var task: Task
-    var baseColor: Color
+    var baseColor: String
     
     var body: some View {
         if !task.isCompleted {
             Circle()
-                .stroke(baseColor, lineWidth: 2)
+                .stroke(Color(baseColor), lineWidth: 2)
                 .frame(width: 19, height: 19)
                 .padding(.trailing, 20)
                 .onTapGesture {
@@ -92,7 +94,7 @@ struct completionButton: View {
         }
         else {
             Circle()
-                .fill(baseColor)
+                .fill(Color(baseColor))
                 .frame(width: 19, height: 19)
                 .padding(.trailing, 20)
                 .onTapGesture {
@@ -104,6 +106,6 @@ struct completionButton: View {
     }
 }
 
-#Preview {
-    TaskCardMedium(task: Task(taskTitle: "Título", todoDateStart: Date.now, todoDateEnd: Date.now, isCompleted: false, tint: "azul", notes: "descrição", symbol: "bus.fill"), baseColor: .yellow)
-}
+//#Preview {
+//    TaskCardMedium(task: Task(taskTitle: "Título", todoDateStart: Date.now, todoDateEnd: Date.now, isCompleted: false, tint: "azul", notes: "descrição", symbol: "bus.fill"), baseColor: .yellow)
+//}

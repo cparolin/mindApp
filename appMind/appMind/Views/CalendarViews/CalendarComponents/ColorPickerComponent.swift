@@ -8,28 +8,27 @@
 import SwiftUI
 
 struct ColorPickerComponent: View {
-    @Binding var selectedColor: Color
     @Binding var taskColor: String
     
-    let colors: [Color] = [.blue, .red, .yellow, .orange, .purple]
+    let palette: String
     
     var body: some View {
         VStack {
             HStack(spacing: 8) {
-                ForEach(colors, id: \.self) { color in
+                ForEach(Array(PalettesButton[palette]!.keys).sorted(), id: \.self) { color in
                     Circle()
-                        .fill(color)
+                        .foregroundStyle(Color(getPaletteColorButton(palette: palette, color: color)))
                         .frame(width: 54)
                         .background(content: {
                             Circle()
                                 .stroke(.blue, lineWidth: 8)
                                 .stroke(.white, lineWidth: 4)
-                                .opacity(selectedColor == color ? 1 : 0)
+                                .opacity(taskColor == color ? 1 : 0)
                         })
                         .contentShape(.rect)
                         .onTapGesture {
                             withAnimation(.snappy) {
-                                selectedColor = color
+                                taskColor = color
                                 
                             }
                         }

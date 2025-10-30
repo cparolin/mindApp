@@ -155,7 +155,7 @@ func corPasta(_ cor: Color) -> String {
         corString = "purple"
         
     default:
-        corString = "gray"
+        corString = "green"
     }
     return corString
        }

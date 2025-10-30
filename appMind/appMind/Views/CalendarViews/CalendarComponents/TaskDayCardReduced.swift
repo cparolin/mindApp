@@ -9,7 +9,7 @@ import SwiftUI
 
 struct TaskDayCardReduced: View {
     var task: TaskDay
-    var baseColor: Color
+    var baseColor: String
     
     var body: some View {
         HStack {
@@ -19,11 +19,12 @@ struct TaskDayCardReduced: View {
                 .frame(width: 60, height: 50)
                 .background(
                     RoundedRectangle(cornerRadius: 16)
-                        .foregroundStyle(baseColor)
+                        .foregroundStyle(Color(baseColor))
                 )
             
             HStack (spacing: 0){
                 Text(task.taskTitleDay)
+                    .truncationMode(.tail)
                     .fontWeight(.semibold)
                     .foregroundStyle(.black)
                     .padding(.leading, 10)
@@ -33,8 +34,8 @@ struct TaskDayCardReduced: View {
             .padding(.vertical, 15)
             .background(
                 RoundedRectangle(cornerRadius: 16)
-                    .stroke(baseColor, lineWidth: 2)
-                    .fill(baseColor.opacity(0.15))
+                    .stroke(Color(baseColor), lineWidth: 2)
+                    .fill(Color(baseColor).opacity(0.15))
             )
         }
         .padding(.horizontal, 15)
