@@ -21,9 +21,10 @@ struct TasksView: View {
     
     var body: some View {
         if tasks.isEmpty && tasksDay.isEmpty {
-            Text("Sem Tarefas ainda...")
-                .font(.title3)
-                .padding()
+                Text("Sem Tarefas ainda...")
+                    .font(.title3)
+                    .padding()
+
         }
         ScrollView(.vertical) {
             
@@ -33,13 +34,13 @@ struct TasksView: View {
                         TaskDayCardReduced(task: task, baseColor: getPaletteColor(palette: paletteLayout, color: task.tintDay))
                     }
                 }
-                
-                Text("Rotina do dia")
-                    .fontWeight(.semibold)
-                    .font(.title3)
-                    .padding(.bottom, 5)
-                    .padding(.leading)
-                
+                if !tasks.isEmpty && !tasksDay.isEmpty {
+                    Text("Rotina do dia")
+                        .fontWeight(.semibold)
+                        .font(.title3)
+                        .padding(.bottom, 5)
+                        .padding(.leading)
+                }
                 //Cards
                 ForEach(tasks) { task in
                     if isSameDate(task.todoDateStart, currentDate) {

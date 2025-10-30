@@ -20,7 +20,7 @@ struct Home: View {
         VStack(alignment: .leading, spacing: 0, content: {
             ZStack {
                 RoundedRectangle(cornerRadius: 25)
-                    .frame(height: 200)
+                    .frame(height: 230)
                     .foregroundColor(.accentColor.opacity(0.3))
                     .vSpacing(.top)
                     .ignoresSafeArea()
@@ -31,7 +31,8 @@ struct Home: View {
                         .fontWeight(.semibold)
                         .textScale(.secondary)
                         .foregroundStyle(.black)
-                        .padding(.top, 36)
+                        .padding(.top, 50)
+                        .padding(.bottom, 23)
                     TabView(selection: $currentWeekIndex) {
                         ForEach(weekSlider.indices, id: \.self){ index in
                             let week = weekSlider[index]
@@ -62,8 +63,9 @@ struct Home: View {
                                             .textScale(.secondary)
                                             .foregroundStyle(.black)
                                             .padding(.bottom, -20)
-                                            .padding(.top, -8)
+                                            .padding(.top, -9)
                                     }
+                                    .padding(.bottom, 16)
                                     .hSpacing(.center)
                                     .onTapGesture {
                                         // Fazendo o update da data atual (animaçao pode ser colocada aqui)
@@ -73,6 +75,7 @@ struct Home: View {
                             }
                         }
                         .padding(.bottom, 16)
+                        .padding(.top, 16)
                     }
                     .tabViewStyle(.page(indexDisplayMode: .never))
                     .frame(height: 90)
@@ -82,7 +85,7 @@ struct Home: View {
                 .hSpacing(.leading)
                 Spacer()
             }
-            .frame(height: 150)
+            .frame(height: 168)
             
             //Visualização das tarefas
             TasksView(tasksDay: tasksDay, tasks: tasks, currentDate: currentDate)
@@ -91,10 +94,15 @@ struct Home: View {
             Button(action: {
                 createNewTask.toggle()
             }, label: {
-                Image(systemName: "plus")
-                    .fontWeight(.semibold)
-                    .foregroundColor(.accentColor)
-                    .font(.title2)
+                ZStack {
+                    Circle()
+                        .frame(width: 40)
+                        .foregroundColor(.accentColor)
+                    Image(systemName: "plus")
+                        .fontWeight(.semibold)
+                        .foregroundColor(.white)
+                        .font(.title2)
+                }
             })
             .padding(.horizontal, 16)
         })
