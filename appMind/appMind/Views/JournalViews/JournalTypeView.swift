@@ -66,6 +66,23 @@ struct JournalTypeView: View {
     }
 }
 
+/// journals horizontal scroll view.
+/// Exibits 5 journals (prefix(5))
+struct NotesHorizontalScroll: View {
+    @State var notes: [JournalModel]
+    
+    var body: some View {
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack(spacing: 25) {
+                ForEach(notes.prefix(5)) { note in
+                    ReducedJournalItem(journal: note)
+                }
+            }
+            .padding(.horizontal, 20)
+        }
+    }
+}
+
 #Preview {
     JournalTypeView()
 }

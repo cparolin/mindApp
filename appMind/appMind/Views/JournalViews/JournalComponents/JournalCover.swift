@@ -67,6 +67,25 @@ struct JournalCover: View {
     }
 }
 
+struct JournalCoverScroll: View {
+    var journals: [JournalTypeModel]
+    
+    var body: some View {
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack (spacing: 25){
+                ForEach(journals) { journal in
+                    NavigationLink {
+                        JournalListView(journalType: journal)
+                    } label: {
+                        JournalCover(journal: journal)
+                    }
+                }
+            }
+            .padding(.horizontal, 20)
+        }
+    }
+}
+
 #Preview {
     JournalCover(journal: JournalTypeModel(type: "Socialização", symbol: "arrow.trianglehead.clockwise", questions: [""]))
 }

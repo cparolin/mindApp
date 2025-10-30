@@ -49,3 +49,18 @@ struct NoteView: View {
         }
     }
 }
+
+struct QuestionProgressIndicator: View {
+    var currentIndex: Int
+    var totalSteps: Int
+    
+    var body: some View {
+        HStack(spacing: 10) {
+            ForEach(0..<totalSteps, id: \.self) { index in
+                Capsule()
+                    .fill(index <= currentIndex ? Color.blue : Color.gray)
+                    .frame(height: 6)
+            }
+        }
+    }
+}
