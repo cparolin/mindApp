@@ -9,7 +9,7 @@ import SwiftUI
 
 struct TaskCardExpanded: View {
     var task: Task
-    var baseColor: Color
+    var baseColor: String
     
     var dateEquals: Bool {
         if task.todoDateStart == task.todoDateEnd {
@@ -30,7 +30,7 @@ struct TaskCardExpanded: View {
                 .foregroundStyle(.black)
                 .background(
                     RoundedRectangle(cornerRadius: 16)
-                        .foregroundStyle(baseColor)
+                        .foregroundStyle(Color(baseColor))
                 )
             } else {
                 VStack(spacing: 20) {
@@ -43,7 +43,7 @@ struct TaskCardExpanded: View {
                 .foregroundStyle(.black)
                 .background(
                     RoundedRectangle(cornerRadius: 16)
-                        .foregroundStyle(baseColor)
+                        .foregroundStyle(Color(baseColor))
                 )
             }
             
@@ -55,11 +55,15 @@ struct TaskCardExpanded: View {
                 
                 VStack (alignment: .leading, spacing: 5){
                     Text(task.taskTitle)
+                        .lineLimit(1)
+                        .truncationMode(.tail)
                         .fontWeight(.semibold)
                         .foregroundStyle(.black)
                         .padding(.leading, 10)
                     
                     Text(task.notes)
+                        .lineLimit(1)
+                        .truncationMode(.tail)
                         .font(.footnote)
                         .foregroundStyle(.black)
                         .padding(.leading, 10)
@@ -72,8 +76,8 @@ struct TaskCardExpanded: View {
             .padding(.vertical, 20)
             .background(
                 RoundedRectangle(cornerRadius: 16)
-                    .stroke(baseColor, lineWidth: 2)
-                    .fill(baseColor.opacity(0.15))
+                    .stroke(Color(baseColor), lineWidth: 2)
+                    .fill(Color(baseColor).opacity(0.15))
             )
         }
         .padding(.horizontal, 15)
@@ -81,6 +85,6 @@ struct TaskCardExpanded: View {
     }
 }
 
-#Preview {
-    TaskCardExpanded(task: Task(taskTitle: "Título", todoDateStart: Date.now, todoDateEnd: Date.now, isCompleted: false, tint: "azul", notes: "descrição", symbol: "bus.fill"), baseColor: .yellow)
-}
+//#Preview {
+//    TaskCardExpanded(task: Task(taskTitle: "Título", todoDateStart: Date.now, todoDateEnd: Date.now, isCompleted: false, tint: "azul", notes: "descrição", symbol: "bus.fill"), baseColor: .yellow)
+//}

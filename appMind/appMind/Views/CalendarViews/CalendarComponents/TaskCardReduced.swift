@@ -9,7 +9,7 @@ import SwiftUI
 
 struct TaskCardReduced: View {
     var task: Task
-    var baseColor: Color
+    var baseColor: String
 
     var body: some View {
         HStack {
@@ -19,11 +19,13 @@ struct TaskCardReduced: View {
                 .frame(width: 60, height: 50)
                 .background(
                     RoundedRectangle(cornerRadius: 16)
-                        .foregroundStyle(baseColor)
+                        .foregroundStyle(Color(baseColor))
                 )
             
             HStack (spacing: 0){
                 Text(task.taskTitle)
+                    .lineLimit(1)
+                    .truncationMode(.tail)
                     .fontWeight(.semibold)
                     .foregroundStyle(.black)
                     .padding(.leading, 10)
@@ -35,8 +37,8 @@ struct TaskCardReduced: View {
             .padding(.vertical, 15)
             .background(
                 RoundedRectangle(cornerRadius: 16)
-                    .stroke(baseColor, lineWidth: 2)
-                    .fill(baseColor.opacity(0.15))
+                    .stroke(Color(baseColor), lineWidth: 2)
+                    .fill(Color(baseColor).opacity(0.15))
             )
         }
         .padding(.horizontal, 15)
@@ -44,6 +46,6 @@ struct TaskCardReduced: View {
     }
 }
 
-#Preview {
-    TaskCardReduced(task: Task(taskTitle: "Título", todoDateStart: Date.now, todoDateEnd: Date.now, isCompleted: false, tint: "azul", notes: "descrição", symbol: "bus.fill"), baseColor: .yellow)
-}
+//#Preview {
+//    TaskCardReduced(task: Task(taskTitle: "Título", todoDateStart: Date.now, todoDateEnd: Date.now, isCompleted: false, tint: "azul", notes: "descrição", symbol: "bus.fill"), baseColor: .yellow)
+//}

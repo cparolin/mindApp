@@ -4,10 +4,14 @@
 //
 //  Created by André Contarelli Lima on 08/10/25.
 //
+import Combine
 import SwiftData
 import SwiftUI
 
 struct NewTaskView: View {
+    
+    @AppStorage("paletteLayout") private var paletteLayout: String = "Saturadas"
+    
     @Environment(\.dismiss) private var dismiss
     @State private var taskTitle: String = ""
     @State private var taskNote: String = ""
@@ -101,7 +105,7 @@ struct NewTaskView: View {
                                 .font(.caption)
                                 .foregroundStyle(.gray)
                             
-                            ColorPickerComponent(selectedColor: $selectedColor, taskColor: $taskColor)
+                            ColorPickerComponent(taskColor: $taskColor, palette: paletteLayout)
                         })
                         .padding(.top, 4)
                     }
@@ -124,7 +128,6 @@ struct NewTaskView: View {
                     }
                     ToolbarItem(placement: .confirmationAction){
                         Button(action: {
-                            taskColor = corPasta(selectedColor)
                             if isEnabled {
                                 let newTaskDay = TaskDay(taskTitleDay: "\(taskTitle)", todoDateDay: taskDate, tintDay: "\(taskColor)", notesDay: "\(taskNote)", symbolDay: "\(tempSelectedIcon)")
                                 modelContext.insert(newTaskDay)
