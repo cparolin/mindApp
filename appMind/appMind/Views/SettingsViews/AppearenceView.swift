@@ -14,6 +14,7 @@ struct AppearenceView: View {
     @State private var name: String = "Tim"
     @State private var birthDate = Date.now
     @State private var showingSheet = false
+//    @State private var oldPalette = paletteLayout
     
     let availableFonts = ["System", "OpenDyslexicMono-Regular.otf"]
     
@@ -23,29 +24,32 @@ struct AppearenceView: View {
                 LayoutRectangle()
                 HStack {
                     Text("Paleta de Cores")
-                        .font(.changeFont(fontType: font, fontStyle: .title, fontWeight: .bold))
+                        .font(.changeFont(fontType: font, fontStyle: .title2, fontWeight: .bold))
 //                        .bold()
                     
                     Spacer()
                 }
                 .padding()
                 
-                Button {
-                    showingSheet.toggle()
-                } label: {
-                     Text("Paleta")
-                        .foregroundStyle(Color.black)
+                HStack {
+                    Button {
+                        showingSheet.toggle()
+                    } label: {
+                        PaletteOptionsButtonView(palette: paletteLayout)
+                    }
+                    .sheet(isPresented: $showingSheet) {
+                        PaletteOptionsView()
+                            .presentationDetents([.height(450)])
+                            .background(.white)
+                    }
+                    
                 }
-                .sheet(isPresented: $showingSheet) {
-                    PaletteOptionsView()
-                        .presentationDetents([.height(450)])
-                        .background(.white)
-                }
+                
                 
                 ///Text Layout
                 HStack {
                     Text("Tipo de Layout")
-                       .font(.changeFont(fontType: font, fontStyle: .title, fontWeight: .bold))
+                       .font(.changeFont(fontType: font, fontStyle: .title2, fontWeight: .bold))
                         .bold()
                     
                     Spacer()
@@ -60,48 +64,48 @@ struct AppearenceView: View {
                 .pickerStyle(.segmented)
                 .frame(width: UIScreen.main.bounds.width * 0.93)
                 
-                HStack {
-                    Text("Efeitos")
-                        .font(.changeFont(fontType: font, fontStyle: .title, fontWeight: .bold))
-                        .bold()
-                    
-                    Spacer()
-                }
-                .padding()
-                
-                
-//                List {
-                
-                HStack {
-                    Image(systemName: "speaker.wave.3.fill")
-//                        .padding(.horizontal)
-                    
-                    Toggle("Som", isOn: $sound)
-                        .onChange(of: sound) {
-                            AudioServicesPlaySystemSound(1522)
-                        }
-//                        .padding(.horizontal)
-                }
-                .padding(.horizontal)
-                
-                Divider()
-                    .padding()
-                
-                HStack {
-                    Image(systemName: "water.waves")
-                    
-                    Toggle("Tátil", isOn: $tactile)
-                        .onChange(of: tactile) {
-                            AudioServicesPlaySystemSound(1522)
-                        }
-//                        .padding(.horizontal)
-                }
-                .padding(.horizontal)
+//                HStack {
+//                    Text("Efeitos")
+//                        .font(.changeFont(fontType: font, fontStyle: .title2, fontWeight: .bold))
+//                        .bold()
+//                    
+//                    Spacer()
+//                }
+//                .padding()
+//                
+//                
+////                List {
+//                
+//                HStack {
+//                    Image(systemName: "speaker.wave.3.fill")
+////                        .padding(.horizontal)
+//                    
+//                    Toggle("Som", isOn: $sound)
+//                        .onChange(of: sound) {
+//                            AudioServicesPlaySystemSound(1522)
+//                        }
+////                        .padding(.horizontal)
+//                }
+//                .padding(.horizontal)
+//                
+//                Divider()
+//                    .padding()
+//                
+//                HStack {
+//                    Image(systemName: "water.waves")
+//                    
+//                    Toggle("Tátil", isOn: $tactile)
+//                        .onChange(of: tactile) {
+//                            AudioServicesPlaySystemSound(1522)
+//                        }
+////                        .padding(.horizontal)
+//                }
+//                .padding(.horizontal)
 //                }
                 
                 HStack {
                     Text("Fonte")
-                        .font(.changeFont(fontType: font, fontStyle: .title, fontWeight: .bold))
+                        .font(.changeFont(fontType: font, fontStyle: .title2, fontWeight: .bold))
                         .bold()
                     
                     Spacer()

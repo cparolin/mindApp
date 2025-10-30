@@ -66,7 +66,7 @@ extension Font.TextStyle {
         switch self {
         case .largeTitle: return 34
         case .title: return 30
-        case .title2: return 22
+        case .title2: return 24
         case .title3: return 20
         case .headline: return 18
         case .body: return 16
@@ -85,7 +85,7 @@ extension UIFont.TextStyle {
         switch self {
         case .largeTitle: return 34
         case .title1: return 30
-        case .title2: return 22
+        case .title2: return 24
         case .title3: return 20
         case .headline: return 18
         case .body: return 16

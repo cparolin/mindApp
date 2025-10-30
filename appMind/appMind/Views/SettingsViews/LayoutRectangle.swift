@@ -12,7 +12,7 @@ struct LayoutRectangle: View {
         ZStack {
             RoundedRectangle(cornerRadius: 20)
                 .frame(width: UIScreen.main.bounds.width * 0.93, height: 230)
-                .foregroundStyle(.tertiary)
+                .foregroundStyle(Color("cinza6"))
             VStack{
                 HStack{
                     Spacer()
@@ -21,16 +21,21 @@ struct LayoutRectangle: View {
                     ForEach((1...6), id: \.self) { number in
                         if number == 5 {
                             RoundedRectangle(cornerRadius: 12)
-                                .frame(width: UIScreen.main.bounds.width * 0.10, height: 55)
+                                .frame(width: UIScreen.main.bounds.width * 0.09, height: 49)
                                 .foregroundStyle(Color.accentColor)
                                 .padding(.trailing, 5)
                         }
                         RoundedRectangle(cornerRadius: 12)
-                            .frame(width: UIScreen.main.bounds.width * 0.10, height: 55)
-                            .foregroundStyle(.secondary)
+                            .frame(width: UIScreen.main.bounds.width * 0.09, height: 49)
+                            .foregroundStyle(.white)
                             .padding(.trailing, 5)
                     }
+                    
                 }
+                
+                Spacer()
+                    .frame(height: 18)
+                
                 
                 ZStack {
                     RoundedRectangle(cornerRadius: 16)
@@ -41,24 +46,24 @@ struct LayoutRectangle: View {
                         
                         if textLayout != 2 {
                             Text("15:00")
-                                .font(.changeFont(fontType: font, fontWeight: .regular))
+                                .font(.changeFont(fontType: font, fontStyle: .caption2, fontWeight: .regular))
+                                
                         }
                         
                         Rectangle()
-                            .frame(width: 100, height: 5)
+                            .frame(width: 80, height: 4)
                             .foregroundStyle(Color.black)
                         
                         if textLayout != 2 {
                             Spacer()
-                                .frame(width: 150)
+                                .frame(width: 200)
                         } else {
                             Spacer()
-                                .frame(width: 200)
+                                .frame(width: 240)
                         }
                         
                         Circle()
                             .stroke(.black)
-                            .fill(.secondary)
                             .frame(width: 20)
                     }
                     
@@ -67,28 +72,32 @@ struct LayoutRectangle: View {
                 ZStack {
                     RoundedRectangle(cornerRadius: 16)
                         .frame(width: UIScreen.main.bounds.width * 0.89, height: 32)
-                        .foregroundStyle(Color(getPaletteColor(palette: paletteLayout, color: "cor2")))
+                        .foregroundStyle(Color(getPaletteColor(palette: paletteLayout, color: "cor4")))
                     
                     HStack {
                         if textLayout != 2 {
                             Text("17:30")
-                                .font(.changeFont(fontType: font, fontWeight: .regular))
+                                .font(.changeFont(fontType: font, fontStyle: .caption2, fontWeight: .regular))
                         }
                         
                         if textLayout != 2 {
                             Rectangle()
-                                .frame(width: 100, height: 5)
+                                .frame(width: 80, height: 4)
                         } else {
                             Rectangle()
-                                .frame(width: 150, height: 5)
+                                .frame(width: 126.5, height: 4)
                         }
                         
-                        Spacer()
-                            .frame(width: 150)
+                        if textLayout != 2 {
+                            Spacer()
+                                .frame(width: 200)
+                        } else {
+                            Spacer()
+                                .frame(width: 195)
+                        }
                         
                         Circle()
                             .stroke(.black)
-                            .fill(.secondary)
                             .frame(width: 20)
                     }
                 }
@@ -96,43 +105,44 @@ struct LayoutRectangle: View {
                 ZStack {
                     RoundedRectangle(cornerRadius: 16)
                         .frame(width: UIScreen.main.bounds.width * 0.89, height: 50)
-                        .foregroundStyle(Color(getPaletteColor(palette: paletteLayout, color: "cor3")))
+                        .foregroundStyle(Color(getPaletteColor(palette: paletteLayout, color: "cor2")))
                     
                     HStack {
                         if textLayout != 2 {
                             Text("17:30")
-                                .font(.changeFont(fontType: font, fontWeight: .regular))
+                                .font(.changeFont(fontType: font, fontStyle: .caption2, fontWeight: .regular))
                         }
                         
                         VStack (alignment: .leading){
                             Rectangle()
-                                .frame(width: 100, height: 5)
+                                .frame(width: 80, height: 4)
                             
                             if textLayout == 0 {
                                 Rectangle()
-                                    .frame(width: 200, height: 5)
+                                    .frame(width: 151, height: 4)
                             }
                         }
                         
                         if textLayout == 0 {
                             Spacer()
-                                .frame(width: 50)
+                                .frame(width: 130)
                         } else if textLayout == 1 {
                             Spacer()
-                                .frame(width: 150)
+                                .frame(width: 200)
                         } else {
                             Spacer()
-                                .frame(width: 200)
+                                .frame(width: 240)
                         }
                         
                         Circle()
                             .stroke(.black)
-                            .fill(.secondary)
                             .frame(width: 20)
                     }
                 }
             }
+            
         }
+        
     }
 }
 
