@@ -38,7 +38,7 @@ struct ReducedJournalItem: View {
     
     var body: some View {
         NavigationLink {
-            NoteCarrouselView(journal: journal.journalType, existingJournal: journal)
+            NoteAnswersView(journal: journal)
         } label: {
             ZStack {
                 // Background

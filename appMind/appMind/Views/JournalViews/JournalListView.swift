@@ -65,6 +65,7 @@ struct JournalListView: View {
                         $0.journalType.type.localizedStandardContains(journalType.type)
                     })
                 }
+                .padding(.top)
             }
             .searchable(text: $searchText)
             .navigationTitle(journalType.type)
