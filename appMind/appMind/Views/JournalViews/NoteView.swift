@@ -9,7 +9,7 @@ import SwiftUI
 struct NoteView: View {
     @Binding var answer: String
     var question: String
-    var currentIndex: Int
+    @Binding var currentIndex: Int
     var totalQuestions: Int
     var onNext: () -> Void
     
@@ -30,6 +30,19 @@ struct NoteView: View {
             Spacer()
             
             HStack {
+                if currentIndex >= 1 {
+                    Button {
+                        currentIndex = currentIndex - 1
+                    } label: {
+                        Image(systemName: "arrow.left")
+                            .font(.title2)
+                            .foregroundColor(.white)
+                            .padding()
+                            .background(Color.blue)
+                            .clipShape(Circle())
+                    }
+                    .padding(.bottom, 30)
+                }
                 Spacer()
                 Button(action: onNext) {
                     Image(systemName: "arrow.right")

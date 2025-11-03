@@ -39,7 +39,7 @@ struct NoteCarrouselView: View {
                     NoteView(
                         answer: $answers[currentIndex],
                         question: journal.questions[currentIndex],
-                        currentIndex: currentIndex,
+                        currentIndex: $currentIndex,
                         totalQuestions: journal.questions.count,
                         onNext: nextView
                     )
