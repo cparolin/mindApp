@@ -46,6 +46,7 @@ struct ListView: View {
             }
             .searchable(text: $searchText)
             .navigationTitle(isFavorite ? "Diários Favoritos" : "Todos os Registros")
+            .toolbarBackground(.hidden, for: .navigationBar)
         }
     }
 }

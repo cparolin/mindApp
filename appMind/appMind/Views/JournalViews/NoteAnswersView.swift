@@ -36,6 +36,7 @@ struct NoteAnswersView: View {
     var body: some View {
         ScrollView {
             TitleBanner(journal: journal)
+                .padding(.trailing, UIScreen.main.bounds.width * 0.1)
             
             VStack (alignment: .leading, spacing: 25){
                 Text(journal.desc)
@@ -66,6 +67,16 @@ struct NoteAnswersView: View {
                 
                 Spacer()
             }
+            .toolbar {
+                ToolbarItem(placement: .confirmationAction) {
+                    NavigationLink {
+                        NoteCarrouselView(journal: journal.journalType, existingJournal: journal)
+                    } label: {
+                        Image(systemName: "pencil.line")
+                    }
+                }
+            }
+            .toolbarBackground(.hidden, for: .navigationBar)
             .padding(EdgeInsets(top: 20, leading: 23, bottom: 0, trailing: 23))
         }
         .ignoresSafeArea()
@@ -100,13 +111,13 @@ struct TitleBanner: View {
     var body: some View {
         ZStack {
             Rectangle()
-                .frame(height: 180)
+                .frame(width: UIScreen.main.bounds.width * 0.9, height: UIScreen.main.bounds.height * 0.22)
                 .foregroundStyle(getColor())
                 .clipShape(
                     .rect(
                         topLeadingRadius: 0,
                         bottomLeadingRadius: 0,
-                        bottomTrailingRadius: 200,
+                        bottomTrailingRadius: 225,
                         topTrailingRadius: 0
                     )
                 )

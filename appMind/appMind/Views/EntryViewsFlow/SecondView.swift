@@ -12,34 +12,42 @@ import SwiftUI
 struct SecondView: View {
     @Environment(AppState.self) private var appState: AppState
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.colorScheme) var colorScheme
+    
+    var colorMode: Bool {
+        if colorScheme == .light {
+            return true
+        } else { return false }
+    }
+    
     var body: some View{
         VStack{
             Text("Diário")
                 .font(.title)
                 .fontWeight(.bold)
                 .padding(.bottom , 5)
-            Text("Aqui você escreve sobre seu dia a dia, vícios, dificuldade de comunicação, com perguntas feitas com base em aplicações da técnica do Registro de Pensamentos Disfuncionais RPD.")
+            
+            Text("Aqui você escreve sobre seu dia a dia, vícios e dificuldades de comunicação, com perguntas feitas com base em aplicações da técnica do Registro de Pensamentos Disfuncionais (RPD).")
                 .font(.body)
                 .fontWeight(.regular)
                 .multilineTextAlignment(.center)
                 .padding(.horizontal)
-            Text("Além disso você pode criar seu próprio diário com perguntas personalizadas!")
-                .foregroundStyle(Color.gray)
-                .font(.subheadline)
-                .fontWeight(.semibold)
-                .multilineTextAlignment(.center)
-                .padding(.top, 2)
             
-            HStack(spacing: 18){
-                RoundedRectangle(cornerRadius: 10)
-                    .frame(width: 104 , height: 143)
-                    .foregroundStyle(Color.gray)
-                RoundedRectangle(cornerRadius: 10)
-                    .frame(width: 104 , height: 143)
-                    .foregroundStyle(Color.gray)
-                RoundedRectangle(cornerRadius: 10)
-                    .frame(width: 104 , height: 143)
-                    .foregroundStyle(Color.gray)
+            HStack(spacing: 2){
+                Image(colorMode ? "routine.light" : "")
+                    .resizable()
+                    .frame(width: 120 , height: 140)
+                    .clipShape(RoundedRectangle(cornerRadius: 10))
+                                    
+                Image(colorMode ? "social.light" : "")
+                    .resizable()
+                    .frame(width: 120 , height: 140)
+                    .clipShape(RoundedRectangle(cornerRadius: 10))
+                
+                Image(colorMode ? "addiction.light" : "")
+                    .resizable()
+                    .frame(width: 120 , height: 140)
+                    .clipShape(RoundedRectangle(cornerRadius: 10))
             }
             .padding(.top , 36)
             Button(){

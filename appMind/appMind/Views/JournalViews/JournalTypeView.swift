@@ -57,6 +57,7 @@ struct JournalTypeView: View {
                     .padding(.top, 10)
                 }
                 .navigationTitle("Meus Diários")
+                .toolbarBackground(.hidden, for: .navigationBar)
             }
         }
         /// Pre set categories initialized when the app is launched for

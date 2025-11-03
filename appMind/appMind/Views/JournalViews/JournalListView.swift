@@ -68,6 +68,7 @@ struct JournalListView: View {
                 .padding(.top)
             }
             .searchable(text: $searchText)
+            .toolbarBackground(.hidden, for: .navigationBar)
             .navigationTitle(journalType.type)
         }
     }

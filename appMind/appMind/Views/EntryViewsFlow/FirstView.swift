@@ -12,22 +12,32 @@ import SwiftUI
 struct FirstView: View {
     @Environment(AppState.self) private var appState: AppState
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.colorScheme) var colorScheme
+    
+    var colorMode: Bool {
+        if colorScheme == .light {
+            return true
+        } else { return false }
+    }
 
     var body: some View {
         VStack{
-            Text("Calendario")
+            Text("Calendário")
                 .font(.title)
                 .fontWeight(.bold)
                 .padding(.bottom , 3)
+            
             Text("Aqui você coloca todas as suas atividades que deverá realizar durante o dia")
                 .font(.body)
                 .fontWeight(.regular)
                 .multilineTextAlignment(.center)
                 .padding(.bottom , 64)
             
-            RoundedRectangle(cornerRadius: 20)
+            Image(colorMode ? "calendarLight" : "calendarDark")
+                .resizable()
                 .frame(width: 361 , height: 213 , alignment: .center)
-                .foregroundStyle(.gray)
+                .clipShape(RoundedRectangle(cornerRadius: 20))
+            
             ///Este botão esta encarregado de redirecionar a tela exibida para a secondScreen.
             Button(){
                 appState.route = .secondScreen

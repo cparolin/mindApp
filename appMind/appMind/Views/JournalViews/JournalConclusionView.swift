@@ -17,7 +17,7 @@ struct JournalConclusionView: View {
     var journalType: JournalTypeModel
     var answers: [String]
     let descLength: Int = 50
-    let titleLength: Int = 16
+    let titleLength: Int = 14
     
     // State properties
     @State private var title: String
@@ -88,6 +88,7 @@ struct JournalConclusionView: View {
                 .disabled(title.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || desc.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
             }
         }
+        .toolbarBackground(.hidden, for: .navigationBar)
     }
 }
 
