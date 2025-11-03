@@ -111,5 +111,5 @@ extension Text {
 }
 
 #Preview {
-    JournalCover(journal: JournalTypeModel(type: "Socialização", symbol: "arrow.trianglehead.clockwise", questions: [""]))
+    JournalCover(journal: JournalTypeModel(type: "Socialização", symbol: "brain.head.profile", questions: [""]))
 }

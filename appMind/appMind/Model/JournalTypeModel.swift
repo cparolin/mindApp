@@ -40,7 +40,7 @@ class JournalTypeModel {
                 "O que eu posso fazer para me ajudar quando algo parecido acontecer de novo?"
             ])
             
-            let socialization = JournalTypeModel(type: "Socialização", symbol: "message", questions: [
+            let socialization = JournalTypeModel(type: "Comunicação", symbol: "message", questions: [
                 "Onde eu estava e com quem?",
                 "O que aconteceu na prática? (Descrição da Situação)",
                 "Como eu participei dessa interação e como me senti? (Exemplos: falei bastante, mais escutei do que falei, me senti ansioso)",
