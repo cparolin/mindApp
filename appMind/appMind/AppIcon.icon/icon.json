@@ -1,0 +1,191 @@
+{
+  "fill-specializations" : [
+    {
+      "value" : {
+        "automatic-gradient" : "srgb:0.78039,0.93725,0.90980,1.00000"
+      }
+    },
+    {
+      "appearance" : "dark",
+      "value" : {
+        "solid" : "srgb:0.08235,0.27059,0.22745,1.00000"
+      }
+    }
+  ],
+  "groups" : [
+    {
+      "layers" : [
+        {
+          "fill" : "none",
+          "glass" : false,
+          "hidden" : true,
+          "image-name" : "Ativo 7.svg",
+          "name" : "Ativo 7",
+          "opacity" : 1,
+          "position" : {
+            "scale" : 2.5,
+            "translation-in-points" : [
+              74.88327009421081,
+              40.4
+            ]
+          }
+        },
+        {
+          "glass" : false,
+          "image-name" : "Ativo 17.svg",
+          "name" : "Ativo 17",
+          "position" : {
+            "scale" : 1.2,
+            "translation-in-points" : [
+              74.9,
+              40.4
+            ]
+          }
+        },
+        {
+          "glass" : false,
+          "hidden" : true,
+          "image-name" : "Ativo 16.svg",
+          "name" : "Ativo 16",
+          "position" : {
+            "scale" : 1,
+            "translation-in-points" : [
+              74.9,
+              40.4
+            ]
+          }
+        },
+        {
+          "glass" : false,
+          "hidden" : true,
+          "image-name" : "Ativo 15.svg",
+          "name" : "Ativo 15",
+          "position" : {
+            "scale" : 1,
+            "translation-in-points" : [
+              74.9,
+              40.4
+            ]
+          }
+        }
+      ],
+      "shadow" : {
+        "kind" : "neutral",
+        "opacity" : 0.5
+      },
+      "translucency" : {
+        "enabled" : true,
+        "value" : 0.5
+      }
+    },
+    {
+      "layers" : [
+        {
+          "fill-specializations" : [
+            {
+              "value" : {
+                "solid" : "srgb:0.63137,0.89020,0.83922,1.00000"
+              }
+            },
+            {
+              "appearance" : "dark",
+              "value" : {
+                "solid" : "srgb:0.25490,0.43529,0.39608,1.00000"
+              }
+            },
+            {
+              "appearance" : "tinted",
+              "value" : {
+                "solid" : "extended-gray:0.00000,1.00000"
+              }
+            }
+          ],
+          "glass" : true,
+          "hidden" : false,
+          "image-name" : "Ativo 8.svg",
+          "name" : "Ativo 8",
+          "position" : {
+            "scale" : 2.5,
+            "translation-in-points" : [
+              0,
+              0
+            ]
+          }
+        },
+        {
+          "fill-specializations" : [
+            {
+              "value" : {
+                "linear-gradient" : [
+                  "extended-gray:1.00000,1.00000",
+                  "display-p3:0.90000,0.90000,0.90000,1.00000"
+                ]
+              }
+            },
+            {
+              "appearance" : "dark",
+              "value" : {
+                "linear-gradient" : [
+                  "extended-gray:0.00000,1.00000",
+                  "display-p3:0.20000,0.20000,0.20000,1.00000"
+                ]
+              }
+            },
+            {
+              "appearance" : "tinted",
+              "value" : {
+                "solid" : "srgb:0.56471,0.42353,0.00000,1.00000"
+              }
+            }
+          ],
+          "glass" : true,
+          "hidden" : false,
+          "image-name" : "Ativo 9.svg",
+          "name" : "Ativo 9",
+          "position" : {
+            "scale" : 2.5,
+            "translation-in-points" : [
+              0,
+              0
+            ]
+          }
+        },
+        {
+          "fill-specializations" : [
+            {
+              "appearance" : "dark",
+              "value" : {
+                "solid" : "srgb:0.32941,0.26275,0.05882,1.00000"
+              }
+            }
+          ],
+          "glass" : true,
+          "hidden" : true,
+          "image-name" : "Ativo 10.svg",
+          "name" : "Ativo 10",
+          "position" : {
+            "scale" : 1.18,
+            "translation-in-points" : [
+              -163.3671875,
+              -235.9
+            ]
+          }
+        }
+      ],
+      "shadow" : {
+        "kind" : "neutral",
+        "opacity" : 0.5
+      },
+      "translucency" : {
+        "enabled" : true,
+        "value" : 0.5
+      }
+    }
+  ],
+  "supported-platforms" : {
+    "circles" : [
+      "watchOS"
+    ],
+    "squares" : "shared"
+  }
+}
