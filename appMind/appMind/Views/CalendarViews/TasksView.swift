@@ -42,15 +42,19 @@ struct TasksView: View {
                 
                 //Cards
                 ForEach(tasks) { task in
-                    if isSameDate(task.todoDateStart, currentDate) {
-                        if textLayout == 0 {
-                            TaskCardExpanded(task: task, baseColor: getPaletteColor(palette: paletteLayout, color: task.tint))
-                        }
-                        if textLayout == 1 {
-                            TaskCardMedium(task: task, baseColor: getPaletteColor(palette: paletteLayout, color: task.tint))
-                        }
-                        if textLayout == 2 {
-                            TaskCardReduced(task: task, baseColor: getPaletteColor(palette: paletteLayout, color: task.tint))
+                    NavigationLink(){
+                        EditingTaskView(taskBeengEdit: task)
+                    } label: {
+                        if isSameDate(task.todoDateStart, currentDate) {
+                            if textLayout == 0 {
+                                TaskCardExpanded(task: task, baseColor: getPaletteColor(palette: paletteLayout, color: task.tint))
+                            }
+                            if textLayout == 1 {
+                                TaskCardMedium(task: task, baseColor: getPaletteColor(palette: paletteLayout, color: task.tint))
+                            }
+                            if textLayout == 2 {
+                                TaskCardReduced(task: task, baseColor: getPaletteColor(palette: paletteLayout, color: task.tint))
+                            }
                         }
                     }
                 }

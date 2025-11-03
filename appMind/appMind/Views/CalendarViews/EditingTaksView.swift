@@ -7,39 +7,57 @@
 
 import SwiftData
 import SwiftUI
+import Combine
+
 ///Precisa garantir a trocva de cor, não está funcionando
 struct EditingTaskView: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) var modelContext
-    @Query var tasks: [Task]
     @State var enunToString: EnunsCreateEditTaskVIew = EnunsCreateEditTaskVIew()
-    @State var taskBeengEditing: Task
-    @State var selectedColor: Color = .yellow
+    @AppStorage("paletteLayout") private var paletteLayout: String = "Saturadas"
+    @State var taskBeengEdit: Task
+    @State var presentConfirmation: Bool = false
+    @State var tempColor: String = "abanana"
+    @State var tempColorTratada: String = "error"
+    @State var localNotes: String = "Teste"
+    @State var notesLength: Int = 50
+    @State var titleLength: Int = 12
     var body: some View {
         NavigationStack {
             VStack(alignment: .leading, spacing: 15, content: {
-                VStack(alignment: .leading, spacing: 8, content: {
-                    
-                    TextField("Nome do evento", text: $taskBeengEditing.taskTitle)
-                        .padding(.vertical, 12)
-                        .padding(.horizontal, 16)
-                        .font(.title)
-                    
-                    TextField("Notas", text: $taskBeengEditing.notes)
-                        .padding(.horizontal, 16)
-                })
-                Divider()
-                .padding(.top, 4)
-                
+                ZStack(){
+                    TheTaksBlockView(task: $taskBeengEdit, cor: $tempColorTratada)
+                    HStack(){
+                        VStack(alignment: .leading){
+                            HStack(){
+                                Text(" ")
+                                    .frame(width: 36 , height: 43)
+                                
+                            }
+                        }
+                        Spacer()
+                    }
+                    .frame(maxWidth: .infinity)
+                    .padding(.horizontal , 16)
+                }
                 VStack(spacing: 16) {
                     VStack(alignment: .leading, spacing: 8, content: {
                         Text("Data da tarefa")
                             .font(.caption)
                             .foregroundStyle(.gray)
+                        HStack(){
+                            Text("Começa")
+                            DatePicker("", selection: $taskBeengEdit.todoDateStart)
+                                .datePickerStyle(.compact)
+                                .scaleEffect(0.9, anchor: .leading)
+                        }
+                        HStack(){
+                            Text("Termina")
+                            DatePicker("", selection: $taskBeengEdit.todoDateEnd)
+                                .datePickerStyle(.compact)
+                                .scaleEffect(0.9, anchor: .leading)
+                        }
                         
-                        DatePicker("", selection: $taskBeengEditing.todoDateStart)
-                            .datePickerStyle(.compact)
-                            .scaleEffect(0.9, anchor: .leading)
                     })
                     .padding(.top, 4)
                     // Maior espaco para clicar nas cores
@@ -50,27 +68,28 @@ struct EditingTaskView: View {
                             .font(.caption)
                             .foregroundStyle(.gray)
                         
-                        let colors: [Color] = [.blue, .red, .yellow, .orange, .purple, .green]
-                        
                         HStack(spacing: 0) {
-                            ForEach(colors, id: \.self) { color in
-                                Circle()
-                                    .fill(color)
-                                    .frame(width: 54)
-                                    .background(content: {
-                                        Circle()
-                                            .stroke(.blue, lineWidth: 8)
-                                            .stroke(.white, lineWidth: 4)
-                                            .opacity(selectedColor == color ? 1 : 0)
-                                    })
-                                    .hSpacing(.center)
-                                    .contentShape(.rect)
-                                    .onTapGesture {
-                                        withAnimation(.snappy) {
-                                            selectedColor = color
-//                                            $taskBeengEditing.taskColor = enunToString.corPasta(selectedColor)
-                                        }
-                                    }
+                                ColorPickerComponent(taskColor: $tempColor, palette: paletteLayout)
+                        }
+                        Spacer()
+                        Button(role: .destructive){
+                            presentConfirmation.toggle()
+                        } label: {
+                            Text("Excluir evento")
+                                .font(.subheadline)
+                                .fontWeight(.semibold)
+                                .hSpacing(.center)
+                        }
+                        .confirmationDialog("Você tem certeza que deseja excluir esse evento ?", isPresented: $presentConfirmation , titleVisibility: .visible){
+                            Button("Sim" , role: .destructive){
+                                modelContext.delete(taskBeengEdit)
+                                do{
+                                    try modelContext.save()
+                                }
+                                catch let error{
+                                    print(error.localizedDescription)
+                                }
+                                dismiss()
                             }
                         }
                     })
@@ -79,35 +98,35 @@ struct EditingTaskView: View {
             })
             .padding(16)
             .toolbar {
-                ToolbarItem(placement: .topBarLeading) {
-                    Button(action: {
-                        dismiss()
-                    }, label: {
-                        Image(systemName: "xmark")
-                    })
-                }
                 ToolbarItem(placement: .principal) {
-                    Text("Adicionar")
+                    Text("\(taskBeengEdit.taskTitle)")
                 }
                 ToolbarItem(placement: .confirmationAction){
                     Button(action: {
                         do{
-                           try modelContext.save()
+                            taskBeengEdit.tint = tempColor
+                            try modelContext.save()
                         }
                         catch let error{
                             print(error.localizedDescription)
                         }
                         dismiss()
                     }, label: {
-                        Text("Salvar")
+                        Text("OK")
                     })
-//                    .disabled(taskTitle == "" || taskNote == "")
                 }
             }
         }
+        .onChange(of: tempColor){
+            withAnimation(){
+                tempColorTratada = getPaletteColor(palette: paletteLayout, color: tempColor)
+            }
+        }
+        .onAppear {
+            tempColor = taskBeengEdit.tint
+        }
     }
 }
-
 enum CorTarefa: String {
     
     case blue
@@ -140,27 +159,10 @@ enum CorTarefa: String {
     }
 }
 
-func corPasta(_ cor: Color) -> String {
-    var corString: String = "erro"
-    switch cor{
-    case .yellow:
-        corString = "yellow"
-    case .blue:
-        corString = "blue"
-    case .red:
-        corString = "red"
-    case .orange:
-        corString = "orange"
-    case .purple:
-        corString = "purple"
-        
-    default:
-        corString = "green"
-    }
-    return corString
-       }
+//#Preview {
+//    EditingTaskView(taskBeengEdit: Task(taskTitle: "sdajnds", todoDateStart: Date(), todoDateEnd: Date(), isCompleted: false, tint: "red", notes: "hsdhjadg"))
+//}
 
-#Preview {
-    ContentView()
-}
+
+
 
