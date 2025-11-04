@@ -30,13 +30,11 @@ struct SymbolsPickerView: View {
                         } label: {
                             if tempSelectedIcon == icon {
                                 Image(systemName: symbols[i])
-                                    .resizable()
-                                    .frame(width: 35)
+                                    .font(.title)
                                     .foregroundStyle(.blue)
                             } else {
                                 Image(systemName: symbols[i])
-                                    .resizable()
-                                    .frame(width: 35, height: 35)
+                                    .font(.title)
                                     .foregroundStyle(.black)
                             }
                         }

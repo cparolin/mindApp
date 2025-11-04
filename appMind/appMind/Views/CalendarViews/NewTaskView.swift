@@ -46,10 +46,8 @@ struct NewTaskView: View {
                                         .foregroundStyle(.gray)
                                 } else {
                                     Image(systemName: "\(tempSelectedIcon)")
-                                        .resizable()
                                         .font(.largeTitle)
                                         .foregroundStyle(.gray)
-                                        
                                 }
                             }
                             .padding(5)
