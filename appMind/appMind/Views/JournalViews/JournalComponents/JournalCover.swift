@@ -19,7 +19,7 @@ struct JournalCover: View {
         case "Rotina":
             return ["cor1", "cor1.1", "cor1.2"]
             
-        case "Socialização":
+        case "Comunicação":
             return ["cor2", "cor2.1", "cor2.2"]
             
         case "Vícios":
