@@ -9,9 +9,8 @@ import SwiftData
 import SwiftUI
 
 struct TasksView: View {
-    
+    @AppStorage("font") private var font = "SF Pro"
     @AppStorage("paletteLayout") private var paletteLayout: String = "Saturadas"
-    
     @AppStorage("textLayout") private var textLayout: Int = 0
     
     var tasksDay: [TaskDay]
@@ -22,7 +21,7 @@ struct TasksView: View {
     var body: some View {
         if tasks.isEmpty && tasksDay.isEmpty {
                 Text("Sem Tarefas ainda...")
-                    .font(.title3)
+                .font(.changeFont(fontType: font, fontStyle: .title3, fontWeight: .regular))
                     .padding()
 
         }
@@ -36,8 +35,7 @@ struct TasksView: View {
                 }
                 if !tasks.isEmpty && !tasksDay.isEmpty {
                     Text("Rotina do dia")
-                        .fontWeight(.semibold)
-                        .font(.title3)
+                        .font(.changeFont(fontType: font, fontStyle: .title3, fontWeight: isOpenDyslexic(font: font) ? .bold : .semibold))
                         .padding(.bottom, 5)
                         .padding(.leading)
                 }

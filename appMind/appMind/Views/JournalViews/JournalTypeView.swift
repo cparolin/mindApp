@@ -9,10 +9,10 @@ import SwiftUI
 
 /// Exibits the journal categories and 5 favorite notes
 struct JournalTypeView: View {
+    @AppStorage("font") private var font = "SF Pro"
     @Environment(\.modelContext) var context
     
     @Query private var journals: [JournalTypeModel]
-    
     @Query(sort: [SortDescriptor(\JournalModel.date, order: .reverse)]) var allNotes: [JournalModel]
     
     /// Receives the `allNotes` array filtered by favorites
@@ -25,6 +25,11 @@ struct JournalTypeView: View {
             NavigationView {
                 ScrollView (showsIndicators: false) {
                     VStack (alignment: .leading, spacing: 27){
+                        Text("Meus Diários")
+                            .font(.changeFont(fontType: font, fontStyle: .title, fontWeight: .bold))
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding(.leading, 20)
+                        
                         if !allNotes.isEmpty {
                             VStack (alignment: .leading, spacing: 4){
                                 RecentShowAll(recentJournals: allNotes)
@@ -45,8 +50,7 @@ struct JournalTypeView: View {
                         
                         VStack (alignment: .leading, spacing: 15){
                             Text("Todos os diários")
-                                .font(.title3)
-                                .fontWeight(.semibold)
+                                .font(.changeFont(fontType: font, fontStyle: .title3, fontWeight: isOpenDyslexic(font: font) ? .bold : .semibold))
                                 .padding(.leading, 20)
                             
                             JournalCoverScroll(journals: journals)
@@ -56,7 +60,6 @@ struct JournalTypeView: View {
                     }
                     .padding(.top, 10)
                 }
-                .navigationTitle("Meus Diários")
                 .toolbarBackground(.hidden, for: .navigationBar)
             }
         }

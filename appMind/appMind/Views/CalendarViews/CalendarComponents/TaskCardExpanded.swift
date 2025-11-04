@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct TaskCardExpanded: View {
+    @AppStorage("font") private var font = "SF Pro"
     var task: Task
     var baseColor: String
     
@@ -26,7 +27,7 @@ struct TaskCardExpanded: View {
                     Text("\(task.todoDateEnd.format("HH:mm"))")
                 }
                 .frame(width: 60, height: 83)
-                .font(.caption)
+                .font(.changeFont(fontType: font, fontStyle: .caption, fontWeight: .regular))
                 .foregroundStyle(.black)
                 .background(
                     RoundedRectangle(cornerRadius: 16)
@@ -39,7 +40,7 @@ struct TaskCardExpanded: View {
                     Text("\(task.todoDateEnd.format("HH:mm"))")
                 }
                 .frame(width: 60, height: 83)
-                .font(.caption)
+                .font(.changeFont(fontType: font, fontStyle: .caption, fontWeight: .regular))
                 .foregroundStyle(.black)
                 .background(
                     RoundedRectangle(cornerRadius: 16)
@@ -57,6 +58,7 @@ struct TaskCardExpanded: View {
                     Text(task.taskTitle)
                         .lineLimit(1)
                         .truncationMode(.tail)
+                        .font(.changeFont(fontType: font, fontStyle: .body, fontWeight: isOpenDyslexic(font: font) ? .bold : .semibold))
                         .fontWeight(.semibold)
                         .foregroundStyle(.black)
                         .padding(.leading, 10)
@@ -64,7 +66,7 @@ struct TaskCardExpanded: View {
                     Text(task.notes)
                         .lineLimit(1)
                         .truncationMode(.tail)
-                        .font(.footnote)
+                        .font(.changeFont(fontType: font, fontStyle: .footnote, fontWeight: .regular))
                         .foregroundStyle(.black)
                         .padding(.leading, 10)
                 }

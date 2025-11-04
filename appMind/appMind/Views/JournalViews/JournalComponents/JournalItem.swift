@@ -10,6 +10,7 @@ import SwiftData
 
 struct JournalItem: View {
     @Environment(\.modelContext) private var context
+    @AppStorage("font") private var font = "SF Pro"
     
     var journal: JournalModel
     
@@ -27,20 +28,18 @@ struct JournalItem: View {
                 HStack (spacing: 22){
                     VStack (spacing: 9){
                         Text(journal.date.formatted(month))
-                            .font(.title3)
-                            .fontWeight(.semibold)
+                            .font(.changeFont(fontType: font, fontStyle: .title3, fontWeight: isOpenDyslexic(font: font) ? .bold : .semibold))
                         
                         Text(journal.date.formatted(day))
-                            .font(.title)
+                            .font(.changeFont(fontType: font, fontStyle: .title, fontWeight: .regular))
                     }
                     
                     VStack (alignment: .leading, spacing: 9){
                         Text(journal.title)
-                            .font(.title3)
-                            .fontWeight(.semibold)
+                            .font(.changeFont(fontType: font, fontStyle: .title3, fontWeight: isOpenDyslexic(font: font) ? .bold : .semibold))
                         
                         Text(journal.desc)
-                            .font(.callout)
+                            .font(.changeFont(fontType: font, fontStyle: .callout, fontWeight: .bold))
                             .multilineTextAlignment(.leading)
                             .frame(width: UIScreen.main.bounds.width * 0.53, alignment: .topLeading)
                     }
@@ -57,24 +56,13 @@ struct JournalItem: View {
                             Image(systemName: "heart")
                         }
                     }
-                    .offset(x: UIScreen.main.bounds.width * 0.02, y: UIScreen.main.bounds.height * -0.04)   
+                    .offset(x: UIScreen.main.bounds.width * 0.01, y: UIScreen.main.bounds.height * -0.04)   
                 }
                 .foregroundStyle(.black)
             }
             .padding(.horizontal)
         }
     }
-}
-
-#Preview {
-    JournalItem(journal: JournalModel(title: "Título", desc: "Lorem Ipsum é simplesmente uma simulação de texto da", date: Date.now, answers: ["Não fiz Nada","aaa","aa","aaa","aaa","aaa",], journalType: JournalTypeModel(type: "Rotina", symbol: "arrow.trianglehead.clockwise", questions: [
-        "O que fiz hoje na minha rotina?",
-        "Houve algo que me deixou confortável ou feliz?",
-        "Houve algo que me incomodou?",
-        "Como eu me senti e o que pensei sobre esse incômodo?",
-        "O que funcionou bem na minha rotina?",
-        "O que eu gostaria de ajustar para lidar com os incômodos da próxima vez?"
-    ]), isFavorite: false))
 }
 
 struct NoteBackground: View {
@@ -125,4 +113,15 @@ struct NoteBackground: View {
         }
         .frame(width: width, height: height)
     }
+}
+
+#Preview {
+    JournalItem(journal: JournalModel(title: "Título", desc: "Lorem Ipsum é simplesmente uma simulação de texto da", date: Date.now, answers: ["Não fiz Nada","aaa","aa","aaa","aaa","aaa",], journalType: JournalTypeModel(type: "Rotina", symbol: "arrow.trianglehead.clockwise", questions: [
+        "O que fiz hoje na minha rotina?",
+        "Houve algo que me deixou confortável ou feliz?",
+        "Houve algo que me incomodou?",
+        "Como eu me senti e o que pensei sobre esse incômodo?",
+        "O que funcionou bem na minha rotina?",
+        "O que eu gostaria de ajustar para lidar com os incômodos da próxima vez?"
+    ]), isFavorite: false))
 }

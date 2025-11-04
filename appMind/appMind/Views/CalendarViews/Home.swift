@@ -8,6 +8,7 @@ import SwiftData
 import SwiftUI
 
 struct Home: View {
+    @AppStorage("font") private var font = "SF Pro"
     @Query(sort: \Task.todoDateStart) var tasks: [Task]
     @Query(sort: \TaskDay.todoDateDay) var tasksDay: [TaskDay]
     
@@ -29,12 +30,12 @@ struct Home: View {
                     
                     VStack(alignment: .center) {
                         Text(Date().format("dd, MMMM YYYY"))
-                            .font(.title3)
-                            .fontWeight(.semibold)
+                            .font(.changeFont(fontType: font, fontStyle: .title3, fontWeight: isOpenDyslexic(font: font) ? .bold : .semibold))
                             .textScale(.secondary)
                             .foregroundStyle(.black)
                             .padding(.top, g.size.height <= 564 ? 20 : 40)
                             .padding(.bottom, 23)
+                        
                         TabView(selection: $currentWeekIndex) {
                             ForEach(weekSlider.indices, id: \.self){ index in
                                 let week = weekSlider[index]
@@ -42,8 +43,7 @@ struct Home: View {
                                     ForEach(week) { day in
                                         VStack {
                                             Text(day.date.format("d"))
-                                                .font(.title)
-                                                .fontWeight(.bold)
+                                                .font(.changeFont(fontType: font, fontStyle: .title, fontWeight: .bold))
                                                 .textScale(.secondary)
                                                 .foregroundStyle(isSameDate(day.date, currentDate) ? .white : .gray)
                                                 .frame(width: 44, height: 64)
@@ -60,8 +60,7 @@ struct Home: View {
                                                 })
                                                 .background(.white.shadow(.drop(radius: 1)), in: .circle) // deixa o numero dos dias com a borda circular
                                             Text(day.date.format("E"))
-                                                .font(.callout)
-                                                .fontWeight(.medium)
+                                                .font(.changeFont(fontType: font, fontStyle: .callout, fontWeight: isOpenDyslexic(font: font) ? .bold : .medium))
                                                 .textScale(.secondary)
                                                 .foregroundStyle(.black)
                                                 .padding(.bottom, -20)
@@ -91,7 +90,6 @@ struct Home: View {
                 
                 //Visualização das tarefas
                 TasksView(tasksDay: tasksDay, tasks: tasks, currentDate: currentDate)
-                Text("L: \(g.size.width) , A: \(g.size.height)")
             })
             .overlay(alignment: .topTrailing, content: {
                 Button(action: {

@@ -9,7 +9,7 @@ import SwiftData
 import SwiftUI
 
 struct NewTaskView: View {
-    
+    @AppStorage("font") private var font = "SF Pro"
     @AppStorage("paletteLayout") private var paletteLayout: String = "Saturadas"
     
     @Environment(\.dismiss) private var dismiss
@@ -24,6 +24,11 @@ struct NewTaskView: View {
     @State private var isEnabled = false
     @State private var symbolsPicker = false
     @State var tempSelectedIcon: String = ""
+    @State var descLength: Int = 36
+    
+    var descCountdown: Int {
+        descLength - taskNote.count
+    }
     
 //    @Binding var newTask: Task
 //    @Binding var newTaskDay: TaskDay
@@ -54,19 +59,28 @@ struct NewTaskView: View {
                             
                             TextField("Nome do evento", text: $taskTitle)
                                 .padding(.vertical, 12)
-                                .font(.title)
-                                .fontWeight(.semibold)
+                                .font(.changeFont(fontType: font, fontStyle: .title, fontWeight: isOpenDyslexic(font: font) ? .bold : .semibold))
                         }
                         TextField("Notas", text: $taskNote)
+                            .font(.changeFont(fontType: font, fontStyle: .body, fontWeight: .regular))
+                            .onReceive(Just(taskNote)) {
+                                taskNote = String($0.prefix(descLength))
+                            }
 
                     })
                     Divider()
                         .padding(.top, 4)
+                    
+                    Text("\(descCountdown)/\(descLength)")
+                        .font(.changeFont(fontType: font, fontStyle: .caption, fontWeight: isOpenDyslexic(font: font) ? .bold : .semibold))
+                        .foregroundStyle(.cinza3)
+                        .frame(maxWidth: .infinity, alignment: .trailing)
+                        .padding(.bottom, 5)
             
                     VStack(spacing: 16) {
                         HStack {
                             Text("Dia inteiro")
-                                .font(.body)
+                                .font(.changeFont(fontType: font, fontStyle: .body, fontWeight: .regular))
                                 .foregroundStyle(.black)
                             
                             Toggle("", isOn: $isEnabled)
@@ -75,7 +89,7 @@ struct NewTaskView: View {
                         HStack(content: {
                             
                             Text("Começa")
-                                .font(.body)
+                                .font(.changeFont(fontType: font, fontStyle: .body, fontWeight: .regular))
                                 .foregroundStyle(.black)
                             
                             DatePicker("", selection: $taskDateStart)
@@ -89,7 +103,7 @@ struct NewTaskView: View {
                         
                         HStack(content: {
                             Text("Termina")
-                                .font(.body)
+                                .font(.changeFont(fontType: font, fontStyle: .body, fontWeight: .regular))
                                 .foregroundStyle(.black)
                             
                             DatePicker("", selection: $taskDateEnd)
@@ -102,7 +116,7 @@ struct NewTaskView: View {
                         
                         VStack(alignment: .leading, spacing: 8, content: {
                             Text("Cor da tarefa")
-                                .font(.caption)
+                                .font(.changeFont(fontType: font, fontStyle: .caption, fontWeight: .regular))
                                 .foregroundStyle(.gray)
                             
                             ColorPickerComponent(taskColor: $taskColor, palette: paletteLayout)
@@ -124,7 +138,7 @@ struct NewTaskView: View {
                     }
                     ToolbarItem(placement: .principal) {
                         Text("Adicionar")
-                            .fontWeight(.semibold)
+                            .font(.changeFont(fontType: font, fontStyle: .body, fontWeight: isOpenDyslexic(font: font) ? .bold : .semibold))
                     }
                     ToolbarItem(placement: .confirmationAction){
                         Button(action: {
@@ -140,6 +154,7 @@ struct NewTaskView: View {
                             dismiss()
                         }, label: {
                             Text("OK")
+                                .font(.changeFont(fontType: font, fontStyle: .body, fontWeight: .regular))
                         })
                         .disabled(taskTitle == "" || tempSelectedIcon == "")
                     }

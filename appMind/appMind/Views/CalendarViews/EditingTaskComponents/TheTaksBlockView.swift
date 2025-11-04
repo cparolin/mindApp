@@ -8,73 +8,56 @@
 import SwiftUI
 //
 struct TheTaksBlockView: View {
+    @AppStorage("font") private var font = "SF Pro"
     @Binding var task: Task
     @Binding var cor: String
-    @State var rectangleX: CGFloat = 361
-    @State var rectangleY: CGFloat = 129
+    @State var width: CGFloat = UIScreen.main.bounds.width * 0.9
+    @State var height: CGFloat = UIScreen.main.bounds.height * 0.17
+    
     var body: some View {
-        VStack(){
-            ZStack(){
-                RoundedRectangle(cornerRadius: 16)
-                    .foregroundStyle(Color(cor).opacity(0.4))
-                    .frame(width: rectangleX , height: rectangleY)
-                RoundedRectangle(cornerRadius: 16)
-                    .stroke(Color(cor), lineWidth: 2)
-                    .frame(width: rectangleX , height: rectangleY)
-                HStack(alignment: .top){
-                    VStack(){
-                        HStack(){
-                            ZStack(){
-                                //O retangulo amalgma
-                                RoundedRectangle(cornerRadius: 0)
-                                    .clipShape(
-                                        .rect(
-                                            topLeadingRadius: 16 ,
-                                            bottomLeadingRadius: 0 ,
-                                            bottomTrailingRadius: 16,
-                                            topTrailingRadius: 0 ,
-                                            
-                                        )
-                                    )
-                                    .foregroundStyle(Color(cor))
-                                    .frame(width: 52 , height: 69)
-                                    .overlay {
-                                        Image(systemName: task.symbol)
-                                            .resizable()
-                                            .scaledToFit()
-                                            .frame(width: 40)
-                                    }
-                            }
-                            TextField("Nome do evento", text: $task.taskTitle)
-                                .font(.title)
-                                .fontWeight(.bold)
-                        }
-                        Spacer()
-                        HStack(){
-                            VStack(alignment: .leading){
-                                
-                                Text("Notas")
-                                    .font(.footnote)
-                                    .fontWeight(.semibold)
-                                TextField("Notas", text: $task.notes , axis: .vertical)
-                                    .font(.callout)
-                                    .fontWeight(.regular)
-                                //                                .onReceive(Just(taskBeengEdit.taskTitle)) { note in
-                                //                                    taskBeengEdit.taskTitle = String(note.prefix(notesLength))
-                                //                                }
-                                Spacer()
-                            }
-                            .padding(.leading , 12)
-                        }
+        ZStack(){
+            RoundedRectangle(cornerRadius: 16)
+                .stroke(Color(cor), lineWidth: 2)
+                .fill(Color(cor).opacity(0.4))
+                .frame(width: width, height: height)
+            
+            HStack {
+                RoundedRectangle(cornerRadius: 0)
+                    .clipShape(
+                        .rect(
+                            topLeadingRadius: 16 ,
+                            bottomLeadingRadius: 0 ,
+                            bottomTrailingRadius: 16,
+                            topTrailingRadius: 0 ,
+                            
+                        )
+                    )
+                    .foregroundStyle(Color(cor))
+                    .frame(width: 52 , height: 69)
+                    .overlay {
+                        Image(systemName: task.symbol)
+                            .font(.title)
                     }
-                    Spacer()
-                }
+                
+                TextField("Título do Evento", text: $task.taskTitle)
+                    .font(.changeFont(fontType: font, fontStyle: .title2, fontWeight: .bold))
+                
+                Spacer()
             }
-            .frame(width: 361 , height: rectangleY)
+            .padding(.bottom, height * 0.52)
+            
+            VStack (alignment: .leading) {
+                Text("Notas")
+                    .font(.changeFont(fontType: font, fontStyle: .footnote, fontWeight: .bold))
+                
+                TextField("Descrição breve sobre o evento", text: $task.notes)
+                    .font(.changeFont(fontType: font, fontStyle: .callout, fontWeight: .regular))
+                    .padding(.leading)
+            }
+            .padding(.top, height * 0.46)
+            .frame(width: width * 0.95)
         }
-        .onAppear(){
-            print("\(cor)")
-        }
+        .frame(width: width, height: height)
     }
 }
 

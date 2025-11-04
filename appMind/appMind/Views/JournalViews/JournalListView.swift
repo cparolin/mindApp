@@ -9,6 +9,7 @@ import SwiftUI
 
 /// Exibits all the journals of the selected journal type
 struct JournalListView: View {
+    @AppStorage("font") private var font = "SF Pro"
     @Environment(\.modelContext) private var context
     @Query(sort: \JournalModel.date, order: .reverse) var allNotes: [JournalModel]
     
@@ -33,8 +34,14 @@ struct JournalListView: View {
         NavigationStack {
             ScrollView (.vertical){
                 VStack (spacing: 12){
+                    Text(journalType.type)
+                        .font(.changeFont(fontType: font, fontStyle: .title, fontWeight: .bold))
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(.leading, 20)
+                    
                     if filteredNotes.count == 0 {
                         Text("Nenhum registro adicionado")
+                            .font(.changeFont(fontType: font, fontStyle: .body, fontWeight: .regular))
                             .frame(width: 370)
                             .padding(.top, UIScreen.main.bounds.height * 0.33)
                         
@@ -69,7 +76,6 @@ struct JournalListView: View {
             }
             .searchable(text: $searchText)
             .toolbarBackground(.hidden, for: .navigationBar)
-            .navigationTitle(journalType.type)
         }
     }
 }

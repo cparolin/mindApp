@@ -8,13 +8,13 @@
 import SwiftUI
 
 struct RecentShowAll: View {
+    @AppStorage("font") private var font = "SF Pro"
     var recentJournals: [JournalModel]
     
     var body: some View {
         HStack {
             Text("Recentes")
-                .font(.title3)
-                .fontWeight(.semibold)
+                .font(.changeFont(fontType: font, fontStyle: .title3, fontWeight: isOpenDyslexic(font: font) ? .bold : .semibold))
             
             Spacer()
             
@@ -24,9 +24,8 @@ struct RecentShowAll: View {
                 
             } label: {
                 Text("Mostrar tudo")
-                    .font(.caption)
+                    .font(.changeFont(fontType: font, fontStyle: .caption, fontWeight: isOpenDyslexic(font: font) ? .bold : .semibold))
                     .foregroundStyle(.gray)
-                    .fontWeight(.semibold)
             }
         }
         .padding(.horizontal, 20)

@@ -16,6 +16,7 @@ struct NoteAnswersView: View {
     var journal: JournalModel
     var list: [Int] = [0, 1, 2, 3, 4, 5]
     
+    @AppStorage("font") private var font = "SF Pro"
     @AppStorage("paletteLayout") private var paletteLayout: String = "Saturadas"
     
     var color: String {
@@ -45,12 +46,14 @@ struct NoteAnswersView: View {
             
             VStack (alignment: .leading, spacing: 25){
                 Text(journal.desc)
-                    .bold()
+                    .font(.changeFont(fontType: font, fontStyle: .body, fontWeight: .bold))
                 
                 HStack {
                     Text("Data do Registro")
+                        .font(.changeFont(fontType: font, fontStyle: .body, fontWeight: .regular))
                     Spacer()
                     Text(journal.date, format: .dateTime.day().month().year())
+                        .font(.changeFont(fontType: font, fontStyle: .body, fontWeight: .regular))
                 }
                 .padding()
                 .background(
@@ -62,11 +65,11 @@ struct NoteAnswersView: View {
                 ForEach (list, id: \.self) { index in
                     VStack (alignment: .leading, spacing: 5){
                         Text(journal.journalType.questions[index])
-                            .font(.callout)
-                            .fontWeight(.semibold)
+                            .font(.changeFont(fontType: font, fontStyle: .callout, fontWeight: isOpenDyslexic(font: font) ? .bold : .semibold))
                             .foregroundStyle(.gray)
                         
                         Text(journal.answers[index])
+                            .font(.changeFont(fontType: font, fontStyle: .body, fontWeight: .regular))
                     }
                 }
                 
@@ -74,8 +77,7 @@ struct NoteAnswersView: View {
                     presentConfirmation.toggle()
                 } label: {
                     Text("Excluir Registro")
-                        .font(.subheadline)
-                        .fontWeight(.semibold)
+                        .font(.changeFont(fontType: font, fontStyle: .subheadline, fontWeight: isOpenDyslexic(font: font) ? .bold : .semibold))
                         .hSpacing(.center)
                 }
                 .confirmationDialog("Você tem certeza que deseja excluir esse evento ?", isPresented: $presentConfirmation , titleVisibility: .visible){
@@ -126,6 +128,7 @@ struct NoteAnswersView: View {
 struct TitleBanner: View {
     var journal: JournalModel
     
+    @AppStorage("font") private var font = "SF Pro"
     @AppStorage("paletteLayout") private var paletteLayout: String = "Saturadas"
     
     var color: String {
@@ -164,8 +167,7 @@ struct TitleBanner: View {
                 .ignoresSafeArea()
             
             Text(journal.title)
-                .font(.largeTitle)
-                .bold()
+                .font(.changeFont(fontType: font, fontStyle: .largeTitle, fontWeight: .bold))
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.horizontal)
                 .offset(y: UIScreen.main.bounds.height * 0.06)

@@ -8,7 +8,7 @@ import PhotosUI
 import SwiftUI
 
 struct SettingsView: View {
-    
+    @AppStorage("font") private var font = "SF Pro"
     @Environment(\.dismiss) private var dismiss
     
     @AppStorage("Imagem do usuario salvo localmente") var savedUserProfileImage: Data = Data()
@@ -54,14 +54,12 @@ struct SettingsView: View {
                     }
                     if userName != "" {
                         Text("\(userName)")
-                            .font(.title2)
-                            .fontWeight(.bold)
+                            .font(.changeFont(fontType: font, fontStyle: .title2, fontWeight: .bold))
                             .padding(.top, 21)
                             .padding(.bottom, 45)
                     } else {
                         Text("Sem nome de usuário")
-                            .font(.title2)
-                            .fontWeight(.bold)
+                            .font(.changeFont(fontType: font, fontStyle: .title2, fontWeight: .bold))
                             .padding(.top, 21)
                             .padding(.bottom, 45)
                     }
@@ -70,6 +68,7 @@ struct SettingsView: View {
                             HStack {
                                 Image(systemName: "bell.badge")
                                 Text("Notificações")
+                                    .font(.changeFont(fontType: font, fontStyle: .body, fontWeight: .regular))
                             }
                             .foregroundStyle(.black)
                             Spacer()
@@ -83,6 +82,7 @@ struct SettingsView: View {
                         HStack {
                             Image(systemName: "paintpalette")
                             Text("Aparência")
+                                .font(.changeFont(fontType: font, fontStyle: .body, fontWeight: .regular))
                         }
                         .foregroundStyle(.black)
                         Spacer()
@@ -95,8 +95,7 @@ struct SettingsView: View {
                         presentConfirmation.toggle()
                     } label: {
                         Text("Excluir dados")
-                            .font(.subheadline)
-                            .fontWeight(.semibold)
+                            .font(.changeFont(fontType: font, fontStyle: .subheadline, fontWeight: isOpenDyslexic(font: font) ? .bold : .semibold))
                             .hSpacing(.center)
                     }
                     .confirmationDialog("Você tem certeza que deseja excluir esse evento?", isPresented: $presentConfirmation , titleVisibility: .visible){

@@ -20,7 +20,7 @@ var Palettes = [
                     "cor4.2" : "saturadas4.2",
                     "cor5" : "saturadas5",
                     "cor6" : "saturadas6"
-    ],
+                  ],
     "Suaves" :    [ "cor1" : "suaves1",
                     "cor1.1" : "suaves1.1",
                     "cor1.2" : "suaves1.2",
@@ -33,7 +33,7 @@ var Palettes = [
                     "cor4.2" : "suaves4.2",
                     "cor5" : "suaves5",
                     "cor6" : "suaves6"
-    ],
+                  ],
     "Tons Frios" : [ "cor1" : "frios1",
                      "cor1.1" : "frios1.1",
                      "cor1.2" : "frios1.2",
@@ -46,7 +46,7 @@ var Palettes = [
                      "cor4.2" : "frios4.2",
                      "cor5" : "frios5",
                      "cor6" : "frios6"
-    ],
+                   ],
     "Tons de Cinza" : [ "cor1" : "cinza1",
                         "cor1.1" : "cinza1.1",
                         "cor1.2" : "cinza1.2",
@@ -59,7 +59,7 @@ var Palettes = [
                         "cor4.2" : "cinza4.2",
                         "cor5" : "cinza5",
                         "cor6" : "cinza6"
-    ]
+                      ]
 ]
 
 var PalettesButton = [
@@ -69,28 +69,28 @@ var PalettesButton = [
                     "cor4" : "saturadas4",
                     "cor5" : "saturadas5",
                     "cor6" : "saturadas6"
-    ],
+                  ],
     "Suaves" :    [ "cor1" : "suaves1",
                     "cor2" : "suaves2",
                     "cor3" : "suaves3",
                     "cor4" : "suaves4",
                     "cor5" : "suaves5",
                     "cor6" : "suaves6"
-    ],
+                  ],
     "Tons Frios" : [ "cor1" : "frios1",
                      "cor2" : "frios2",
                      "cor3" : "frios3",
                      "cor4" : "frios4",
                      "cor5" : "frios5",
                      "cor6" : "frios6"
-    ],
+                   ],
     "Tons de Cinza" : [ "cor1" : "cinza1",
                         "cor2" : "cinza2",
                         "cor3" : "cinza3",
                         "cor4" : "cinza4",
                         "cor5" : "cinza5",
                         "cor6" : "cinza6"
-    ]
+                      ]
 ]
 
 
@@ -100,4 +100,10 @@ public func getPaletteColor(palette: String, color: String) -> String {
 
 public func getPaletteColorButton(palette: String, color: String) -> String {
     return PalettesButton[palette]?[color] ?? "azul"
+}
+
+public func isOpenDyslexic(font: String) -> Bool {
+    print(font)
+    if font.localizedStandardContains("System") && font.localizedStandardContains("SF Pro") { return false }
+    else {return true}
 }

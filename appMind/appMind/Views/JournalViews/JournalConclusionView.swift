@@ -9,6 +9,7 @@ import SwiftUI
 import SwiftData
 
 struct JournalConclusionView: View {
+    @AppStorage("font") private var font = "SF Pro"
     @Environment(\.modelContext) var context
     @Environment(\.dismiss) var dismiss
     
@@ -64,21 +65,21 @@ struct JournalConclusionView: View {
     var body: some View {
         VStack (spacing: 8){
             TextField("Título do Registro", text: $title)
-                .font(.title2)
-                .bold()
+                .font(.changeFont(fontType: font, fontStyle: .title2, fontWeight: .bold))
+
                 .onReceive(Just(title)) {
                     title = String($0.prefix(titleLength))
                 }
             
             Text("\(titleCountdown)/\(titleLength)")
-                .font(.caption)
-                .fontWeight(.semibold)
+                .font(.changeFont(fontType: font, fontStyle: .caption, fontWeight: isOpenDyslexic(font: font) ? .bold : .semibold))
                 .foregroundStyle(.cinza3)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.bottom, 17)
             
             TextField("Descrição Breve", text: $desc, axis: .vertical)
-                .fontWeight(.semibold)
+                .font(.changeFont(fontType: font, fontStyle: .body, fontWeight: isOpenDyslexic(font: font) ? .bold : .semibold))
+
                 .onReceive(Just(desc)) {
                     desc = String($0.prefix(descLength))
                 }
@@ -87,18 +88,19 @@ struct JournalConclusionView: View {
                 .padding(.top, 4)
             
             Text("\(descCountdown)/\(descLength)")
-                .font(.caption)
-                .fontWeight(.semibold)
+                .font(.changeFont(fontType: font, fontStyle: .caption, fontWeight: isOpenDyslexic(font: font) ? .bold : .semibold))
                 .foregroundStyle(.cinza3)
                 .frame(maxWidth: .infinity, alignment: .trailing)
             
             DatePicker("Data do Registro", selection: $date, displayedComponents: .date)
+                .font(.changeFont(fontType: font, fontStyle: .body, fontWeight: .regular))
                 .padding(.top, 15)
             
             Spacer()
         }
         .padding(30)
         .navigationTitle(existingJournal == nil ? "Finalizar Registro" : "Editar Registro")
+        .font(.changeFont(fontType: font, fontStyle: .title2, fontWeight: .bold))
         .toolbar {
             ToolbarItem(placement: .confirmationAction) {
                 Button(existingJournal == nil ? "Salvar" : "Atualizar") {

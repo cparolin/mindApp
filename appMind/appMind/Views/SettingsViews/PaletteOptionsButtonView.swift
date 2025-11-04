@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct PaletteOptionsButtonView: View {
-    
+    @AppStorage("font") private var font = "SF Pro"
     let palette: String
     
     var body: some View {
@@ -28,6 +28,7 @@ struct PaletteOptionsButtonView: View {
 //                .frame(width: 12)
             
             Text("\(palette)")
+                .font(.changeFont(fontType: font, fontStyle: .body, fontWeight: .regular))
                 .foregroundStyle(.black)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding()

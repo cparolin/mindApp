@@ -7,6 +7,7 @@
 import SwiftUI
 
 struct NoteView: View {
+    @AppStorage("font") private var font = "SF Pro"
     @Binding var answer: String
     var question: String
     @Binding var currentIndex: Int
@@ -21,10 +22,10 @@ struct NoteView: View {
             QuestionProgressIndicator(currentIndex: currentIndex, totalSteps: totalQuestions)
             
             Text(question)
-                .font(.title3)
-                .fontWeight(.semibold)
+                .font(.changeFont(fontType: font, fontStyle: .title3, fontWeight: isOpenDyslexic(font: font) ? .bold : .semibold))
             
             TextField("", text: $answer, axis: .vertical)
+                .font(.changeFont(fontType: font, fontStyle: .body, fontWeight: .regular))
                 .focused($focused)
             
             Spacer()

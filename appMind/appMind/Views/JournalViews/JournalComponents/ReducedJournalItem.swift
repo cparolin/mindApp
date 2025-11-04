@@ -10,6 +10,7 @@ import SwiftData
 
 struct ReducedJournalItem: View {
     var journal: JournalModel
+    @AppStorage("font") private var font = "SF Pro"
     @AppStorage("paletteLayout") private var paletteLayout: String = "Saturadas"
     
     // month and day date formating
@@ -50,10 +51,11 @@ struct ReducedJournalItem: View {
                     HStack {
                         HStack (spacing: 5){
                             Text(journal.date.formatted(day))
-                                .bold()
+                                .font(.changeFont(fontType: font, fontStyle: .body, fontWeight: .bold))
                                 .italic()
                             
                             Text(journal.date.formatted(month))
+                                .font(.changeFont(fontType: font, fontStyle: .body, fontWeight: .regular))
                                 .italic()
                         }
                         .padding(.leading, 7)
@@ -62,21 +64,26 @@ struct ReducedJournalItem: View {
                         
                         VStack (alignment: .trailing, spacing: 2){
                             Text(journal.journalType.type)
-                                .font(.caption)
-                                .bold()
-                                .padding(.trailing, 10)
+                                .font(
+                                    .changeFont(
+                                        fontType: font,
+                                        fontStyle: .caption,
+                                        fontWeight: isOpenDyslexic(font: font) ? .bold : .medium
+                                    )
+                                )
+                                .padding(.trailing, 5)
+                            
                             Capsule()
-                                .frame(width: 88, height: 2.6)
+                                .frame(width: 95, height: 2.6)
                                 .foregroundStyle(getColor())
                         }
                     }
-                    .frame(width: UIScreen.main.bounds.width * 0.48)
+                    .frame(width: UIScreen.main.bounds.width * 0.5)
                     
                     Spacer()
                     // Title
                     Text(journal.title)
-                        .font(.title3)
-                        .bold()
+                        .font(.changeFont(fontType: font, fontStyle: .title3, fontWeight: .bold))
                         .padding(EdgeInsets(top: 0, leading: 6, bottom: 6, trailing: 0))
                 }
                 .padding(.leading, 6)
@@ -111,7 +118,7 @@ struct ReducedItemBackground: View {
         return Color(getPaletteColor(palette: paletteLayout, color: color))
     }
     
-    let width = UIScreen.main.bounds.width * 0.5
+    let width = UIScreen.main.bounds.width * 0.52
     let height = UIScreen.main.bounds.height * 0.107
     
     var body: some View {
