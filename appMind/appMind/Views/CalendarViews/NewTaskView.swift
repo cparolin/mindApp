@@ -141,7 +141,7 @@ struct NewTaskView: View {
                         }, label: {
                             Text("OK")
                         })
-                        .disabled(taskTitle == "" || taskNote == "" || tempSelectedIcon == "")
+                        .disabled(taskTitle == "" || tempSelectedIcon == "")
                     }
                 }
         } .sheet(isPresented: $symbolsPicker) {

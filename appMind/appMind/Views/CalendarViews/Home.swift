@@ -13,7 +13,7 @@ struct Home: View {
     
     @State var currentDate: Date = Date()
     @State private var weekSlider: [[Date.WeekDay]] = []
-    @State private var currentWeekIndex: Int = 0
+    @State private var currentWeekIndex: Int = 1
     @State private var createNewTask: Bool = false
     
     var body: some View {
@@ -27,11 +27,11 @@ struct Home: View {
                 
                 VStack(alignment: .center) {
                     Text(Date().format("dd, MMMM YYYY"))
-                        .font(.headline)
+                        .font(.title3)
                         .fontWeight(.semibold)
                         .textScale(.secondary)
                         .foregroundStyle(.black)
-                        .padding(.top, 50)
+                        .padding(.top, 40)
                         .padding(.bottom, 23)
                     TabView(selection: $currentWeekIndex) {
                         ForEach(weekSlider.indices, id: \.self){ index in
@@ -109,7 +109,17 @@ struct Home: View {
         .onAppear {
             if weekSlider.isEmpty {
                 let currentWeek = Date().fetchWeek()
+                
+                if let firstDate = currentWeek.first?.date {
+                    weekSlider.append(firstDate.createPreviousWeek())
+                }
+                
                 weekSlider.append(currentWeek)
+                
+                
+                if let lastDate = currentWeek.last?.date {
+                    weekSlider.append(lastDate.createNextWeek())
+                }
             }
         }
         .sheet(isPresented: $createNewTask) {
