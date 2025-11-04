@@ -20,7 +20,6 @@ struct AppearenceView: View {
     
     var body: some View {
         NavigationStack {
-            NavigationView {
                 ScrollView {
                     LayoutRectangle()
                     HStack {
@@ -151,14 +150,15 @@ struct AppearenceView: View {
                 .navigationTitle("Aparência")
                 .toolbarBackground(.hidden, for: .navigationBar)
             }
-        }
-        //        .id(font)
         .onChange(of: font) { oldValue, newValue in
             currentFont(to: font)
         }
+        //        .id(font)
+        
+        }
         
     }
-}
+
 
 #Preview {
     AppearenceView()
