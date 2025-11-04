@@ -6,8 +6,13 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct NoteAnswersView: View {
+    @Environment(\.modelContext) var context
+    @Environment(\.dismiss) var dismiss
+    @State var presentConfirmation: Bool = false
+    
     var journal: JournalModel
     var list: [Int] = [0, 1, 2, 3, 4, 5]
     
@@ -18,7 +23,7 @@ struct NoteAnswersView: View {
         case "Rotina":
             return "cor1"
             
-        case "Socialização":
+        case "Comunicação":
             return "cor2"
             
         case "Vícios":
@@ -36,7 +41,7 @@ struct NoteAnswersView: View {
     var body: some View {
         ScrollView {
             TitleBanner(journal: journal)
-                .padding(.trailing, UIScreen.main.bounds.width * 0.1)
+                .padding(.trailing, UIScreen.main.bounds.width * 0.02)
             
             VStack (alignment: .leading, spacing: 25){
                 Text(journal.desc)
@@ -65,9 +70,44 @@ struct NoteAnswersView: View {
                     }
                 }
                 
+                Button(role: .destructive){
+                    presentConfirmation.toggle()
+                } label: {
+                    Text("Excluir Registro")
+                        .font(.subheadline)
+                        .fontWeight(.semibold)
+                        .hSpacing(.center)
+                }
+                .confirmationDialog("Você tem certeza que deseja excluir esse evento ?", isPresented: $presentConfirmation , titleVisibility: .visible){
+                    Button("Sim" , role: .destructive){
+                       context.delete(journal)
+                        do {
+                            try context.save()
+                        } catch let error{
+                            print(error.localizedDescription)
+                        }
+                        dismiss()
+                    }
+                }
+                
                 Spacer()
             }
             .toolbar {
+                ToolbarItem(placement: .confirmationAction) {
+                    Button {
+                        journal.isFavorite.toggle()
+                        try? context.save()
+                        
+                    } label: {
+                        if journal.isFavorite {
+                            Image(systemName: "heart.fill")
+                        }
+                        else {
+                            Image(systemName: "heart")
+                        }
+                    }
+                }
+                
                 ToolbarItem(placement: .confirmationAction) {
                     NavigationLink {
                         NoteCarrouselView(journal: journal.journalType, existingJournal: journal)
@@ -93,7 +133,7 @@ struct TitleBanner: View {
         case "Rotina":
             return "cor1"
             
-        case "Socialização":
+        case "Comunicação":
             return "cor2"
             
         case "Vícios":
@@ -111,7 +151,7 @@ struct TitleBanner: View {
     var body: some View {
         ZStack {
             Rectangle()
-                .frame(width: UIScreen.main.bounds.width * 0.9, height: UIScreen.main.bounds.height * 0.22)
+                .frame(width: UIScreen.main.bounds.width * 0.98, height: UIScreen.main.bounds.height * 0.22)
                 .foregroundStyle(getColor())
                 .clipShape(
                     .rect(

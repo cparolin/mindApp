@@ -17,12 +17,20 @@ struct JournalConclusionView: View {
     var journalType: JournalTypeModel
     var answers: [String]
     let descLength: Int = 50
-    let titleLength: Int = 14
+    let titleLength: Int = 18
     
     // State properties
     @State private var title: String
     @State private var desc: String
     @State private var date: Date
+    
+    var titleCountdown: Int {
+        titleLength - title.count
+    }
+    
+    var descCountdown: Int {
+        descLength - desc.count
+    }
     
     init(existingJournal: JournalModel? = nil, journalType: JournalTypeModel, answers: [String]) {
         self.existingJournal = existingJournal
@@ -58,10 +66,16 @@ struct JournalConclusionView: View {
             TextField("Título do Registro", text: $title)
                 .font(.title2)
                 .bold()
-                .padding(.bottom, 10)
                 .onReceive(Just(title)) {
                     title = String($0.prefix(titleLength))
                 }
+            
+            Text("\(titleCountdown)/\(titleLength)")
+                .font(.caption)
+                .fontWeight(.semibold)
+                .foregroundStyle(.cinza3)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.bottom, 17)
             
             TextField("Descrição Breve", text: $desc, axis: .vertical)
                 .fontWeight(.semibold)
@@ -71,6 +85,12 @@ struct JournalConclusionView: View {
             
             Divider()
                 .padding(.top, 4)
+            
+            Text("\(descCountdown)/\(descLength)")
+                .font(.caption)
+                .fontWeight(.semibold)
+                .foregroundStyle(.cinza3)
+                .frame(maxWidth: .infinity, alignment: .trailing)
             
             DatePicker("Data do Registro", selection: $date, displayedComponents: .date)
                 .padding(.top, 15)
@@ -85,7 +105,7 @@ struct JournalConclusionView: View {
                     createNote()
                 }
                 /// confirmation button is disabled if the fields are empty
-                .disabled(title.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || desc.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
+                .disabled(title.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
             }
         }
         .toolbarBackground(.hidden, for: .navigationBar)
