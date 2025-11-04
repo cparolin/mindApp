@@ -31,7 +31,8 @@ struct ContentView: View {
                     .tabItem {
                         Label("Diários", systemImage: "book.pages")
                     }
-                AppearenceView()
+//                AppearenceView()
+                SettingsView()
                     .tabItem {
                         Label("Configurações", systemImage: "gear")
                     }
