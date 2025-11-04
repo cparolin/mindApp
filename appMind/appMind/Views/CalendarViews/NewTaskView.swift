@@ -42,16 +42,18 @@ struct NewTaskView: View {
                             } label : {
                                 if tempSelectedIcon == "" {
                                     Image(systemName: "figure.cross.training")
-                                        .resizable()
-                                        .frame(width: 30,height: 40)
+                                        .font(.largeTitle)
                                         .foregroundStyle(.gray)
                                 } else {
                                     Image(systemName: "\(tempSelectedIcon)")
                                         .resizable()
-                                        .frame(width: 30,height: 40)
+                                        .font(.largeTitle)
                                         .foregroundStyle(.gray)
+                                        
                                 }
                             }
+                            .padding(5)
+                            
                             TextField("Nome do evento", text: $taskTitle)
                                 .padding(.vertical, 12)
                                 .font(.title)
