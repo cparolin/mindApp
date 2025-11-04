@@ -99,7 +99,7 @@ struct SettingsView: View {
                             .fontWeight(.semibold)
                             .hSpacing(.center)
                     }
-                    .confirmationDialog("Você tem certeza que deseja excluir TODOS os seus dados?, isso também deleta todas as suas tarefas e diários", isPresented: $presentConfirmation , titleVisibility: .visible){
+                    .confirmationDialog("Você tem certeza que deseja excluir TODOS os seus dados? Isso também irá deletar todas as suas tarefas e diários", isPresented: $presentConfirmation , titleVisibility: .visible){
                         Button("Sim" , role: .destructive){
                             savedUserProfileImage = Data()
                             userName = ""
