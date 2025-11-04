@@ -21,14 +21,14 @@ struct ReducedJournalItem: View {
         case "Rotina":
             return "cor1"
             
-        case "Socialização":
+        case "Comunicação":
             return "cor2"
             
         case "Vícios":
             return "cor4"
             
         default:
-            return "cor não selecionada"
+            return "cor1"
         }
     }
     
@@ -96,14 +96,14 @@ struct ReducedItemBackground: View {
         case "Rotina":
             return "cor1"
             
-        case "Socialização":
+        case "Comunicação":
             return "cor2"
             
         case "Vícios":
             return "cor4"
             
         default:
-            return "cor não selecionada"
+            return "cor1"
         }
     }
     
@@ -140,5 +140,5 @@ struct ReducedItemBackground: View {
 
 
 #Preview {
-    ReducedJournalItem(journal: JournalModel(title: "Título", desc: "Lorem Ipsum é simplesmente uma simulação de texto da", date: Date.now, answers: ["",""], journalType: JournalTypeModel(type: "Socialização", symbol: "message", questions: [""]), isFavorite: false))
+    ReducedJournalItem(journal: JournalModel(title: "Título", desc: "Lorem Ipsum é simplesmente uma simulação de texto da", date: Date.now, answers: ["",""], journalType: JournalTypeModel(type: "Comunicação", symbol: "message", questions: [""]), isFavorite: false))
 }

@@ -89,14 +89,14 @@ struct NoteBackground: View {
         case "Rotina":
             return "cor1"
             
-        case "Socialização":
+        case "Comunicação":
             return "cor2"
             
         case "Vícios":
             return "cor4"
             
         default:
-            return "cor não selecionada"
+            return "cor1"
         }
     }
     

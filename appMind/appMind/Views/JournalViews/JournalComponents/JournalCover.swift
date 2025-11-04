@@ -26,7 +26,7 @@ struct JournalCover: View {
             return ["cor4", "cor4.1", "cor4.2"]
             
         default:
-            return []
+            return ["cor1", "cor1.1", "cor1.2"]
         }
     }
     
@@ -111,5 +111,5 @@ extension Text {
 }
 
 #Preview {
-    JournalCover(journal: JournalTypeModel(type: "Socialização", symbol: "brain.head.profile", questions: [""]))
+    JournalCover(journal: JournalTypeModel(type: "Comunicação", symbol: "brain.head.profile", questions: [""]))
 }
