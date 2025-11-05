@@ -7,8 +7,8 @@
 
 import SwiftUI
 //
-struct TheTaksBlockView: View {
-    @Binding var task: Task
+struct TheTaksDayBlockView: View {
+    @Binding var task: TaskDay
     @Binding var cor: String
     @State var width: CGFloat = UIScreen.main.bounds.width * 0.9
     @State var height: CGFloat = UIScreen.main.bounds.height * 0.17
@@ -39,13 +39,14 @@ struct TheTaksBlockView: View {
                         Button {
                             isPresented.toggle()
                         } label: {
-                            Image(systemName: task.symbol)
+                            Image(systemName: task.symbolDay)
                                 .font(.title)
                                 .foregroundColor(.black)
                         }
+
                     }
                 
-                TextField("Título do Evento", text: $task.taskTitle)
+                TextField("Título do Evento", text: $task.taskTitleDay)
                     .font(.title2)
                     .bold()
                 
@@ -58,10 +59,10 @@ struct TheTaksBlockView: View {
                     .font(.footnote)
                     .bold()
                 
-                TextField("Descrição breve sobre o evento", text: $task.notes)
-                    .onChange(of: task.notes) { newValue in
+                TextField("Descrição breve sobre o evento", text: $task.notesDay)
+                    .onChange(of: task.notesDay) { newValue in
                         if newValue.count > descLength {
-                            task.notes = String(newValue.prefix(descLength))
+                            task.notesDay = String(newValue.prefix(descLength))
                         }
                     }
                     .font(.callout)
@@ -72,7 +73,7 @@ struct TheTaksBlockView: View {
         }
         .frame(width: width, height: height)
         .sheet(isPresented: $isPresented) {
-            SymbolsPickerView(tempSelectedIcon: $task.symbol)
+            SymbolsPickerView(tempSelectedIcon: $task.symbolDay)
         }
     }
 }
