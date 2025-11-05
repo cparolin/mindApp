@@ -77,6 +77,7 @@ struct SettingsView: View {
                         HStack {
                             Image(systemName: "paintpalette")
                             Text("Aparência")
+                                .font(.body)
                         }
                         .foregroundStyle(.black)
                         Spacer()

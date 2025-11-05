@@ -55,6 +55,7 @@ struct TaskCardExpanded: View {
                 
                 VStack (alignment: .leading, spacing: 5){
                     Text(task.taskTitle)
+                        .font(.body)
                         .lineLimit(1)
                         .truncationMode(.tail)
                         .fontWeight(.semibold)
