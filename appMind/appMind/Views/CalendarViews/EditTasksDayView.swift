@@ -10,12 +10,12 @@ import SwiftUI
 import Combine
 
 ///Precisa garantir a trocva de cor, não está funcionando
-struct EditingTaskView: View {
+struct EditingTasksDayView: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) var modelContext
     @State var enunToString: EnunsCreateEditTaskVIew = EnunsCreateEditTaskVIew()
     @AppStorage("paletteLayout") private var paletteLayout: String = "Saturadas"
-    @State var taskBeengEdit: Task
+    @State var taskBeengEdit: TaskDay
     @State var presentConfirmation: Bool = false
     @State var tempColor: String = "abanana"
     @State var tempColorTratada: String = "error"
@@ -25,7 +25,7 @@ struct EditingTaskView: View {
         NavigationStack {
             VStack(alignment: .leading, spacing: 15, content: {
                 ZStack(){
-                    TheTaksBlockView(task: $taskBeengEdit, cor: $tempColorTratada)
+                    TheTaksDayBlockView(task: $taskBeengEdit, cor: $tempColorTratada)
                     HStack(){
                         VStack(alignment: .leading){
                             HStack(){
@@ -45,17 +45,11 @@ struct EditingTaskView: View {
                             .font(.caption)
                             .foregroundStyle(.gray)
                         
-                        HStack(){
-                            Text("Começa")
-                            DatePicker("", selection: $taskBeengEdit.todoDateStart)
-                                .datePickerStyle(.compact)
-                                .scaleEffect(0.9, anchor: .leading)
-                        }
-                        HStack(){
-                            Text("Termina")
-                            DatePicker("", selection: $taskBeengEdit.todoDateEnd)
-                                .datePickerStyle(.compact)
-                                .scaleEffect(0.9, anchor: .leading)
+                        HStack {
+                            Text("Dia Inteiro")
+                            Spacer()
+                            Text("\(taskBeengEdit.todoDateDay.format("dd, MMMM YYYY"))")
+                                .padding(.trailing, 16)
                         }
                         
                     })
@@ -80,7 +74,7 @@ struct EditingTaskView: View {
                                 .bold()
                                 .hSpacing(.center)
                         }
-                        .confirmationDialog("Você tem certeza que deseja excluir esse evento ?", isPresented: $presentConfirmation , titleVisibility: .visible){
+                        .confirmationDialog("Você tem certeza que deseja excluir esse evento?", isPresented: $presentConfirmation , titleVisibility: .visible){
                             Button("Sim" , role: .destructive){
                                 modelContext.delete(taskBeengEdit)
                                 do{
@@ -99,12 +93,12 @@ struct EditingTaskView: View {
             .padding(16)
             .toolbar {
                 ToolbarItem(placement: .principal) {
-                    Text("\(taskBeengEdit.taskTitle)")
+                    Text("\(taskBeengEdit.taskTitleDay)")
                 }
                 ToolbarItem(placement: .confirmationAction){
                     Button(action: {
                         do{
-                            taskBeengEdit.tint = tempColor
+                            taskBeengEdit.tintDay = tempColor
                             try modelContext.save()
                         }
                         catch let error{
@@ -114,7 +108,8 @@ struct EditingTaskView: View {
                     }, label: {
                         Text("OK")
                     })
-                    .disabled(taskBeengEdit.taskTitle == "" || taskBeengEdit.notes == "" ? true : false)
+                    .disabled(taskBeengEdit.taskTitleDay == "" || taskBeengEdit.notesDay == "" ? true : false)
+
                 }
             }
         }
@@ -124,38 +119,7 @@ struct EditingTaskView: View {
             }
         }
         .onAppear {
-            tempColor = taskBeengEdit.tint
-        }
-    }
-}
-enum CorTarefa: String {
-    
-    case blue
-    case red
-    case yellow
-    case orange
-    case purple
-    case gray
-    
-    var color: Color {
-        switch self {
-        case .blue:
-            return .blue
-            
-        case .red:
-            return .red
-            
-        case .yellow:
-            return .yellow
-            
-        case .orange:
-            return .orange
-            
-        case .purple:
-            return .purple
-            
-        case .gray:
-            return .gray
+            tempColor = taskBeengEdit.tintDay
         }
     }
 }

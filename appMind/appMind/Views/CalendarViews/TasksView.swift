@@ -28,8 +28,12 @@ struct TasksView: View {
             
             VStack(alignment: .leading) {
                 ForEach(tasksDay) { task in
-                    if isSameDate(task.todoDateDay, currentDate) {
-                        TaskDayCardReduced(task: task, baseColor: getPaletteColor(palette: paletteLayout, color: task.tintDay))
+                    NavigationLink {
+                        EditingTasksDayView(taskBeengEdit: task)
+                    } label: {
+                        if isSameDate(task.todoDateDay, currentDate) {
+                            TaskDayCardReduced(task: task, baseColor: getPaletteColor(palette: paletteLayout, color: task.tintDay))
+                        }
                     }
                 }
                 if !tasks.isEmpty && !tasksDay.isEmpty {
