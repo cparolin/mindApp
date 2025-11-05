@@ -22,6 +22,7 @@ struct TaskDayCardReduced: View {
                     RoundedRectangle(cornerRadius: 16)
                         .foregroundStyle(Color(baseColor))
                 )
+                .accessibilityLabel(Text("Símbolo da Tarefa: \(task.symbolDay)"))
             
             HStack (spacing: 0){
                 Text(task.taskTitleDay)
@@ -29,6 +30,7 @@ struct TaskDayCardReduced: View {
                     .fontWeight(.semibold)
                     .foregroundStyle(.black)
                     .padding(.leading, 10)
+                    .accessibilityLabel(Text("Título da tarefa: \(task.taskTitleDay)"))
                 
                 Spacer()
             }

@@ -26,28 +26,36 @@ struct SecondView: View {
                 .font(.title)
                 .fontWeight(.bold)
                 .padding(.bottom , 5)
+                .accessibilityLabel(Text("Diário"))
             
             Text("Aqui você escreve sobre seu dia a dia, vícios e dificuldades de comunicação, com perguntas feitas com base em aplicações da técnica do Registro de Pensamentos Disfuncionais (RPD).")
                 .font(.body)
                 .fontWeight(.regular)
                 .multilineTextAlignment(.center)
                 .padding(.horizontal)
+                .accessibilityLabel(Text("Nos diários você pode escrever sobre seu dia a dia, vícios e dificuldades de comunicação, com perguntas feitas com base em aplicações da técnica do Registro de Pensamentos Disfuncionais (RPD)."))
             
             HStack(spacing: 2){
                 Image(colorMode ? "routine.light" : "")
                     .resizable()
                     .frame(width: 120 , height: 140)
                     .clipShape(RoundedRectangle(cornerRadius: 10))
+                    .accessibilityLabel(Text("Imagem de um diário"))
+                    .accessibilityHint(Text("Diário de rotina vermelho"))
                                     
                 Image(colorMode ? "social.light" : "")
                     .resizable()
                     .frame(width: 120 , height: 140)
                     .clipShape(RoundedRectangle(cornerRadius: 10))
+                    .accessibilityLabel(Text("Imagem de um diário"))
+                    .accessibilityHint(Text("Diário de comunicação amarelo"))
                 
                 Image(colorMode ? "addiction.light" : "")
                     .resizable()
                     .frame(width: 120 , height: 140)
                     .clipShape(RoundedRectangle(cornerRadius: 10))
+                    .accessibilityLabel(Text("Imagem de um diário"))
+                    .accessibilityHint(Text("Diário de vícios azul piscina"))
             }
             .padding(.top , 36)
             Button(){
@@ -63,6 +71,7 @@ struct SecondView: View {
                 }
                 .frame(maxWidth: .infinity)
                 .padding(.top , 70)
+                .accessibilityLabel(Text("Botão para avançar para a próxima tela da introdução"))
             }
             Button(){
                 appState.setFirstTimeOnApp(value: true)
@@ -73,6 +82,7 @@ struct SecondView: View {
                         .fontWeight(.semibold)
             }
             .padding(.top , 5)
+            .accessibilityLabel(Text("Botão para pular a introdução"))
         }
         .vSpacing(.top)
         .padding(.top , 60)

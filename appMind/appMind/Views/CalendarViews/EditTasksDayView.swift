@@ -44,12 +44,15 @@ struct EditingTasksDayView: View {
                         Text("Data da tarefa")
                             .font(.caption)
                             .foregroundStyle(.gray)
+                            .accessibilityLabel(Text("Data da tarefa"))
                         
                         HStack {
                             Text("Dia Inteiro")
+                                .accessibilityLabel(Text("Tarefa que dura o dia inteiro"))
                             Spacer()
                             Text("\(taskBeengEdit.todoDateDay.format("dd, MMMM YYYY"))")
                                 .padding(.trailing, 16)
+                                .accessibilityLabel(Text("Dia da tarefa: \(taskBeengEdit.todoDateDay.format("dd, MMMM YYYY"))"))
                         }
                         
                     })
@@ -61,6 +64,7 @@ struct EditingTasksDayView: View {
                         Text("Cor da tarefa")
                             .font(.caption)
                             .foregroundStyle(.gray)
+                            .accessibilityLabel(Text("Cor da tarefa"))
                         
                         HStack(spacing: 0) {
                                 ColorPickerComponent(taskColor: $tempColor, palette: paletteLayout)
@@ -74,6 +78,7 @@ struct EditingTasksDayView: View {
                                 .bold()
                                 .hSpacing(.center)
                         }
+                        .accessibilityLabel(Text("Botão para deletar tarefa"))
                         .confirmationDialog("Você tem certeza que deseja excluir esse evento?", isPresented: $presentConfirmation , titleVisibility: .visible){
                             Button("Sim" , role: .destructive){
                                 modelContext.delete(taskBeengEdit)
@@ -109,7 +114,7 @@ struct EditingTasksDayView: View {
                         Text("OK")
                     })
                     .disabled(taskBeengEdit.taskTitleDay == "" || taskBeengEdit.notesDay == "" ? true : false)
-
+                    .accessibilityLabel(Text("Botão para salvar modificações"))
                 }
             }
         }

@@ -43,12 +43,13 @@ struct TheTaksDayBlockView: View {
                                 .font(.title)
                                 .foregroundColor(.black)
                         }
-
                     }
+                    .accessibilityLabel(Text("Botão de seleção do símbolo da Tarefa: \(task.symbolDay)"))
                 
                 TextField("Título do Evento", text: $task.taskTitleDay)
                     .font(.title2)
                     .bold()
+                    .accessibilityLabel(Text("Campo de edição do título da Tarefa. Texto atual:  \(task.taskTitleDay)"))
                 
                 Spacer()
             }
@@ -58,6 +59,7 @@ struct TheTaksDayBlockView: View {
                 Text("Notas")
                     .font(.footnote)
                     .bold()
+                    .accessibilityLabel(Text("Notas sobre o evento"))
                 
                 TextField("Descrição breve sobre o evento", text: $task.notesDay)
                     .onChange(of: task.notesDay) { newValue in
@@ -67,6 +69,7 @@ struct TheTaksDayBlockView: View {
                     }
                     .font(.callout)
                     .padding(.leading)
+                    .accessibilityLabel(Text("Campo de edição das notas da Tarefa. Texto atual:  \(task.notesDay). Número de caracteres disponíveis é igual a 35"))
             }
             .padding(.top, height * 0.46)
             .frame(width: width * 0.95)

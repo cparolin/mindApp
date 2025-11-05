@@ -22,9 +22,10 @@ struct TaskCardExpanded: View {
     var body: some View {
         HStack {
             if dateEquals {
-                VStack() {
+                VStack {
                     Text("\(task.todoDateEnd.format("HH:mm"))")
                 }
+                .accessibilityLabel(Text("Horário da tarefa: \(task.todoDateEnd.format("HH:mm"))"))
                 .frame(width: 60, height: 83)
                 .font(.caption)
                 .foregroundStyle(.black)
@@ -35,8 +36,10 @@ struct TaskCardExpanded: View {
             } else {
                 VStack(spacing: 20) {
                     Text("\(task.todoDateStart.format("HH:mm"))")
+                        .accessibilityLabel(Text("Horário de início da tarefa:\(task.todoDateStart.format("HH:mm"))"))
                     
                     Text("\(task.todoDateEnd.format("HH:mm"))")
+                        .accessibilityLabel(Text("Horário de término da tarefa:\(task.todoDateEnd.format("HH:mm"))"))
                 }
                 .frame(width: 60, height: 83)
                 .font(.caption)
@@ -52,6 +55,7 @@ struct TaskCardExpanded: View {
                     .font(.title3)
                     .foregroundStyle(.black)
                     .padding(.leading, 12)
+                    .accessibilityLabel(Text("Símbolo da Tarefa: \(task.symbol)"))
                 
                 VStack (alignment: .leading, spacing: 5){
                     Text(task.taskTitle)
@@ -61,6 +65,7 @@ struct TaskCardExpanded: View {
                         .fontWeight(.semibold)
                         .foregroundStyle(.black)
                         .padding(.leading, 10)
+                        .accessibilityLabel(Text("Título da tarefa: \(task.taskTitle)"))
                     
                     Text(task.notes)
                         .lineLimit(1)
@@ -68,11 +73,13 @@ struct TaskCardExpanded: View {
                         .font(.footnote)
                         .foregroundStyle(.black)
                         .padding(.leading, 10)
+                        .accessibilityLabel(Text("Descrição da tarefa: \(task.notes)"))
                 }
                 
                 Spacer()
                 
                 completionButton(task: task, baseColor: baseColor)
+                    .accessibilityLabel(Text("Botão para completar tarefa"))
             }
             .padding(.vertical, 20)
             .background(

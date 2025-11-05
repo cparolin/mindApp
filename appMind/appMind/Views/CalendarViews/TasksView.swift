@@ -20,6 +20,7 @@ struct TasksView: View {
     var body: some View {
         if tasks.isEmpty && tasksDay.isEmpty {
                 Text("Sem Tarefas ainda...")
+                .accessibilityLabel(Text("Sem tarefas ainda..."))
                 .font(.title3)
                     .padding()
 
@@ -35,6 +36,7 @@ struct TasksView: View {
                             TaskDayCardReduced(task: task, baseColor: getPaletteColor(palette: paletteLayout, color: task.tintDay))
                         }
                     }
+                    .accessibilityLabel(Text("Tarefa: \(task.taskTitleDay), do dia: \(task.todoDateDay)"))
                 }
                 if !tasks.isEmpty && !tasksDay.isEmpty {
                     Text("Rotina do dia")
@@ -42,6 +44,7 @@ struct TasksView: View {
                         .fontWeight(.semibold)
                         .padding(.bottom, 5)
                         .padding(.leading)
+                        .accessibilityLabel(Text("Rotina do dia:"))
                 }
                 //Cards
                 ForEach(tasks) { task in
@@ -59,6 +62,7 @@ struct TasksView: View {
                                 TaskCardReduced(task: task, baseColor: getPaletteColor(palette: paletteLayout, color: task.tint))
                             }
                         }
+                        .accessibilityLabel(Text("Tarefa: \(task.taskTitle), do dia: \(task.todoDateStart), que termina em: \(task.todoDateEnd). Descrição da tarefa: \(task.notes)"))
                     }
                 }
             }

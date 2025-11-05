@@ -20,6 +20,7 @@ struct TaskCardReduced: View {
                     RoundedRectangle(cornerRadius: 16)
                         .foregroundStyle(Color(baseColor))
                 )
+                .accessibilityLabel(Text("Símbolo da Tarefa: \(task.symbol)"))
             
             HStack (spacing: 0){
                 Text(task.taskTitle)
@@ -28,10 +29,12 @@ struct TaskCardReduced: View {
                     .fontWeight(.semibold)
                     .foregroundStyle(.black)
                     .padding(.leading, 10)
+                    .accessibilityLabel(Text("Título da tarefa: \(task.taskTitle)"))
                 
                 Spacer()
                 
                 completionButton(task: task, baseColor: baseColor)
+                
             }
             .padding(.vertical, 15)
             .background(

@@ -25,12 +25,17 @@ struct HomeScreenView: View {
                 .resizable()
                 .frame(width: UIScreen.main.bounds.width * 0.5, height: UIScreen.main.bounds.height * 0.23, alignment: .top)
                 .clipShape(RoundedRectangle(cornerRadius: 20))
+                .accessibilityLabel(Text("Imagem do ícone do aplicativo"))
+                .accessibilityHint(Text("Imagem de uma pasta azul piscina em efeito de vidro com um símbolo de check"))
                 
             VStack {
                 Text("Bem-vindo ao Conscist!")
                     .font(.title)
                     .fontWeight(.bold)
+                    .accessibilityLabel(Text("Bem-vindo ao Conscist!"))
+                
                 Text("Um aplicativo de organização e reflexão")
+                    .accessibilityLabel(Text("Um aplicativo de organização e reflexão"))
                     .font(.body)
                     .fontWeight(.regular)
                     .padding(.bottom, UIScreen.main.bounds.height * 0.08)
@@ -48,6 +53,7 @@ struct HomeScreenView: View {
                         .fontWeight(.semibold)
                 }
             }
+            .accessibilityLabel(Text("Botão para avançar para a próxima parte da introducão do aplicativo"))
         }
     }
 }

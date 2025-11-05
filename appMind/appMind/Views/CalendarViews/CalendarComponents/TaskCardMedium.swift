@@ -22,7 +22,7 @@ struct TaskCardMedium: View {
     var body: some View {
         HStack {
             if dateEquals {
-                VStack(spacing: 20) {
+                VStack {
                     Text("\(task.todoDateEnd.format("HH:mm"))")
                 }
                 .frame(width: 60, height: 50)
@@ -32,11 +32,15 @@ struct TaskCardMedium: View {
                     RoundedRectangle(cornerRadius: 16)
                         .foregroundStyle(Color(baseColor))
                 )
+                .accessibilityLabel(Text("Horário da tarefa: \(task.todoDateEnd.format("HH:mm"))"))
+                
             } else {
                 VStack(spacing: 20) {
                     Text("\(task.todoDateStart.format("HH:mm"))")
+                        .accessibilityLabel(Text("Horário de início da tarefa:\(task.todoDateStart.format("HH:mm"))"))
                     
                     Text("\(task.todoDateEnd.format("HH:mm"))")
+                        .accessibilityLabel(Text("Horário de término da tarefa:\(task.todoDateStart.format("HH:mm"))"))
                 }
                 .frame(width: 60, height: 75)
                 .font(.caption)
@@ -52,6 +56,7 @@ struct TaskCardMedium: View {
                     .font(.title3)
                     .foregroundStyle(.black)
                     .padding(.leading, 12)
+                    .accessibilityLabel(Text("Símbolo da Tarefa: \(task.symbol)"))
                 
                 Text(task.taskTitle)
                     .lineLimit(1)
@@ -59,10 +64,12 @@ struct TaskCardMedium: View {
                     .fontWeight(.semibold)
                     .foregroundStyle(.black)
                     .padding(.leading, 10)
+                    .accessibilityLabel(Text("Título da tarefa: \(task.taskTitle)"))
                 
                 Spacer()
                 
                 completionButton(task: task, baseColor: baseColor)
+                    .accessibilityLabel(Text("Botão para completar tarefa"))
             }
             .padding(.vertical, dateEquals ? 12 : 25)
             .background(
@@ -91,6 +98,7 @@ struct completionButton: View {
                         task.isCompleted.toggle()
                     }
                 }
+                .accessibilityLabel(Text("Tarefa não completada"))
         }
         else {
             Circle()
@@ -102,6 +110,7 @@ struct completionButton: View {
                         task.isCompleted.toggle()
                     }
                 }
+                .accessibilityLabel(Text("Tarefa completada"))
         }
     }
 }

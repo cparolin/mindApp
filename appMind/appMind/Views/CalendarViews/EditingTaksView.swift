@@ -44,15 +44,18 @@ struct EditingTaskView: View {
                         Text("Data da tarefa")
                             .font(.caption)
                             .foregroundStyle(.gray)
+                            .accessibilityLabel(Text("Data da tarefa"))
                         
                         HStack(){
                             Text("Começa")
+                                .accessibilityLabel(Text("Data de início da tarefa"))
                             DatePicker("", selection: $taskBeengEdit.todoDateStart)
                                 .datePickerStyle(.compact)
                                 .scaleEffect(0.9, anchor: .leading)
                         }
                         HStack(){
                             Text("Termina")
+                                .accessibilityLabel(Text("Data de término da tarefa"))
                             DatePicker("", selection: $taskBeengEdit.todoDateEnd)
                                 .datePickerStyle(.compact)
                                 .scaleEffect(0.9, anchor: .leading)
@@ -67,6 +70,7 @@ struct EditingTaskView: View {
                         Text("Cor da tarefa")
                             .font(.caption)
                             .foregroundStyle(.gray)
+                            .accessibilityLabel(Text("Cor da tarefa"))
                         
                         HStack(spacing: 0) {
                                 ColorPickerComponent(taskColor: $tempColor, palette: paletteLayout)
@@ -80,6 +84,7 @@ struct EditingTaskView: View {
                                 .bold()
                                 .hSpacing(.center)
                         }
+                        .accessibilityLabel(Text("Botão para deletar tarefa"))
                         .confirmationDialog("Você tem certeza que deseja excluir esse evento ?", isPresented: $presentConfirmation , titleVisibility: .visible){
                             Button("Sim" , role: .destructive){
                                 modelContext.delete(taskBeengEdit)
@@ -115,6 +120,7 @@ struct EditingTaskView: View {
                         Text("OK")
                     })
                     .disabled(taskBeengEdit.taskTitle == "" || taskBeengEdit.notes == "" ? true : false)
+                    .accessibilityLabel(Text("Botão para salvar modificações"))
                 }
             }
         }

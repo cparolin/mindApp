@@ -36,6 +36,7 @@ struct SymbolsPickerView: View {
                                     .foregroundStyle(.black)
                             }
                         }
+                        .accessibilityLabel(Text("Botão com o símbolo selecionado. Símbolo atual: \(symbols[i])"))
                     }
                 }
             }
@@ -48,6 +49,7 @@ struct SymbolsPickerView: View {
                     } label: {
                         Image(systemName: "xmark")
                     }
+                    .accessibilityLabel(Text("Botão para sair da tela atual"))
                 }
                 ToolbarItem(placement: .principal){
                     Text("Ícone")
@@ -58,6 +60,7 @@ struct SymbolsPickerView: View {
                         //aplicar funcionalidade de salvar, definir ImagemSelecionada temporaria = ImagemAtual
                         dismiss()
                     }
+                    .accessibilityLabel(Text("Botão para confirmar a seleção do ícone"))
                 }
             }
         }

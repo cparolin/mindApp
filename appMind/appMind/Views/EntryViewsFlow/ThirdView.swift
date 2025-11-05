@@ -27,6 +27,7 @@ struct ThirdView: View {
                 .font(.title)
                 .fontWeight(.bold)
                 .padding(.bottom , 30)
+                .accessibilityLabel(Text("Crie seu perfil"))
             
             
             PhotosPicker(selection: $imageSelection, matching: .images){
@@ -43,6 +44,8 @@ struct ThirdView: View {
                         .clipShape(Circle())
                 }
             }
+            .accessibilityLabel(Text("Botão para seleção da foto de perfil"))
+            
             .padding(.bottom  , 20)
             VStack(alignment: .center){
                 TextField("AAAAAAAAAAA", text: $userProfileNameTemp, prompt: Text("Nome e Sobrenome")
@@ -53,6 +56,7 @@ struct ThirdView: View {
                 .fontWeight(.semibold)
                 .multilineTextAlignment(.center)
                 .padding(.bottom , 80)
+                .accessibilityLabel(Text("Campo para escrever o nome de usuário"))
             }
             Button(){
                 if  userProfileNameTemp == ""{
@@ -71,6 +75,7 @@ struct ThirdView: View {
                         .fontWeight(.semibold)
                 }
             }
+            .accessibilityLabel(Text("Botão para salvar o perfil e prosseguir para página principal do aplicativo"))
             
             Button(){
                 imageSelection = nil
@@ -84,6 +89,7 @@ struct ThirdView: View {
             }
             .foregroundStyle(colorScheme == .light ? .black : .white)
             .padding(.top , 10)
+            .accessibilityLabel(Text("Botão para entrar no aplicativo sem fazer um perfil"))
         }
         .task(id: imageSelection) {
             do{

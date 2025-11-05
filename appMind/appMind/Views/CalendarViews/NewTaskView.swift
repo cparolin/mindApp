@@ -55,13 +55,16 @@ struct NewTaskView: View {
                                 }
                             }
                             .padding(5)
+                            .accessibilityLabel(Text("Botão para selecionar ícone da tarefa. Ícone atual: \(tempSelectedIcon)"))
                             
                             TextField("Nome do evento", text: $taskTitle)
                                 .padding(.vertical, 12)
                                 .font(.title)
                                 .fontWeight(.semibold)
+                                .accessibilityLabel(Text("Campo de texto para escrever o título da tarefa"))
                         }
                         TextField("Notas", text: $taskNote)
+                            .accessibilityLabel(Text("Campo de texto para escrever a descrição da tarefa"))
                             .onReceive(Just(taskNote)) {
                                 taskNote = String($0.prefix(descLength))
                             }
@@ -76,18 +79,22 @@ struct NewTaskView: View {
                         .foregroundStyle(.cinza3)
                         .frame(maxWidth: .infinity, alignment: .trailing)
                         .padding(.bottom, 5)
+                        .accessibilityLabel(Text("Caracteres disponíveis para o campo de descrição: \(descLength)"))
             
                     VStack(spacing: 16) {
                         HStack {
                             Text("Dia inteiro")
                                 .foregroundStyle(.black)
+                                .accessibilityLabel(Text("Texto descritivo para botão de tornar a duração da tarefa o dia inteiro: Dia inteiro"))
                             
                             Toggle("", isOn: $isEnabled)
                                 .padding(.trailing, 16)
+                                .accessibilityLabel(Text("Botão para tornar a duração da tarefa o dia inteiro"))
                         }
                         HStack(content: {
                             
                             Text("Começa")
+                                .accessibilityLabel(Text("Data e horário de início da tarefa"))
                                 .foregroundStyle(.black)
                             
                             DatePicker("", selection: $taskDateStart)
@@ -101,6 +108,7 @@ struct NewTaskView: View {
                         
                         HStack(content: {
                             Text("Termina")
+                                .accessibilityLabel(Text("Data e horário de término da tarefa"))
                                 .foregroundStyle(.black)
                             
                             DatePicker("", selection: $taskDateEnd)
@@ -113,6 +121,7 @@ struct NewTaskView: View {
                         
                         VStack(alignment: .leading, spacing: 8, content: {
                             Text("Cor da tarefa")
+                                .accessibilityLabel(Text("Cor da tarefa"))
                                 .font(.caption)
                                 .foregroundStyle(.gray)
                             
@@ -132,6 +141,7 @@ struct NewTaskView: View {
                         }, label: {
                             Image(systemName: "xmark")
                         })
+                        .accessibilityLabel(Text("Botão para sair da tela atual"))
                     }
                     ToolbarItem(placement: .principal) {
                         Text("Adicionar")
@@ -152,6 +162,7 @@ struct NewTaskView: View {
                         }, label: {
                             Text("OK")
                         })
+                        .accessibilityLabel(Text("Botão para confirmar criação tarefa"))
                         .disabled(taskTitle == "" || tempSelectedIcon == "")
                     }
                 }

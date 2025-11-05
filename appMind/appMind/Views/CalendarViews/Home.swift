@@ -36,6 +36,7 @@ struct Home: View {
                             .foregroundStyle(.black)
                             .padding(.top, g.size.height <= 564 ? 20 : 40)
                             .padding(.bottom, 23)
+                            .accessibilityLabel(Text("Data atual: \(Date().format("dd, MMMM YYYY"))"))
                         
                         TabView(selection: $currentWeekIndex) {
                             ForEach(weekSlider.indices, id: \.self){ index in
@@ -109,6 +110,7 @@ struct Home: View {
                     }
                 })
                 .padding(.horizontal, 16)
+                .accessibilityLabel(Text("Adicionar nova tarefa"))
             })
             .onAppear {
                 if weekSlider.isEmpty {
