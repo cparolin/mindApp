@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct TaskCardReduced: View {
-    @AppStorage("font") private var font = "SF Pro"
     var task: Task
     var baseColor: String
 
@@ -26,7 +25,7 @@ struct TaskCardReduced: View {
                 Text(task.taskTitle)
                     .lineLimit(1)
                     .truncationMode(.tail)
-                    .font(.changeFont(fontType: font, fontStyle: .body, fontWeight: isOpenDyslexic(font: font) ? .bold : .semibold))
+                    .fontWeight(.semibold)
                     .foregroundStyle(.black)
                     .padding(.leading, 10)
                 

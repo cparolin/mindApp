@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct TaskCardMedium: View {
-    @AppStorage("font") private var font = "SF Pro"
     var task: Task
     var baseColor: String
     
@@ -27,7 +26,7 @@ struct TaskCardMedium: View {
                     Text("\(task.todoDateEnd.format("HH:mm"))")
                 }
                 .frame(width: 60, height: 50)
-                .font(.changeFont(fontType: font, fontStyle: .caption, fontWeight: .regular))
+                .font(.caption)
                 .foregroundStyle(.black)
                 .background(
                     RoundedRectangle(cornerRadius: 16)
@@ -40,7 +39,7 @@ struct TaskCardMedium: View {
                     Text("\(task.todoDateEnd.format("HH:mm"))")
                 }
                 .frame(width: 60, height: 75)
-                .font(.changeFont(fontType: font, fontStyle: .caption, fontWeight: .regular))
+                .font(.caption)
                 .foregroundStyle(.black)
                 .background(
                     RoundedRectangle(cornerRadius: 16)

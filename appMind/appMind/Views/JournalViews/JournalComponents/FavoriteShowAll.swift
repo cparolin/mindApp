@@ -8,13 +8,13 @@
 import SwiftUI
 
 struct FavoriteShowAll: View {
-    @AppStorage("font") private var font = "SF Pro"
     var favoriteJournals: [JournalModel]
     
     var body: some View {
         HStack {
             Text("Favoritos")
-                .font(.changeFont(fontType: font, fontStyle: .title3, fontWeight: isOpenDyslexic(font: font) ? .bold : .semibold))
+                .font(.title3)
+                .fontWeight(.semibold)
             
             Spacer()
             
@@ -24,7 +24,8 @@ struct FavoriteShowAll: View {
                 
             } label: {
                 Text("Mostrar tudo")
-                    .font(.changeFont(fontType: font, fontStyle: .caption, fontWeight: isOpenDyslexic(font: font) ? .bold : .semibold))
+                    .font(.caption)
+                    .fontWeight(.semibold)
                     .foregroundStyle(.gray)
             }
         }

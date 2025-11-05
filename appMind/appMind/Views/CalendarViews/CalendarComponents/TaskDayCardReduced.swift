@@ -26,7 +26,7 @@ struct TaskDayCardReduced: View {
             HStack (spacing: 0){
                 Text(task.taskTitleDay)
                     .truncationMode(.tail)
-                    .font(.changeFont(fontType: font, fontStyle: .body, fontWeight: isOpenDyslexic(font: font) ? .bold : .semibold))
+                    .fontWeight(.semibold)
                     .foregroundStyle(.black)
                     .padding(.leading, 10)
                 

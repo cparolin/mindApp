@@ -64,7 +64,7 @@ public func currentFont(to newFont: String) {
 extension Font.TextStyle {
     var size: CGFloat {
         switch self {
-        case .largeTitle: return 34
+        case .largeTitle: return 30
         case .title: return 30
         case .title2: return 24
         case .title3: return 20

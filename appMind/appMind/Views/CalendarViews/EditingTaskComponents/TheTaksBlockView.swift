@@ -8,7 +8,6 @@
 import SwiftUI
 //
 struct TheTaksBlockView: View {
-    @AppStorage("font") private var font = "SF Pro"
     @Binding var task: Task
     @Binding var cor: String
     @State var width: CGFloat = UIScreen.main.bounds.width * 0.9
@@ -41,7 +40,8 @@ struct TheTaksBlockView: View {
                     }
                 
                 TextField("Título do Evento", text: $task.taskTitle)
-                    .font(.changeFont(fontType: font, fontStyle: .title2, fontWeight: .bold))
+                    .font(.title2)
+                    .bold()
                 
                 Spacer()
             }
@@ -49,7 +49,8 @@ struct TheTaksBlockView: View {
             
             VStack (alignment: .leading) {
                 Text("Notas")
-                    .font(.changeFont(fontType: font, fontStyle: .footnote, fontWeight: .bold))
+                    .font(.footnote)
+                    .bold()
                 
                 TextField("Descrição breve sobre o evento", text: $task.notes)
                     .onChange(of: task.notes) { newValue in
@@ -57,7 +58,7 @@ struct TheTaksBlockView: View {
                             task.notes = String(newValue.prefix(descLength))
                         }
                     }
-                    .font(.changeFont(fontType: font, fontStyle: .callout, fontWeight: .regular))
+                    .font(.callout)
                     .padding(.leading)
             }
             .padding(.top, height * 0.46)

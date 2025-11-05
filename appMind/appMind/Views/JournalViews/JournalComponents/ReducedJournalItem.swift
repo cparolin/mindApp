@@ -10,7 +10,6 @@ import SwiftData
 
 struct ReducedJournalItem: View {
     var journal: JournalModel
-    @AppStorage("font") private var font = "SF Pro"
     @AppStorage("paletteLayout") private var paletteLayout: String = "Saturadas"
     
     // month and day date formating
@@ -51,11 +50,12 @@ struct ReducedJournalItem: View {
                     HStack {
                         HStack (spacing: 5){
                             Text(journal.date.formatted(day))
-                                .font(.changeFont(fontType: font, fontStyle: .body, fontWeight: .bold))
+                                .font(.body)
+                                .fontWeight(.bold)
                                 .italic()
                             
                             Text(journal.date.formatted(month))
-                                .font(.changeFont(fontType: font, fontStyle: .body, fontWeight: .regular))
+                                .font(.body)
                                 .italic()
                         }
                         .padding(.leading, 7)
@@ -64,26 +64,22 @@ struct ReducedJournalItem: View {
                         
                         VStack (alignment: .trailing, spacing: 2){
                             Text(journal.journalType.type)
-                                .font(
-                                    .changeFont(
-                                        fontType: font,
-                                        fontStyle: .caption,
-                                        fontWeight: isOpenDyslexic(font: font) ? .bold : .medium
-                                    )
-                                )
-                                .padding(.trailing, 5)
+                                .font(.caption)
+                                .fontWeight(.medium)
+                                .padding(.trailing, 10)
                             
                             Capsule()
-                                .frame(width: 95, height: 2.6)
+                                .frame(width: 90, height: 2.6)
                                 .foregroundStyle(getColor())
                         }
                     }
-                    .frame(width: UIScreen.main.bounds.width * 0.5)
+                    .frame(width: UIScreen.main.bounds.width * 0.48)
                     
                     Spacer()
                     // Title
                     Text(journal.title)
-                        .font(.changeFont(fontType: font, fontStyle: .title3, fontWeight: .bold))
+                        .font(.title3)
+                        .bold()
                         .padding(EdgeInsets(top: 0, leading: 6, bottom: 6, trailing: 0))
                 }
                 .padding(.leading, 6)
@@ -118,7 +114,7 @@ struct ReducedItemBackground: View {
         return Color(getPaletteColor(palette: paletteLayout, color: color))
     }
     
-    let width = UIScreen.main.bounds.width * 0.52
+    let width = UIScreen.main.bounds.width * 0.5
     let height = UIScreen.main.bounds.height * 0.107
     
     var body: some View {
@@ -144,7 +140,6 @@ struct ReducedItemBackground: View {
         .padding(.vertical, 5)
     }
 }
-
 
 #Preview {
     ReducedJournalItem(journal: JournalModel(title: "Título", desc: "Lorem Ipsum é simplesmente uma simulação de texto da", date: Date.now, answers: ["",""], journalType: JournalTypeModel(type: "Comunicação", symbol: "message", questions: [""]), isFavorite: false))

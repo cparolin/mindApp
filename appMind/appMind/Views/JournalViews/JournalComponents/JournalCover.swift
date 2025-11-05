@@ -9,7 +9,6 @@ import SwiftUI
 
 struct JournalCover: View {
     var journal: JournalTypeModel
-    @AppStorage("font") private var font = "SF Pro"
     @AppStorage("paletteLayout") private var paletteLayout: String = "Saturadas"
     
     let coverSize: CGFloat = UIScreen.main.bounds.width * 0.6
@@ -66,7 +65,8 @@ struct JournalCover: View {
                     
                     Text(journal.type)
                         .foregroundStyle(Color(getPaletteColor(palette: paletteLayout, color: color[1])))
-                        .font(.changeFont(fontType: font, fontStyle: .title, fontWeight: .bold))
+                        .font(.title)
+                        .bold()
                 }
                 .padding(.bottom)
             }

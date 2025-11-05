@@ -9,7 +9,6 @@ import SwiftData
 import SwiftUI
 
 struct NewTaskView: View {
-    @AppStorage("font") private var font = "SF Pro"
     @AppStorage("paletteLayout") private var paletteLayout: String = "Saturadas"
     
     @Environment(\.dismiss) private var dismiss
@@ -59,10 +58,10 @@ struct NewTaskView: View {
                             
                             TextField("Nome do evento", text: $taskTitle)
                                 .padding(.vertical, 12)
-                                .font(.changeFont(fontType: font, fontStyle: .title, fontWeight: isOpenDyslexic(font: font) ? .bold : .semibold))
+                                .font(.title)
+                                .fontWeight(.semibold)
                         }
                         TextField("Notas", text: $taskNote)
-                            .font(.changeFont(fontType: font, fontStyle: .body, fontWeight: .regular))
                             .onReceive(Just(taskNote)) {
                                 taskNote = String($0.prefix(descLength))
                             }
@@ -72,7 +71,8 @@ struct NewTaskView: View {
                         .padding(.top, 4)
                     
                     Text("\(descCountdown)/\(descLength)")
-                        .font(.changeFont(fontType: font, fontStyle: .caption, fontWeight: isOpenDyslexic(font: font) ? .bold : .semibold))
+                        .font(.caption)
+                        .fontWeight(.semibold)
                         .foregroundStyle(.cinza3)
                         .frame(maxWidth: .infinity, alignment: .trailing)
                         .padding(.bottom, 5)
@@ -80,7 +80,6 @@ struct NewTaskView: View {
                     VStack(spacing: 16) {
                         HStack {
                             Text("Dia inteiro")
-                                .font(.changeFont(fontType: font, fontStyle: .body, fontWeight: .regular))
                                 .foregroundStyle(.black)
                             
                             Toggle("", isOn: $isEnabled)
@@ -89,7 +88,6 @@ struct NewTaskView: View {
                         HStack(content: {
                             
                             Text("Começa")
-                                .font(.changeFont(fontType: font, fontStyle: .body, fontWeight: .regular))
                                 .foregroundStyle(.black)
                             
                             DatePicker("", selection: $taskDateStart)
@@ -103,7 +101,6 @@ struct NewTaskView: View {
                         
                         HStack(content: {
                             Text("Termina")
-                                .font(.changeFont(fontType: font, fontStyle: .body, fontWeight: .regular))
                                 .foregroundStyle(.black)
                             
                             DatePicker("", selection: $taskDateEnd)
@@ -116,7 +113,7 @@ struct NewTaskView: View {
                         
                         VStack(alignment: .leading, spacing: 8, content: {
                             Text("Cor da tarefa")
-                                .font(.changeFont(fontType: font, fontStyle: .caption, fontWeight: .regular))
+                                .font(.caption)
                                 .foregroundStyle(.gray)
                             
                             ColorPickerComponent(taskColor: $taskColor, palette: paletteLayout)
@@ -138,7 +135,7 @@ struct NewTaskView: View {
                     }
                     ToolbarItem(placement: .principal) {
                         Text("Adicionar")
-                            .font(.changeFont(fontType: font, fontStyle: .body, fontWeight: isOpenDyslexic(font: font) ? .bold : .semibold))
+                            .fontWeight(.semibold)
                     }
                     ToolbarItem(placement: .confirmationAction){
                         Button(action: {
@@ -154,7 +151,6 @@ struct NewTaskView: View {
                             dismiss()
                         }, label: {
                             Text("OK")
-                                .font(.changeFont(fontType: font, fontStyle: .body, fontWeight: .regular))
                         })
                         .disabled(taskTitle == "" || tempSelectedIcon == "")
                     }

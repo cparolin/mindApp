@@ -14,7 +14,6 @@ struct EditingTaskView: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) var modelContext
     @State var enunToString: EnunsCreateEditTaskVIew = EnunsCreateEditTaskVIew()
-    @AppStorage("font") private var font = "SF Pro"
     @AppStorage("paletteLayout") private var paletteLayout: String = "Saturadas"
     @State var taskBeengEdit: Task
     @State var presentConfirmation: Bool = false
@@ -43,18 +42,17 @@ struct EditingTaskView: View {
                 VStack(spacing: 16) {
                     VStack(alignment: .leading, spacing: 8, content: {
                         Text("Data da tarefa")
-                            .font(.changeFont(fontType: font, fontStyle: .caption, fontWeight: .regular))
+                            .font(.caption)
                             .foregroundStyle(.gray)
+                        
                         HStack(){
                             Text("Começa")
-                                .font(.changeFont(fontType: font, fontStyle: .body, fontWeight: .regular))
                             DatePicker("", selection: $taskBeengEdit.todoDateStart)
                                 .datePickerStyle(.compact)
                                 .scaleEffect(0.9, anchor: .leading)
                         }
                         HStack(){
                             Text("Termina")
-                                .font(.changeFont(fontType: font, fontStyle: .body, fontWeight: .regular))
                             DatePicker("", selection: $taskBeengEdit.todoDateEnd)
                                 .datePickerStyle(.compact)
                                 .scaleEffect(0.9, anchor: .leading)
@@ -67,7 +65,7 @@ struct EditingTaskView: View {
                     
                     VStack(alignment: .leading, spacing: 8, content: {
                         Text("Cor da tarefa")
-                            .font(.changeFont(fontType: font, fontStyle: .caption, fontWeight: .regular))
+                            .font(.caption)
                             .foregroundStyle(.gray)
                         
                         HStack(spacing: 0) {
@@ -78,7 +76,8 @@ struct EditingTaskView: View {
                             presentConfirmation.toggle()
                         } label: {
                             Text("Excluir evento")
-                                .font(.changeFont(fontType: font, fontStyle: .subheadline, fontWeight: isOpenDyslexic(font: font) ? .bold : .semibold))
+                                .font(.subheadline)
+                                .bold()
                                 .hSpacing(.center)
                         }
                         .confirmationDialog("Você tem certeza que deseja excluir esse evento ?", isPresented: $presentConfirmation , titleVisibility: .visible){
@@ -101,7 +100,6 @@ struct EditingTaskView: View {
             .toolbar {
                 ToolbarItem(placement: .principal) {
                     Text("\(taskBeengEdit.taskTitle)")
-                        .font(.changeFont(fontType: font, fontStyle: .body, fontWeight: .regular))
                 }
                 ToolbarItem(placement: .confirmationAction){
                     Button(action: {
@@ -115,7 +113,6 @@ struct EditingTaskView: View {
                         dismiss()
                     }, label: {
                         Text("OK")
-                            .font(.changeFont(fontType: font, fontStyle: .body, fontWeight: .regular))
                     })
                 }
             }

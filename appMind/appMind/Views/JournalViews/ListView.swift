@@ -9,7 +9,6 @@ import SwiftUI
 
 /// Exibits all the journals on the favorite list
 struct ListView: View {
-    @AppStorage("font") private var font = "SF Pro"
     @State var notes: [JournalModel]
     @State var searchText = ""
     var isFavorite: Bool
@@ -31,7 +30,6 @@ struct ListView: View {
                 VStack (spacing: 12){
                     if notes.count == 0 {
                         Text("Nenhum registro adicionado")
-                            .font(.changeFont(fontType: font, fontStyle: .body, fontWeight: .regular))
                             .frame(width: 370)
                             .padding(.top, UIScreen.main.bounds.height * 0.33)
                         

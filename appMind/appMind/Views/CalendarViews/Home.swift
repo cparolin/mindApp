@@ -30,7 +30,8 @@ struct Home: View {
                     
                     VStack(alignment: .center) {
                         Text(Date().format("dd, MMMM YYYY"))
-                            .font(.changeFont(fontType: font, fontStyle: .title3, fontWeight: isOpenDyslexic(font: font) ? .bold : .semibold))
+                            .font(.title3)
+                            .fontWeight(.semibold)
                             .textScale(.secondary)
                             .foregroundStyle(.black)
                             .padding(.top, g.size.height <= 564 ? 20 : 40)
@@ -43,7 +44,8 @@ struct Home: View {
                                     ForEach(week) { day in
                                         VStack {
                                             Text(day.date.format("d"))
-                                                .font(.changeFont(fontType: font, fontStyle: .title, fontWeight: .bold))
+                                                .font(.title)
+                                                .bold()
                                                 .textScale(.secondary)
                                                 .foregroundStyle(isSameDate(day.date, currentDate) ? .white : .gray)
                                                 .frame(width: 44, height: 64)
@@ -60,7 +62,8 @@ struct Home: View {
                                                 })
                                                 .background(.white.shadow(.drop(radius: 1)), in: .circle) // deixa o numero dos dias com a borda circular
                                             Text(day.date.format("E"))
-                                                .font(.changeFont(fontType: font, fontStyle: .callout, fontWeight: isOpenDyslexic(font: font) ? .bold : .medium))
+                                                .font(.callout)
+                                                .fontWeight(.medium)
                                                 .textScale(.secondary)
                                                 .foregroundStyle(.black)
                                                 .padding(.bottom, -20)

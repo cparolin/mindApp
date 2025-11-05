@@ -9,9 +9,6 @@ import SwiftUI
 import SwiftData
 
 struct SettingsView: View {
-    
-    @AppStorage("font") private var font = "SF Pro"
-    
     @Environment(\.modelContext) var context
     @Environment(\.dismiss) private var dismiss
     
@@ -46,7 +43,8 @@ struct SettingsView: View {
                     }
                     if userName == "" {
                         TextField("Sem nome de usuário", text: $nomeUsuario)
-                            .font(.changeFont(fontType: font, fontStyle: .title2, fontWeight: .bold))
+                            .font(.title2)
+                            .bold()
                             .padding(.top, 21)
                             .padding(.bottom, 45)
                             .multilineTextAlignment(.center)
@@ -66,7 +64,6 @@ struct SettingsView: View {
                             HStack {
                                 Image(systemName: "bell.badge")
                                 Text("Notificações")
-                                    .font(.changeFont(fontType: font, fontStyle: .body, fontWeight: .regular))
                             }
                             .foregroundStyle(.black)
                             Spacer()
@@ -80,7 +77,6 @@ struct SettingsView: View {
                         HStack {
                             Image(systemName: "paintpalette")
                             Text("Aparência")
-                                .font(.changeFont(fontType: font, fontStyle: .body, fontWeight: .regular))
                         }
                         .foregroundStyle(.black)
                         Spacer()
@@ -93,7 +89,8 @@ struct SettingsView: View {
                         presentConfirmation.toggle()
                     } label: {
                         Text("Excluir dados")
-                            .font(.changeFont(fontType: font, fontStyle: .subheadline, fontWeight: isOpenDyslexic(font: font) ? .bold : .semibold))
+                            .font(.subheadline)
+                            .fontWeight(.semibold)
                             .hSpacing(.center)
                     }
                     .confirmationDialog("Você tem certeza que deseja excluir TODOS os seus dados? Isso também irá deletar todas as suas tarefas e diários", isPresented: $presentConfirmation , titleVisibility: .visible){

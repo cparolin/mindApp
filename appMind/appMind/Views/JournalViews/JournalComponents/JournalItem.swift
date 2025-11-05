@@ -10,7 +10,6 @@ import SwiftData
 
 struct JournalItem: View {
     @Environment(\.modelContext) private var context
-    @AppStorage("font") private var font = "SF Pro"
     
     var journal: JournalModel
     
@@ -28,18 +27,20 @@ struct JournalItem: View {
                 HStack (spacing: 22){
                     VStack (spacing: 9){
                         Text(journal.date.formatted(month))
-                            .font(.changeFont(fontType: font, fontStyle: .title3, fontWeight: isOpenDyslexic(font: font) ? .bold : .semibold))
+                            .font(.title3)
+                            .fontWeight(.semibold)
                         
                         Text(journal.date.formatted(day))
-                            .font(.changeFont(fontType: font, fontStyle: .title, fontWeight: .regular))
+                            .font(.title)
                     }
                     
                     VStack (alignment: .leading, spacing: 9){
                         Text(journal.title)
-                            .font(.changeFont(fontType: font, fontStyle: .title3, fontWeight: isOpenDyslexic(font: font) ? .bold : .semibold))
+                            .font(.title3)
+                            .fontWeight(.semibold)
                         
                         Text(journal.desc)
-                            .font(.changeFont(fontType: font, fontStyle: .callout, fontWeight: .bold))
+                            .font(.callout)
                             .multilineTextAlignment(.leading)
                     }
                     .frame(width: UIScreen.main.bounds.width * 0.53, alignment: .topLeading)
