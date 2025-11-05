@@ -24,7 +24,7 @@ struct NewTaskView: View {
     @State private var isEnabled = false
     @State private var symbolsPicker = false
     @State var tempSelectedIcon: String = ""
-    @State var descLength: Int = 36
+    @State var descLength: Int = 35
     
     var descCountdown: Int {
         descLength - taskNote.count

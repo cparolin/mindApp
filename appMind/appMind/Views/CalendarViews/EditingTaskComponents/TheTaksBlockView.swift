@@ -13,6 +13,7 @@ struct TheTaksBlockView: View {
     @Binding var cor: String
     @State var width: CGFloat = UIScreen.main.bounds.width * 0.9
     @State var height: CGFloat = UIScreen.main.bounds.height * 0.17
+    @State var descLength: Int = 35
     
     var body: some View {
         ZStack(){
@@ -51,6 +52,11 @@ struct TheTaksBlockView: View {
                     .font(.changeFont(fontType: font, fontStyle: .footnote, fontWeight: .bold))
                 
                 TextField("Descrição breve sobre o evento", text: $task.notes)
+                    .onChange(of: task.notes) { newValue in
+                        if newValue.count > descLength {
+                            task.notes = String(newValue.prefix(descLength))
+                        }
+                    }
                     .font(.changeFont(fontType: font, fontStyle: .callout, fontWeight: .regular))
                     .padding(.leading)
             }
