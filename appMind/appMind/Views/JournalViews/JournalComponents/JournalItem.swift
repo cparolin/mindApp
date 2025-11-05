@@ -41,8 +41,8 @@ struct JournalItem: View {
                         Text(journal.desc)
                             .font(.changeFont(fontType: font, fontStyle: .callout, fontWeight: .bold))
                             .multilineTextAlignment(.leading)
-                            .frame(width: UIScreen.main.bounds.width * 0.53, alignment: .topLeading)
                     }
+                    .frame(width: UIScreen.main.bounds.width * 0.53, alignment: .topLeading)
                     
                     Button {
                         journal.isFavorite.toggle()
