@@ -6,9 +6,13 @@
 //
 import PhotosUI
 import SwiftUI
+import SwiftData
 
 struct SettingsView: View {
+    
     @AppStorage("font") private var font = "SF Pro"
+    
+    @Environment(\.modelContext) var context
     @Environment(\.dismiss) private var dismiss
     
     @AppStorage("Imagem do usuario salvo localmente") var savedUserProfileImage: Data = Data()
@@ -18,11 +22,13 @@ struct SettingsView: View {
     @State var userProfileNameTemp: String = ""
     @State var imageSelection: PhotosPickerItem? = nil
     @State var userProfileImage: UIImage = UIImage()
-
+    @State var nomeUsuario: String = ""
+    var questionMark: Image = Image(systemName: "questionmark")
+    
     var body: some View {
         NavigationStack {
             NavigationView {
-                VStack {
+                VStack (alignment: .center){
                     if let uiImage = UIImage(data: savedUserProfileImage) {
                         Image(uiImage: uiImage)
                             .resizable()
@@ -30,36 +36,28 @@ struct SettingsView: View {
                             .frame(width: 161 , height: 161)
                             .clipShape(Circle())
                     } else {
-                        Image(systemName: "questionmark")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 161 , height: 161)
-                            .clipShape(Circle())
-                            .onTapGesture {
-                                PhotosPicker(selection: $imageSelection, matching: .images){
-                                    if imageSelection == nil{
-                                        Circle()
-                                            .foregroundStyle(Color.gray)
-                                            .frame(width: 161)
-                                    }
-                                    else {
-                                        Image(uiImage: userProfileImage)
-                                            .resizable()
-                                            .scaledToFill()
-                                            .frame(width: 161 , height: 161)
-                                            .clipShape(Circle())
-                                    }
-                                }
+                        PhotosPicker(selection: $imageSelection, matching: .images){
+                            if UIImage(data: savedUserProfileImage) == nil{
+                                Circle()
+                                    .foregroundStyle(Color.gray)
+                                    .frame(width: 161)
                             }
+                        }
                     }
-                    if userName != "" {
-                        Text("\(userName)")
+                    if userName == "" {
+                        TextField("Sem nome de usuário", text: $nomeUsuario)
                             .font(.changeFont(fontType: font, fontStyle: .title2, fontWeight: .bold))
                             .padding(.top, 21)
                             .padding(.bottom, 45)
+                            .multilineTextAlignment(.center)
+                            .frame(maxWidth: .infinity, alignment: .center)
+                            .onSubmit {
+                                userName = nomeUsuario
+                            }
                     } else {
-                        Text("Sem nome de usuário")
-                            .font(.changeFont(fontType: font, fontStyle: .title2, fontWeight: .bold))
+                        Text("\(userName)")
+                            .font(.title2)
+                            .fontWeight(.bold)
                             .padding(.top, 21)
                             .padding(.bottom, 45)
                     }
@@ -98,22 +96,39 @@ struct SettingsView: View {
                             .font(.changeFont(fontType: font, fontStyle: .subheadline, fontWeight: isOpenDyslexic(font: font) ? .bold : .semibold))
                             .hSpacing(.center)
                     }
-                    .confirmationDialog("Você tem certeza que deseja excluir esse evento?", isPresented: $presentConfirmation , titleVisibility: .visible){
+                    .confirmationDialog("Você tem certeza que deseja excluir TODOS os seus dados? Isso também irá deletar todas as suas tarefas e diários", isPresented: $presentConfirmation , titleVisibility: .visible){
                         Button("Sim" , role: .destructive){
                             savedUserProfileImage = Data()
                             userName = ""
+                            nomeUsuario = ""
+                            do {
+                                try context.delete(model: Task.self)
+                                try context.delete(model: TaskDay.self)
+                                try context.delete(model: JournalModel.self)
+                                try context.delete(model: JournalTypeModel.self)
+                            } catch {
+                                print("Falha ao deletar Modelo: \(error)")
+                            }
                             dismiss()
                         }
                     }
-
-                    
                 }
                 .padding(16)
                 .navigationTitle("Ajustes")
+                .task(id: imageSelection) {
+                    do{
+                        if let loaded = try await imageSelection?.loadTransferable(type: Data.self) {
+                            savedUserProfileImage = loaded
+                            userProfileImage = UIImage(data: savedUserProfileImage) ?? UIImage(named: "Se Voce esta vendo isso, significa que algo deu errado no momento de converter o Data para UIImage na 'ThirdView'")!
+                        } else {
+                            print("Failed")
+                        }
+                    } catch(let error) {
+                        print(error.localizedDescription)
+                    }
+                }
             }
-            
         }
-        
     }
 }
 

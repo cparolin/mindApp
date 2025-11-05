@@ -22,7 +22,7 @@ struct Home: View {
             VStack(alignment: .leading, spacing: 0, content: {
                 ZStack {
                     UnevenRoundedRectangle(cornerRadii: .init(topLeading: 0, bottomLeading: 25, bottomTrailing: 25, topTrailing: 0))
-                        .frame(height: g.size.height >= 729 ? 230 : g.size.height >= 714 ? 220 : 190)
+                        .frame(height: 230)
                         .foregroundColor(.accentColor.opacity(0.3))
                         .vSpacing(.top)
                         .ignoresSafeArea()
