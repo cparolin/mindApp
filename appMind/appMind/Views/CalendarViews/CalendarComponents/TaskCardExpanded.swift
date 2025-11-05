@@ -22,7 +22,7 @@ struct TaskCardExpanded: View {
     var body: some View {
         HStack {
             if dateEquals {
-                VStack(spacing: 20) {
+                VStack() {
                     Text("\(task.todoDateEnd.format("HH:mm"))")
                 }
                 .frame(width: 60, height: 83)
@@ -47,7 +47,7 @@ struct TaskCardExpanded: View {
                 )
             }
             
-            HStack (spacing: 0){
+            HStack (spacing: 0) {
                 Image(systemName: task.symbol)
                     .font(.title3)
                     .foregroundStyle(.black)

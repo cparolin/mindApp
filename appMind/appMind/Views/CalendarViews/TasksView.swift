@@ -26,7 +26,7 @@ struct TasksView: View {
         }
         ScrollView(.vertical) {
             
-            VStack(alignment: .leading, spacing: 15) {
+            VStack(alignment: .leading) {
                 ForEach(tasksDay) { task in
                     if isSameDate(task.todoDateDay, currentDate) {
                         TaskDayCardReduced(task: task, baseColor: getPaletteColor(palette: paletteLayout, color: task.tintDay))
@@ -41,10 +41,10 @@ struct TasksView: View {
                 }
                 //Cards
                 ForEach(tasks) { task in
-                    NavigationLink(){
-                        EditingTaskView(taskBeengEdit: task)
-                    } label: {
-                        if isSameDate(task.todoDateStart, currentDate) {
+                    if isSameDate(task.todoDateStart, currentDate) {
+                        NavigationLink(){
+                            EditingTaskView(taskBeengEdit: task)
+                        } label: {
                             if textLayout == 0 {
                                 TaskCardExpanded(task: task, baseColor: getPaletteColor(palette: paletteLayout, color: task.tint))
                             }
