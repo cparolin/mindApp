@@ -59,19 +59,19 @@ struct SettingsView: View {
                             .padding(.top, 21)
                             .padding(.bottom, 45)
                     }
-                    HStack {
-                        NavigationLink(destination: NotificationsView()) {
-                            HStack {
-                                Image(systemName: "bell.badge")
-                                Text("Notificações")
-                            }
-                            .foregroundStyle(.black)
-                            Spacer()
-                            Image(systemName: "chevron.right")
-                                .foregroundStyle(.gray)
-                        }
-                        .padding(.vertical, 11)
-                    }
+//                    HStack {
+//                        NavigationLink(destination: NotificationsView()) {
+//                            HStack {
+//                                Image(systemName: "bell.badge")
+//                                Text("Notificações")
+//                            }
+//                            .foregroundStyle(.black)
+//                            Spacer()
+//                            Image(systemName: "chevron.right")
+//                                .foregroundStyle(.gray)
+//                        }
+//                        .padding(.vertical, 11)
+//                    }
                     Divider()
                     NavigationLink(destination: AppearenceView()) {
                         HStack {
@@ -84,6 +84,7 @@ struct SettingsView: View {
                             .foregroundStyle(.gray)
                     }
                     .padding(.vertical, 11)
+                    Divider()
                     Spacer()
                     Button(role: .destructive){
                         presentConfirmation.toggle()
