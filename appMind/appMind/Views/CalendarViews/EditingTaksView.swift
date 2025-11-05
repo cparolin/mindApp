@@ -80,7 +80,7 @@ struct EditingTaskView: View {
                                 .bold()
                                 .hSpacing(.center)
                         }
-                        .confirmationDialog("Você tem certeza que deseja excluir esse evento ?", isPresented: $presentConfirmation , titleVisibility: .visible){
+                        .confirmationDialog("Você tem certeza que deseja excluir esse evento?", isPresented: $presentConfirmation , titleVisibility: .visible){
                             Button("Sim" , role: .destructive){
                                 modelContext.delete(taskBeengEdit)
                                 do{
@@ -114,7 +114,7 @@ struct EditingTaskView: View {
                     }, label: {
                         Text("OK")
                     })
-                    .disabled(taskBeengEdit.taskTitle == "" || taskBeengEdit.notes == "" ? true : false)
+                    .disabled(taskBeengEdit.taskTitle == "" || taskBeengEdit.notes == "" || taskBeengEdit.symbol == "" ? true : false)
                 }
             }
         }

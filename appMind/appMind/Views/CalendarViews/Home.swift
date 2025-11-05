@@ -127,7 +127,7 @@ struct Home: View {
                 }
             }
             .sheet(isPresented: $createNewTask) {
-                NewTaskView(/*newTask: $newTask, newTaskDay: $newTaskDay*/)
+                NewTaskView(/*newTask: $newTask, newTaskDay: $newTaskDay*/currentDate: currentDate)
                     .presentationDetents([.height(585)])
                     .presentationCornerRadius(30)
                     .background(.white)

@@ -39,9 +39,15 @@ struct TheTaksDayBlockView: View {
                         Button {
                             isPresented.toggle()
                         } label: {
-                            Image(systemName: task.symbolDay)
-                                .font(.title)
-                                .foregroundColor(.black)
+                            if task.symbolDay == "" {
+                                Image(systemName: "questionmark")
+                                    .font(.title)
+                                    .foregroundColor(.black)
+                            } else {
+                                Image(systemName: task.symbolDay)
+                                    .font(.title)
+                                    .foregroundColor(.black)
+                            }
                         }
 
                     }

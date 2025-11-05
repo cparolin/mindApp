@@ -22,8 +22,10 @@ struct NewTaskView: View {
     @State private var selection: String = "t"
     @State private var isEnabled = false
     @State private var symbolsPicker = false
-    @State var tempSelectedIcon: String = ""
+    @State var tempSelectedIcon: String = "figure.cross.training"
     @State var descLength: Int = 35
+    
+    var currentDate: Date
     
     var descCountdown: Int {
         descLength - taskNote.count
@@ -44,15 +46,10 @@ struct NewTaskView: View {
                             Button {
                                 symbolsPicker.toggle()
                             } label : {
-                                if tempSelectedIcon == "" {
-                                    Image(systemName: "figure.cross.training")
-                                        .font(.largeTitle)
-                                        .foregroundStyle(.gray)
-                                } else {
                                     Image(systemName: "\(tempSelectedIcon)")
                                         .font(.largeTitle)
                                         .foregroundStyle(.gray)
-                                }
+                                
                             }
                             .padding(5)
                             
@@ -90,7 +87,7 @@ struct NewTaskView: View {
                             Text("Começa")
                                 .foregroundStyle(.black)
                             
-                            DatePicker("", selection: $taskDateStart)
+                            DatePicker("", selection: $taskDateStart, in: currentDate...)
                                 .datePickerStyle(.compact)
                                 .scaleEffect(0.9, anchor: .leading)
                                 .disabled(isEnabled)
@@ -103,7 +100,7 @@ struct NewTaskView: View {
                             Text("Termina")
                                 .foregroundStyle(.black)
                             
-                            DatePicker("", selection: $taskDateEnd)
+                            DatePicker("", selection: $taskDateEnd, in: currentDate...)
                                 .datePickerStyle(.compact)
                                 .scaleEffect(0.9, anchor: .leading)
                                 .disabled(isEnabled)
@@ -140,7 +137,7 @@ struct NewTaskView: View {
                     ToolbarItem(placement: .confirmationAction){
                         Button(action: {
                             if isEnabled {
-                                let newTaskDay = TaskDay(taskTitleDay: "\(taskTitle)", todoDateDay: taskDate, tintDay: "\(taskColor)", notesDay: "\(taskNote)", symbolDay: "\(tempSelectedIcon)")
+                                let newTaskDay = TaskDay(taskTitleDay: "\(taskTitle)", todoDateDay: currentDate, tintDay: "\(taskColor)", notesDay: "\(taskNote)", symbolDay: "\(tempSelectedIcon)")
                                 modelContext.insert(newTaskDay)
                             }
                             else {
@@ -163,5 +160,5 @@ struct NewTaskView: View {
     }
 }
 #Preview {
-    NewTaskView()
+    NewTaskView(currentDate: Date.now)
 }

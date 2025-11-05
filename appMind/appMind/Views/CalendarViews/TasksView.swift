@@ -42,10 +42,11 @@ struct TasksView: View {
                         .fontWeight(.semibold)
                         .padding(.bottom, 5)
                         .padding(.leading)
+                        .padding(.top, 10)
                 }
                 //Cards
                 ForEach(tasks) { task in
-                    if isSameDate(task.todoDateStart, currentDate) {
+                    if isSameDate(task.todoDateStart, currentDate) || isSameDate(task.todoDateEnd, currentDate) {
                         NavigationLink(){
                             EditingTaskView(taskBeengEdit: task)
                         } label: {

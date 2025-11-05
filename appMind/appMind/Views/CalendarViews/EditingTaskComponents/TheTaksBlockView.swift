@@ -39,9 +39,15 @@ struct TheTaksBlockView: View {
                         Button {
                             isPresented.toggle()
                         } label: {
-                            Image(systemName: task.symbol)
-                                .font(.title)
-                                .foregroundColor(.black)
+                            if task.symbol == "" {
+                                Image(systemName: "questionmark")
+                                    .font(.title)
+                                    .foregroundColor(.black)
+                            } else {
+                                Image(systemName: task.symbol)
+                                    .font(.title)
+                                    .foregroundColor(.black)
+                            }
                         }
                     }
                 
