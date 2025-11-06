@@ -42,11 +42,11 @@ struct TheTaksBlockView: View {
                             if task.symbol == "" {
                                 Image(systemName: "questionmark")
                                     .font(.title)
-                                    .foregroundColor(.black)
+                                    .foregroundColor(.text)
                             } else {
                                 Image(systemName: task.symbol)
                                     .font(.title)
-                                    .foregroundColor(.black)
+                                    .foregroundColor(.text)
                             }
                         }
                     }

@@ -79,7 +79,7 @@ struct SettingsView: View {
                             Text("Aparência")
                                 .font(.body)
                         }
-                        .foregroundStyle(.black)
+                        .foregroundColor(.text)
                         Spacer()
                         Image(systemName: "chevron.right")
                             .foregroundStyle(.gray)

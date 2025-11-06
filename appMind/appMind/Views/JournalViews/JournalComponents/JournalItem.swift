@@ -59,7 +59,7 @@ struct JournalItem: View {
                     }
                     .offset(x: UIScreen.main.bounds.width * 0.01, y: UIScreen.main.bounds.height * -0.04)   
                 }
-                .foregroundStyle(.black)
+                .foregroundColor(.text)
             }
             .padding(.horizontal)
         }

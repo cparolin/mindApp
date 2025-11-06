@@ -33,7 +33,7 @@ struct Home: View {
                             .font(.title3)
                             .fontWeight(.semibold)
                             .textScale(.secondary)
-                            .foregroundStyle(.black)
+                            .foregroundColor(.text)
                             .padding(.top, g.size.height <= 564 ? 20 : 40)
                             .padding(.bottom, 23)
                         
@@ -65,7 +65,7 @@ struct Home: View {
                                                 .font(.callout)
                                                 .fontWeight(.medium)
                                                 .textScale(.secondary)
-                                                .foregroundStyle(.black)
+                                                .foregroundColor(.text)
                                                 .padding(.bottom, -20)
                                                 .padding(.top, -9)
                                         }

@@ -86,7 +86,7 @@ struct ReducedJournalItem: View {
                 .frame(width: UIScreen.main.bounds.width * 0.46, height: UIScreen.main.bounds.height * 0.095)
             }
         }
-        .foregroundStyle(.black)
+        .foregroundColor(.text)
     }
 }
 

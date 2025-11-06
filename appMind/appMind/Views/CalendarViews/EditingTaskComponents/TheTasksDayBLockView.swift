@@ -42,11 +42,11 @@ struct TheTaksDayBlockView: View {
                             if task.symbolDay == "" {
                                 Image(systemName: "questionmark")
                                     .font(.title)
-                                    .foregroundColor(.black)
+                                    .foregroundColor(.text)
                             } else {
                                 Image(systemName: task.symbolDay)
                                     .font(.title)
-                                    .foregroundColor(.black)
+                                    .foregroundColor(.text)
                             }
                         }
 

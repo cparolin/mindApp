@@ -27,7 +27,7 @@ struct TaskCardMedium: View {
                 }
                 .frame(width: 60, height: 50)
                 .font(.caption)
-                .foregroundStyle(.black)
+                .foregroundColor(.text)
                 .background(
                     RoundedRectangle(cornerRadius: 16)
                         .foregroundStyle(Color(baseColor))
@@ -40,7 +40,7 @@ struct TaskCardMedium: View {
                 }
                 .frame(width: 60, height: 75)
                 .font(.caption)
-                .foregroundStyle(.black)
+                .foregroundColor(.text)
                 .background(
                     RoundedRectangle(cornerRadius: 16)
                         .foregroundStyle(Color(baseColor))
@@ -50,14 +50,14 @@ struct TaskCardMedium: View {
             HStack (spacing: 0){
                 Image(systemName: task.symbol)
                     .font(.title3)
-                    .foregroundStyle(.black)
+                    .foregroundColor(.text)
                     .padding(.leading, 12)
                 
                 Text(task.taskTitle)
                     .lineLimit(1)
                     .truncationMode(.tail)
                     .fontWeight(.semibold)
-                    .foregroundStyle(.black)
+                    .foregroundColor(.text)
                     .padding(.leading, 10)
                 
                 Spacer()

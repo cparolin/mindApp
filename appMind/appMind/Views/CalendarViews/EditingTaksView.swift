@@ -57,7 +57,6 @@ struct EditingTaskView: View {
                                 .datePickerStyle(.compact)
                                 .scaleEffect(0.9, anchor: .leading)
                         }
-                        
                     })
                     .padding(.top, 4)
                     // Maior espaco para clicar nas cores

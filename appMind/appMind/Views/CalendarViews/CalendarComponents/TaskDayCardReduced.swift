@@ -16,7 +16,7 @@ struct TaskDayCardReduced: View {
         HStack {
             Image(systemName: task.symbolDay)
                 .font(.title3)
-                .foregroundStyle(.black)
+                .foregroundColor(.text)
                 .frame(width: 60, height: 50)
                 .background(
                     RoundedRectangle(cornerRadius: 16)
@@ -27,7 +27,7 @@ struct TaskDayCardReduced: View {
                 Text(task.taskTitleDay)
                     .truncationMode(.tail)
                     .fontWeight(.semibold)
-                    .foregroundStyle(.black)
+                    .foregroundColor(.text)
                     .padding(.leading, 10)
                 
                 Spacer()

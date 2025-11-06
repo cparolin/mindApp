@@ -33,7 +33,7 @@ struct SymbolsPickerView: View {
                             } else {
                                 Image(systemName: symbols[i])
                                     .font(.title)
-                                    .foregroundStyle(.black)
+                                    .foregroundColor(.text)
                             }
                         }
                     }

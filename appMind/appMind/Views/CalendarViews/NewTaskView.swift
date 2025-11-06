@@ -118,6 +118,9 @@ struct NewTaskView: View {
                         .padding(.top, 4)
                     }
                 })
+                .onTapGesture {
+                    self.hideKeyboard()
+                }
 //                .padding(.top, 70)
                 .padding(.horizontal, 16)
                 .vSpacing(.top)
@@ -159,6 +162,13 @@ struct NewTaskView: View {
         }
     }
 }
+
+extension View {
+    func hideKeyboard() {
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+    }
+}
+
 #Preview {
     NewTaskView(currentDate: Date.now)
 }

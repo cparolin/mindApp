@@ -14,7 +14,7 @@ struct TaskCardReduced: View {
     var body: some View {
         HStack {
             Image(systemName: task.symbol)
-                .foregroundStyle(.black)
+                .foregroundColor(.text)
                 .frame(width: 60, height: 50)
                 .background(
                     RoundedRectangle(cornerRadius: 16)
@@ -26,7 +26,7 @@ struct TaskCardReduced: View {
                     .lineLimit(1)
                     .truncationMode(.tail)
                     .fontWeight(.semibold)
-                    .foregroundStyle(.black)
+                    .foregroundColor(.text)
                     .padding(.leading, 10)
                 
                 Spacer()

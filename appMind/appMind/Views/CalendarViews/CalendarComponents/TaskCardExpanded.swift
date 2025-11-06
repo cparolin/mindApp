@@ -27,7 +27,7 @@ struct TaskCardExpanded: View {
                 }
                 .frame(width: 60, height: 83)
                 .font(.caption)
-                .foregroundStyle(.black)
+                .foregroundColor(.text)
                 .background(
                     RoundedRectangle(cornerRadius: 16)
                         .foregroundStyle(Color(baseColor))
@@ -40,7 +40,7 @@ struct TaskCardExpanded: View {
                 }
                 .frame(width: 60, height: 83)
                 .font(.caption)
-                .foregroundStyle(.black)
+                .foregroundColor(.text)
                 .background(
                     RoundedRectangle(cornerRadius: 16)
                         .foregroundStyle(Color(baseColor))
@@ -50,7 +50,7 @@ struct TaskCardExpanded: View {
             HStack (spacing: 0) {
                 Image(systemName: task.symbol)
                     .font(.title3)
-                    .foregroundStyle(.black)
+                    .foregroundColor(.text)
                     .padding(.leading, 12)
                 
                 VStack (alignment: .leading, spacing: 5){
@@ -59,14 +59,14 @@ struct TaskCardExpanded: View {
                         .lineLimit(1)
                         .truncationMode(.tail)
                         .fontWeight(.semibold)
-                        .foregroundStyle(.black)
+                        .foregroundColor(.text)
                         .padding(.leading, 10)
                     
                     Text(task.notes)
                         .lineLimit(1)
                         .truncationMode(.tail)
                         .font(.footnote)
-                        .foregroundStyle(.black)
+                        .foregroundColor(.text)
                         .padding(.leading, 10)
                 }
                 
