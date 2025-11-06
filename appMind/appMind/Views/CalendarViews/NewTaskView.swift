@@ -22,7 +22,7 @@ struct NewTaskView: View {
     @State private var selection: String = "t"
     @State private var isEnabled = false
     @State private var symbolsPicker = false
-    @State var tempSelectedIcon: String = "figure.cross.training"
+    @State var tempSelectedIcon: String = "square.and.pencil"
     @State var descLength: Int = 35
     
     var currentDate: Date
@@ -48,7 +48,7 @@ struct NewTaskView: View {
                             } label : {
                                     Image(systemName: "\(tempSelectedIcon)")
                                         .font(.largeTitle)
-                                        .foregroundStyle(.gray)
+                                        .foregroundColor(.accentColor)
                                 
                             }
                             .padding(5)
