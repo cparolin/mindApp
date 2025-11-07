@@ -42,7 +42,7 @@ struct SymbolsPickerView: View {
             .toolbar {
                 ToolbarItem(placement: .topBarLeading){
                     Button {
-                        tempSelectedIcon = ""
+                        tempSelectedIcon = "square.and.pencil"
                         dismiss()
                         //verificar funcionalidade, se o ícone selecionado nao esta sendo salvo
                     } label: {
