@@ -108,7 +108,7 @@ struct EditingTasksDayView: View {
                     }, label: {
                         Text("OK")
                     })
-                    .disabled(taskBeengEdit.taskTitleDay == "" || taskBeengEdit.notesDay == "" || taskBeengEdit.symbolDay == "" ? true : false)
+                    .disabled(taskBeengEdit.taskTitleDay == "" || taskBeengEdit.symbolDay == "" ? true : false)
 
                 }
             }

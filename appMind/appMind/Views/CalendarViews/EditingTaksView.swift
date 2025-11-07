@@ -113,7 +113,7 @@ struct EditingTaskView: View {
                     }, label: {
                         Text("OK")
                     })
-                    .disabled(taskBeengEdit.taskTitle == "" || taskBeengEdit.notes == "" || taskBeengEdit.symbol == "" ? true : false)
+                    .disabled(taskBeengEdit.taskTitle == "" || taskBeengEdit.symbol == "" ? true : false)
                 }
             }
         }
