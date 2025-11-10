@@ -18,8 +18,8 @@ struct SymbolsPickerView: View {
     @Binding var tempSelectedIcon: String 
     
     var body: some View {
-        NavigationStack{
-            ScrollView{
+        NavigationStack {
+            ScrollView {
                 LazyVGrid(columns: columns, spacing: 24) {
                     ForEach(symbols.indices, id: \.self) { i in
                         let icon = symbols[i]
@@ -39,6 +39,7 @@ struct SymbolsPickerView: View {
                     }
                 }
             }
+            .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarLeading){
                     Button {

@@ -31,131 +31,117 @@ struct NewTaskView: View {
         descLength - taskNote.count
     }
     
-//    @Binding var newTask: Task
-//    @Binding var newTaskDay: TaskDay
-    
     @Query var tasks: [Task]
     @Query var tasksDay: [TaskDay]
     @Environment(\.modelContext) var modelContext
     
     var body: some View {
         NavigationStack {
-                VStack(alignment: .leading, spacing: 15, content: {
-                    VStack(alignment: .leading, spacing: 8, content: {
-                        HStack {
-                            Button {
-                                symbolsPicker.toggle()
-                            } label : {
-                                    Image(systemName: "\(tempSelectedIcon)")
-                                        .font(.largeTitle)
-                                        .foregroundColor(.accentColor)
-                                
-                            }
-                            .padding(5)
-                            
-                            TextField("Nome do evento", text: $taskTitle)
-                                .padding(.vertical, 12)
-                                .font(.title)
-                                .fontWeight(.semibold)
+            VStack (spacing: 20) {
+                HStack (spacing: 15) {
+                    Button {
+                        symbolsPicker.toggle()
+                        
+                    } label : {
+                        Image(systemName: "\(tempSelectedIcon)")
+                            .font(.largeTitle)
+                            .foregroundColor(.accentColor)
+                    }
+                    
+                    TextField("Nome do evento", text: $taskTitle)
+                        .font(.title2)
+                        .fontWeight(.semibold)
+                }
+                
+                VStack (spacing: 10){
+                    TextField("Notas", text: $taskNote)
+                        .onReceive(Just(taskNote)) {
+                            taskNote = String($0.prefix(descLength))
                         }
-                        TextField("Notas", text: $taskNote)
-                            .onReceive(Just(taskNote)) {
-                                taskNote = String($0.prefix(descLength))
-                            }
-
-                    })
+                    
                     Divider()
-                        .padding(.top, 4)
                     
                     Text("\(descCountdown)/\(descLength)")
-                        .font(.caption)
+                        .font(.caption2)
                         .fontWeight(.semibold)
                         .foregroundStyle(.cinza3)
                         .frame(maxWidth: .infinity, alignment: .trailing)
-                        .padding(.bottom, 5)
-            
-                    VStack(spacing: 16) {
-                        HStack {
-                            Text("Dia inteiro")
-                                .foregroundStyle(.black)
-                            
-                            Toggle("", isOn: $isEnabled)
-                                .padding(.trailing, 16)
+                }
+                
+                HStack {
+                    Text("Dia inteiro")
+                    Toggle("", isOn: $isEnabled)
+                }.padding(.vertical, 5)
+                
+                HStack {
+                    Text("Começa")
+                    
+                    Spacer()
+                    
+                    DatePicker("", selection: $taskDateStart, in: currentDate...)
+                        .datePickerStyle(.compact)
+                        .disabled(isEnabled)
+                }
+                
+                HStack {
+                    Text("Termina")
+                    
+                    Spacer()
+                    
+                    DatePicker("", selection: $taskDateStart, in: currentDate...)
+                        .datePickerStyle(.compact)
+                        .disabled(isEnabled)
+                }
+                
+                Text("Cor da tarefa")
+                    .font(.caption)
+                    .foregroundStyle(.gray)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                
+                ColorPickerComponent(taskColor: $taskColor, palette: paletteLayout)
+                
+                Spacer()
+            }
+            .padding(.top, 20)
+            .onTapGesture {
+                self.hideKeyboard()
+            }
+            .padding(.horizontal, 16)
+            .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    Button(action: {
+                        dismiss()
+                    }, label: {
+                        Image(systemName: "xmark")
+                    })
+                }
+                
+                ToolbarItem(placement: .principal) {
+                    Text("Adicionar")
+                }
+                
+                ToolbarItem(placement: .confirmationAction){
+                    Button(action: {
+                        if isEnabled {
+                            let newTaskDay = TaskDay(taskTitleDay: "\(taskTitle)", todoDateDay: currentDate, tintDay: "\(taskColor)", notesDay: "\(taskNote)", symbolDay: "\(tempSelectedIcon)")
+                            modelContext.insert(newTaskDay)
                         }
-                        HStack(content: {
-                            
-                            Text("Começa")
-                                .foregroundStyle(.black)
-                            
-                            DatePicker("", selection: $taskDateStart, in: currentDate...)
-                                .datePickerStyle(.compact)
-                                .scaleEffect(0.9, anchor: .leading)
-                                .disabled(isEnabled)
-                        })
-                        .opacity(isEnabled ? 0.5 : 1)
-                        .padding(.top, 4)
-                        .padding(.trailing, -16)
-                        
-                        HStack(content: {
-                            Text("Termina")
-                                .foregroundStyle(.black)
-                            
-                            DatePicker("", selection: $taskDateEnd, in: currentDate...)
-                                .datePickerStyle(.compact)
-                                .scaleEffect(0.9, anchor: .leading)
-                                .disabled(isEnabled)
-                        })
-                        .padding(.trailing, -16)
-                        .opacity(isEnabled ? 0.5 : 1)
-                        
-                        VStack(alignment: .leading, spacing: 8, content: {
-                            Text("Cor da tarefa")
-                                .font(.caption)
-                                .foregroundStyle(.gray)
-                            
-                            ColorPickerComponent(taskColor: $taskColor, palette: paletteLayout)
-                        })
-                        .padding(.top, 4)
-                    }
-                })
-                .onTapGesture {
-                    self.hideKeyboard()
+                        else {
+                            let newTask = Task(taskTitle: "\(taskTitle)", todoDateStart: taskDateStart, todoDateEnd: taskDateEnd, isCompleted: false, tint: "\(taskColor)", notes: "\(taskNote)", symbol: "\(tempSelectedIcon)")
+                            modelContext.insert(newTask)
+                            print(newTask)
+                        }
+                        dismiss()
+                    }, label: {
+                        Text("OK")
+                    })
+                    .disabled(taskTitle == "" || tempSelectedIcon == "")
                 }
-//                .padding(.top, 70)
-                .padding(.horizontal, 16)
-                .vSpacing(.top)
-//                .ignoresSafeArea()
-                .toolbar {
-                    ToolbarItem(placement: .topBarLeading) {
-                        Button(action: {
-                            dismiss()
-                        }, label: {
-                            Image(systemName: "xmark")
-                        })
-                    }
-                    ToolbarItem(placement: .principal) {
-                        Text("Adicionar")
-                            .fontWeight(.semibold)
-                    }
-                    ToolbarItem(placement: .confirmationAction){
-                        Button(action: {
-                            if isEnabled {
-                                let newTaskDay = TaskDay(taskTitleDay: "\(taskTitle)", todoDateDay: currentDate, tintDay: "\(taskColor)", notesDay: "\(taskNote)", symbolDay: "\(tempSelectedIcon)")
-                                modelContext.insert(newTaskDay)
-                            }
-                            else {
-                                let newTask = Task(taskTitle: "\(taskTitle)", todoDateStart: taskDateStart, todoDateEnd: taskDateEnd, isCompleted: false, tint: "\(taskColor)", notes: "\(taskNote)", symbol: "\(tempSelectedIcon)")
-                                modelContext.insert(newTask)
-                                print(newTask)
-                            }
-                            dismiss()
-                        }, label: {
-                            Text("OK")
-                        })
-                        .disabled(taskTitle == "" || tempSelectedIcon == "")
-                    }
-                }
-        } .sheet(isPresented: $symbolsPicker) {
+            }
+            .navigationBarTitleDisplayMode(.inline)
+            .ignoresSafeArea(.keyboard)
+        }
+        .sheet(isPresented: $symbolsPicker) {
             SymbolsPickerView(tempSelectedIcon: $tempSelectedIcon)
                 .presentationDetents([.height(345)])
                 .interactiveDismissDisabled()
