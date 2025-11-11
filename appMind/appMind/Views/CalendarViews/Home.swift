@@ -130,7 +130,7 @@ struct Home: View {
                 NewTaskView(currentDate: currentDate)
                     .presentationDetents([.height(585)])
                     .presentationCornerRadius(30)
-                    .background(.white)
+                    .background(Color.sheet)
             }
         }
     }

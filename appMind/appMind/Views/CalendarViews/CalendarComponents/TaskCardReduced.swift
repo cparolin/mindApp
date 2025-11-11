@@ -26,6 +26,7 @@ struct TaskCardReduced: View {
                     .lineLimit(1)
                     .truncationMode(.tail)
                     .fontWeight(.semibold)
+                    .font(.body)
                     .foregroundColor(.text)
                     .padding(.leading, 10)
                 

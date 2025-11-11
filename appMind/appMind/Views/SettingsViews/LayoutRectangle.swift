@@ -1,14 +1,11 @@
 import SwiftUI
 
 struct LayoutRectangle: View {
-    
-//    @AppStorage("colorLayout") private var colorLayout: ColorCases = .amarelo
     @AppStorage("paletteLayout") private var paletteLayout: String = "Saturadas"
     @AppStorage("textLayout") private var textLayout: Int = 0
     @AppStorage("font") private var font = "SF Pro"
     
     var body: some View {
-        
         ZStack {
             RoundedRectangle(cornerRadius: 20)
                 .frame(width: UIScreen.main.bounds.width * 0.93, height: 230)
@@ -30,12 +27,10 @@ struct LayoutRectangle: View {
                             .foregroundStyle(.white)
                             .padding(.trailing, 5)
                     }
-                    
                 }
                 
                 Spacer()
                     .frame(height: 18)
-                
                 
                 ZStack {
                     RoundedRectangle(cornerRadius: 16)
@@ -48,15 +43,12 @@ struct LayoutRectangle: View {
                             Text("15:00")
                                 .frame(width: UIScreen.main.bounds.width * 0.082, height: 10)
                                 .font(.changeFont(fontType: font, fontStyle: .caption2, fontWeight: .regular))
-//                                .border(.red)
-                                
-                                
+                            
                         }
                         
                         Rectangle()
                             .frame(width: UIScreen.main.bounds.width * 0.20, height: 4)
-//                            .border(.red)
-                            .foregroundStyle(Color.black)
+                            .foregroundStyle(Color.text)
                         
                         if textLayout != 2 {
                             Spacer()
@@ -65,12 +57,10 @@ struct LayoutRectangle: View {
                             Spacer()
                                 .frame(width: UIScreen.main.bounds.width * 0.583)
                         }
-                        
                         Circle()
-                            .stroke(.black)
+                            .stroke(.text)
                             .frame(width: 20)
                     }
-                    
                 }
                 
                 ZStack {
@@ -102,7 +92,7 @@ struct LayoutRectangle: View {
                         }
                         
                         Circle()
-                            .stroke(.black)
+                            .stroke(.text)
                             .frame(width: 20)
                     }
                 }
@@ -141,14 +131,12 @@ struct LayoutRectangle: View {
                         }
                         
                         Circle()
-                            .stroke(.black)
+                            .stroke(.text)
                             .frame(width: 20)
                     }
                 }
             }
-            
         }
-        
     }
 }
 

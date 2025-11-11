@@ -20,22 +20,13 @@ struct PaletteOptionsButtonView: View {
                 
                 Spacer()
                     .frame(width: 2)
-                
             }
-            
-            
-//            Spacer()
-//                .frame(width: 12)
             
             Text("\(palette)")
                 .font(.changeFont(fontType: font, fontStyle: .body, fontWeight: .regular))
-                .foregroundStyle(.black)
+                .foregroundStyle(.text)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding()
-//                .border(.red)
-            
-//            Spacer()
-//                .frame(width: 200)
             
             Image(systemName: "chevron.right")
                 .foregroundStyle(.black)
@@ -43,7 +34,6 @@ struct PaletteOptionsButtonView: View {
             
         }
         .padding(.horizontal)
-        
     }
 }
 

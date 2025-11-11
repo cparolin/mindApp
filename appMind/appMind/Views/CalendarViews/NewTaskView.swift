@@ -48,16 +48,17 @@ struct NewTaskView: View {
                             .foregroundColor(.accentColor)
                     }
                     
-                    TextField("Nome do evento", text: $taskTitle)
+                    TextField("", text: $taskTitle, prompt: Text("Nome do evento").foregroundColor(.gray))
                         .font(.title2)
                         .fontWeight(.semibold)
                 }
                 
                 VStack (spacing: 10){
-                    TextField("Notas", text: $taskNote)
+                    TextField("", text: $taskNote, prompt: Text("Adicione uma descrição").foregroundColor(.gray))
                         .onReceive(Just(taskNote)) {
                             taskNote = String($0.prefix(descLength))
                         }
+                        .font(.body)
                     
                     Divider()
                     
@@ -70,11 +71,13 @@ struct NewTaskView: View {
                 
                 HStack {
                     Text("Dia inteiro")
+                        .font(.body)
                     Toggle("", isOn: $isEnabled)
                 }.padding(.vertical, 5)
                 
                 HStack {
                     Text("Começa")
+                        .font(.body)
                     
                     Spacer()
                     
@@ -85,10 +88,11 @@ struct NewTaskView: View {
                 
                 HStack {
                     Text("Termina")
+                        .font(.body)
                     
                     Spacer()
                     
-                    DatePicker("", selection: $taskDateStart, in: currentDate...)
+                    DatePicker("", selection: $taskDateEnd, in: currentDate...)
                         .datePickerStyle(.compact)
                         .disabled(isEnabled)
                 }
@@ -118,6 +122,7 @@ struct NewTaskView: View {
                 
                 ToolbarItem(placement: .principal) {
                     Text("Adicionar")
+                        .font(.body)
                 }
                 
                 ToolbarItem(placement: .confirmationAction){
@@ -134,6 +139,8 @@ struct NewTaskView: View {
                         dismiss()
                     }, label: {
                         Text("OK")
+                            .font(.body)
+                            .bold()
                     })
                     .disabled(taskTitle == "" || tempSelectedIcon == "")
                 }

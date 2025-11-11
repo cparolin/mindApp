@@ -28,8 +28,15 @@ struct JournalTypeView: View {
                             VStack (alignment: .leading, spacing: 4){
                                 RecentShowAll(recentJournals: allNotes)
                                 
-                                NotesHorizontalScroll(notes: allNotes)
+                                ScrollView(.horizontal, showsIndicators: false) {
+                                    HStack(spacing: 25) {
+                                        ForEach(allNotes.prefix(5)) { note in
+                                            ReducedJournalItem(journal: note)
+                                        }
+                                    }
+                                    .padding(.horizontal, 20)
                                     .padding(.top, 10)
+                                }
                             }
                         }
                         
@@ -37,8 +44,15 @@ struct JournalTypeView: View {
                             VStack (alignment: .leading, spacing: 4){
                                 FavoriteShowAll(favoriteJournals: favoriteJournals)
                                 
-                                NotesHorizontalScroll(notes: favoriteJournals)
+                                ScrollView(.horizontal, showsIndicators: false) {
+                                    HStack(spacing: 25) {
+                                        ForEach(favoriteJournals.prefix(5)) { note in
+                                            ReducedJournalItem(journal: note)
+                                        }
+                                    }
+                                    .padding(.horizontal, 20)
                                     .padding(.top, 10)
+                                }
                             }
                         }
                         
@@ -63,23 +77,6 @@ struct JournalTypeView: View {
         /// the first time
         .onAppear {
             JournalTypeModel.initialJournalsCreation(journals: journals, context: context)
-        }
-    }
-}
-
-/// journals horizontal scroll view.
-/// Exibits 5 journals (prefix(5))
-struct NotesHorizontalScroll: View {
-    @State var notes: [JournalModel]
-    
-    var body: some View {
-        ScrollView(.horizontal, showsIndicators: false) {
-            HStack(spacing: 25) {
-                ForEach(notes.prefix(5)) { note in
-                    ReducedJournalItem(journal: note)
-                }
-            }
-            .padding(.horizontal, 20)
         }
     }
 }

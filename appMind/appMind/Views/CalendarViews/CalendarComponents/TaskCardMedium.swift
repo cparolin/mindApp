@@ -56,6 +56,7 @@ struct TaskCardMedium: View {
                 Text(task.taskTitle)
                     .lineLimit(1)
                     .truncationMode(.tail)
+                    .font(.body)
                     .fontWeight(.semibold)
                     .foregroundColor(.text)
                     .padding(.leading, 10)

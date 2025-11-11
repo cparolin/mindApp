@@ -8,9 +8,7 @@
 import SwiftUI
 
 struct PaletteOptionsView: View {
-    
     @AppStorage("paletteLayout") private var paletteLayout: String = "Saturadas"
-    
     @Environment(\.dismiss) var dismiss
     
     let columns = [
@@ -28,24 +26,23 @@ struct PaletteOptionsView: View {
                             print("jjknknjk")
                         } label: {
                             VStack {
-                                    ZStack {
-                                        RoundedRectangle(cornerRadius: 16)
-                                            .foregroundStyle(Color.white)
-                                            .frame(width: 170, height: 145)
-                                            .overlay(
-                                                RoundedRectangle(cornerRadius: 16)
-                                                    .stroke(Color.accentColor, lineWidth: 4)
-                                                    .opacity(paletteLayout == number ? 1 : 0)
-                                            )
+                                ZStack {
+                                    RoundedRectangle(cornerRadius: 16)
+                                        .foregroundStyle(Color.white)
+                                        .frame(width: 170, height: 145)
+                                        .overlay(
+                                            RoundedRectangle(cornerRadius: 16)
+                                                .stroke(Color.accentColor, lineWidth: 4)
+                                                .opacity(paletteLayout == number ? 1 : 0)
+                                        )
+                                    
+                                    VStack {
+                                        PaletteButton(palette: number)
                                         
-                                        VStack {
-                                            PaletteButton(palette: number)
-                                            
-                                            Text(number)
-                                                .foregroundStyle(Color.black)
-                                        }
-                                        
+                                        Text(number)
+                                            .foregroundStyle(Color.black)
                                     }
+                                }
                             }
                         }
                     }

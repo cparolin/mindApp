@@ -8,9 +8,7 @@
 import SwiftUI
 
 struct NotificationsView: View {
-    
     @State var viewModel = NotificationsViewModel()
-    
     @AppStorage("notification") var notification: Bool = false
     @AppStorage("events") var events: Bool = false
     @AppStorage("reminder") var reminder: Bool = false
@@ -77,9 +75,6 @@ struct NotificationsView: View {
 //                                Text("Disable Notifications")
 //                                    .fontWeight(.bold)
 //                        }
-                        
-                        
-
                     }
                 }
             }

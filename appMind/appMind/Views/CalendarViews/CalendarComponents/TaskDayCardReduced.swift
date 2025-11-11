@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct TaskDayCardReduced: View {
-    @AppStorage("font") private var font = "SF Pro"
     var task: TaskDay
     var baseColor: String
         
@@ -26,6 +25,7 @@ struct TaskDayCardReduced: View {
             HStack (spacing: 0){
                 Text(task.taskTitleDay)
                     .truncationMode(.tail)
+                    .font(.body)
                     .fontWeight(.semibold)
                     .foregroundColor(.text)
                     .padding(.leading, 10)
